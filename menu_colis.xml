@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+    <menuitem name="Delivry Management System" 
+      id="colis_app.menu_root" 
+      groups="base.group_user" />
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!! MENU COLIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <menuitem name="Gestion des Livraisons"
+                  id="colis_app.colis"
+                  parent="colis_app.menu_root"
+                  groups="base.group_user"/>
+
+                  <menuitem name="Envoyer un colis"
+                    id="colis_app.colis_draft"
+                    parent="colis_app.colis"
+                    action="colis_app.view_colis_colis_action_to_send"
+                    groups="base.group_user"/>
+
+
+                  <menuitem name="Colis a envoyer"
+                    id="colis_app.colis_draft"
+                    parent="colis_app.colis"
+                    action="colis_app.view_colis_colis_action_to_send"
+                    groups="base.group_user"/>
+                    
+                  <menuitem name="Colis Envoyé"
+                    id="colis_app.colis_send"
+                    parent="colis_app.colis"
+                    action="colis_app.view_colis_colis_action_send"
+                    groups="base.group_user"/>
+
+                  <menuitem name="Colis recu"
+                    id="colis_app.colis_receive"
+                    parent="colis_app.colis"
+                    action="colis_app.view_colis_colis_action_receive"
+                    groups="base.group_user"/>
+
+                  <menuitem name="Tous les Colis"
+                    id="colis_app.all_colis"
+                    parent="colis_app.colis"
+                    action="colis_app.view_colis_colis_action"
+                    groups="base.group_user"/>
+
+
+    </data>
+
+</odoo>
