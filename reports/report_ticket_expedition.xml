@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="ticket_expedition">
+          <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <center>
+                    <h3>Recu du colis No  <span t-esc="docs.numero_colis"/> </h3>
+                    </center>
+
+                     <table class="table table-borderless"> 
+                            <thead>
+                                <th> <h4> EXPEDITEUR </h4></th>
+                                <th>  <h4> DESTINATAIRE</h4></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                         <p><strong>Date d'envoi</strong> :<span t-esc="docs.sender_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></p>
+                                        <p><strong>Noms</strong> :<span t-esc="docs.sender_id.name"/> </p>
+                                        <p><strong>Téléphone</strong> : <span t-esc="docs.sender_id.phone"/> </p>
+                                        <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p> 
+                                        <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p> 
+                                    </td>
+                                    <td> 
+                                        <p><strong>Noms:</strong> <span t-esc="docs.receive_id.name"/> </p>
+                                        <p><strong>Téléphone:</strong> <span t-esc="docs.receive_id.phone"/> </p>
+                                        <p><strong>Adresse :</strong> <span t-esc="docs.address_rec.name"/> </p>
+                                        <p><strong>Etat :</strong> <span t-esc="docs.state_id.name"/> </p>
+                                        <p><strong>Pays : </strong> <span t-esc="docs.country_rec_id.name"/> </p>
+                                        <p><strong>Paiement:</strong> 
+                                        <span t-esc="{'solde': 'SOLDE','notsolde': 'NON SOLDE',}[docs.paiement]"/> 
+                                        </p>
+                                        <p><strong>Nature:</strong> <span t-esc="docs.contenu_colis"/> 
+                                        </p>
+                                        <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/> 
+                                        </p>
+                                        <p><strong>Valeur(FCFA):</strong> <span t-esc="docs.valeur_colis"/> 
+                                        </p>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    <!-- <div class="row" width="100%">
+                        <div width="50%">
+                          <h3 style="text-align: left"><b>EXPEDITEUR</b></h3>
+                            <p><strong>Date d'envoi</strong> :<span t-esc="docs.sender_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></p>
+                            <p><strong>Noms</strong> :<span t-esc="docs.sender_id.name"/> </p>
+                            <p><strong>Téléphone</strong> : <span t-esc="docs.sender_id.phone"/> </p>
+                            <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p> 
+                            <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p>
+                         </div>
+
+
+                         <div  width="50%">
+                            <h3 style="text-align: right"><b>DESTINATAIRE</b></h3>
+                            <p><strong>Nom:</strong> 
+                                         <span t-esc="docs.receive_id.name"/> 
+                            </p>
+                            <p><strong>Téléphone:</strong> <span t-esc="docs.receive_id.phone"/> 
+                            </p>
+                            <p><strong>Adresse :</strong> <span t-esc="docs.address_rec.name"/> 
+                            </p>
+                            <p><strong>Etat :</strong> <span t-esc="docs.state_id.name"/> 
+                            </p>
+                            <p><strong>Pays : </strong> <span t-esc="docs.country_rec_id.name"/>
+                            </p>
+                            <p><strong>Paiement:</strong> <span t-esc="{'solde': 'SOLDE','notsolde': 'NON SOLDE',}[docs.paiement]"/> 
+                            </p>
+                            <p><strong>Nature:</strong> <span t-esc="docs.valeur_colis"/> 
+                            </p>
+                            <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/> 
+                            </p>
+                            <p><strong>Valeur(FCFA):</strong> <span t-esc="docs.valeur_colis"/> 
+                            </p>
+                         </div>
+                    </div>
+ -->
+              
+                        
+                          <p class="text-right"> Signature</p>
+                         <br />  
+
+                        <small class="text-right">NB: En cas de destruction du colis par les services de douanes du pays de destination,<br />Régal Shipping se désengage de toute responsabilité</small>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <hr/>
+                          <hr/>
+                          
+
+                                            <center>
+                           <h3> FICHE D'ENVOI  </h3>
+                           <h4> COLIS No  <span t-esc="docs.numero_colis"/></h4>
+                    
+                    <p> Your Satisfaction is our priority <br />
+                    Tel:<span t-esc="docs.user_id.company_id.phone"/> </p>
+                    </center> 
+                      
+            </div>
+
+        </t>
+        </t>
+
+   
+
+</template>
+</odoo>
+
+

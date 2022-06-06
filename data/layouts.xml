@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sheet_a5" model="report.paperformat">
+            <field name="name">A5 Format</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">210</field>
+            <field name="page_width">148</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">15</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">3</field>
+            <field name="dpi">130</field>
+        </record>
+
+        <!-- <record id="action_report_ticket_colis" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="colis_app.sheet_a5"/>
+        </record> -->
+
+
+    </data>
+
+</odoo>

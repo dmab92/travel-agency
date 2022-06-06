@@ -8,10 +8,12 @@
     'description': """
         Ce module vous permet de gerer les livraisions de vos colis
         Envoyer les SMS a l'Expediteur et  au Destinataire
+        d'Editer vos etats Statistiques aux format PDF et Excel
     """,
-
-    'author': "MB Consulting and Service",
-    'website': "http://www.mbconsultingandservices.com",
+    'author': "MT Consulting and Services",
+    'email': "contact@mtconsultingandservices.com",
+    'website': "http://www.mtconsultingandservices.com",
+    'phone': "+237 678128120 /697005649",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -25,9 +27,14 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        #'data/layouts.xml',
         'views/colis_views.xml',
+        'views/colis_config.xml',
+        'wizard/wizard_rapport_colis.xml',
+        'reports/report_ticket_expedition.xml',
+        'reports/report_rapport_expedition.xml',
+        'report_colis.xml',
         'menu_colis.xml',
-        #'views/views.xml',
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode

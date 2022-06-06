@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_ville_envoi_form">
+            <field name="name">Ville d'envois</field>
+            <field name="model">ville.envoi.colis</field>
+            <field name="arch" type="xml">
+                <form string="Villes d'envoi">
+                        <p class="oe_grey">
+                            Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Villes d'envois des Colis
+                        </p>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Informations Generales">
+                                <field name="name" required="1"/>
+                                <field name="country_id"  />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_ville_envoi_tree">
+            <field name="name">Villes d'envois des colis</field>
+            <field name="model">ville.envoi.colis</field>
+
+            <field name="arch" type="xml">
+                <tree string="Ville d'envoi des Colis">
+                    <field name="name" required="1"/>
+                    <field name="country_id"  />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ville_envoi_action" model="ir.actions.act_window">
+            <field name="name">Villes  d'envoi des Colis</field>
+            <field name="res_model">ville.envoi.colis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les villes d'envvoi des colis
+              </p><p>
+                Cette interface vous permet d'enregistrer les informations les villes d'envoi des colis
+              </p>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_ville_recept_form">
+            <field name="name">Ville de Reception des colis</field>
+            <field name="model">ville.recept.colis</field>
+            <field name="arch" type="xml">
+                <form string="Villes de reception">
+                        <p class="oe_grey">
+                            Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Villes de reception des Colis
+                        </p>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Informations Generales">
+                                <field name="name" required="1"/>
+                                <field name="country_id"  />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_ville_recept_tree">
+            <field name="name">Villes de reception des colis</field>
+            <field name="model">ville.recept.colis</field>
+
+            <field name="arch" type="xml">
+                <tree string="Ville de reception des Colis">
+                    <field name="name" required="1"/>
+                    <field name="country_id"  />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_ville_recept_action" model="ir.actions.act_window">
+            <field name="name">Villes  de reception des Colis</field>
+            <field name="res_model">ville.recept.colis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les villes de reception des colis
+              </p><p>
+                Cette interface vous permet d'enregistrer les informations les villes de recepion des colis
+              </p>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_adress_recept_form">
+            <field name="name">Adresses de Reception des colis</field>
+            <field name="model">adress.recept.colis</field>
+            <field name="arch" type="xml">
+                <form string="Adresses de Reception">
+                        <p class="oe_grey">
+                            Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Villes de reception des Colis
+                        </p>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Informations Generales">
+                                <field name="name" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_adress_recept_tree">
+            <field name="name">Adresses de reception des colis</field>
+            <field name="model">adress.recept.colis</field>
+
+            <field name="arch" type="xml">
+                <tree string="Adresses de reception des Colis">
+                    <field name="name" required="1"/>
+                    
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_adress_recept_action" model="ir.actions.act_window">
+            <field name="name">Adresses  de reception des Colis</field>
+            <field name="res_model">adress.recept.colis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les adresses reception des colis
+              </p><p>
+                Cette interface vous permet d'enregistrer les informations les adresses de recepion des colis
+              </p>
+            </field>
+        </record>
+        
+</odoo>

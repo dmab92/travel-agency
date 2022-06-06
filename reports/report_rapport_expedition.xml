@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="rapport_expedition">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <h5 class="mt16">
+                    <center>       
+                    <b> 
+            <t t-if="len(ville_reception_ids) != '0' and len(ville_envoi_ids) == '0'">
+
+                            LISTING DES COLIS  EXPEDIES  POUR LA PERIODE DU
+                                <span t-esc="datas['date_start']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/> 
+                                 AU  
+                                <span t-esc="datas['date_end']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                <br/>
+                            VILLES CONCERNES : 
+
+                          <t t-foreach="ville_reception_ids" t-as="line"> 
+                                      <span t-esc="line.name.upper()"/> -
+
+                            </t>
+                        </t>
+
+                        <t t-if="len(ville_envoi_ids) != '0' and len(ville_reception_ids) == '0'">
+
+                            LISTING DES COLIS  ENVOYES  POUR LA PERIODE DU
+                                <span t-esc="datas['date_start']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/> 
+                                 AU  
+                                <span t-esc="datas['date_end']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                <br/>
+                            VILLES CONCERNES : 
+
+                          <t t-foreach="ville_envoi_ids" t-as="line"> 
+                                      <span t-esc="line.name.upper()"/> -
+
+                            </t>
+                        </t>
+
+
+                        <t t-if="len(ville_envoi_ids) != '0' and len(ville_reception_ids) != '0'">
+
+                            LISTING DES COLIS  ENVOYES  POUR LA PERIODE DU
+                                <span t-esc="datas['date_start']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/> 
+                                 AU  
+                                <span t-esc="datas['date_end']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                <br/>
+                            VILLES D'ENVOIS : 
+
+                          <t t-foreach="ville_envoi_ids" t-as="line"> 
+                                      <span t-esc="line.name.upper()"/> -
+
+                            </t>
+                            VILLES DE RECEPTIONS : 
+
+                          <t t-foreach="ville_reception_ids" t-as="line"> 
+                                      <span t-esc="line.name.upper()"/> -
+
+                            </t>
+                        </t>
+
+
+                        <t t-if="len(ville_envoi_ids) == '0' and len(ville_reception_ids) == '0'">
+
+                            LISTING DES COLIS  ENVOYES  POUR LA PERIODE DU
+                                <span t-esc="datas['date_start']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/> 
+                                 AU  
+                                <span t-esc="datas['date_end']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                <br/>
+                            VILLES D'ENVOIS : TOUTES - VILLES DE RECEPTIONS : TOUTES
+                        </t>
+
+                    </b> 
+
+
+            </center> 
+        </h5>
+        <br/>
+
+        <table class="table table-sm o_main_table">
+            <thead class="thead-light">
+                <tr>
+                    <th><strong>No</strong></th>
+                    <th><strong>Numero colis</strong></th>
+                    <th><b>Expediteur </b></th>
+                    <th><b>Telephone</b></th>
+                    <th><b>Ville d'envoi</b></th>
+                    <th><b>Contenu du colis</b></th>
+                    <th><b>Destinataire</b></th>
+                    <th><b>Telephone</b></th>
+                    <th><b>Destination</b></th>
+                    
+                    <th><b>Frais(FCFA)</b></th>    
+                </tr>
+            </thead>
+            <tbody>
+                <t t-set="total" t-value="0"/>
+                    <t t-set="index" t-value="1"/>
+                    <t t-set="price" t-value="1"/>
+                    <tr t-foreach="docs" t-as="line" class="border-black">
+                            <td class="text-left"><span t-esc="index"/></td>
+                            <td class="text-left"><span t-esc="line.numero_colis"/></td>
+                            <td class="text-left"><span t-field="line.sender_id.name"/>
+                        </td>
+                            <td class="text-right"><span t-field="line.sender_phone"/></td>
+                            <td class="text-right"><span t-field="line.ville_envoi_id.name"/></td>
+                            <td class="text-left"> <span t-field="line.contenu_colis"/> </td>    
+                            <td class="text-right"> <span t-field="line.receive_id.name"/> 
+                        <img t-att-src="'data:image/png;base64,%s' % to_text(line.digital_signature)" style="max-height: 4cm; max-width: 8cm;"/></td>
+                            <td class="text-right"><span t-field="line.receive_phone"/></td>
+                            <td class="text-right"><span t-field="line.ville_reception_id.name"/></td>
+                            
+                            <td class="text-right"><span t-field="line.price"/></td>
+                            <t t-set="total" t-value="total+line.price"/>
+                            <t t-set="index" t-value="index+1"/>
+                    </tr>
+
+                    <tr class="border-black o_subtotal">
+                          <td with="80%" colspan="8"> 
+                          <b>TOTAL</b></td>
+                          <td class="text-right" colspan="2">
+                              <h4><span t-esc="'{:,.0f}'.format(total).replace(',', ' ')"/></h4>
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span t-sec="total"/>
+            </div>
+            </t>
+    </t>
+
+</template>
+</odoo>
+
+

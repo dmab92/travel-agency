@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rapport_expedition_colis" model="ir.ui.view">
+        <field name="name">wizard Rapports Colis</field>
+        <field name="model">wizard.colis_app.bordereau.expedition</field>
+        <field name="arch" type="xml">
+            <form string="Rapport d'Expedition des colis">
+                <group>
+                    <field name="date_start" readonly="0"/>
+                    <field name="date_end" readonly="0"/>
+
+<!--                    <field name="company_id" />-->
+
+                    <field name="ville_envoi_ids"  readonly="0"  widget="many2many_tags"
+                        options="{'no_create_edit': True}" />
+
+                    <field name="ville_reception_ids"  readonly="0"  widget="many2many_tags"
+                        options="{'no_create_edit': True}" />
+                        
+                </group>
+
+                <footer>
+                    <button name="print_rapport"
+                            string="Imprimer le listing"
+                            type="object"
+                            icon="fa-print"
+                            class="btn-primary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_rapport_expedition" model="ir.actions.act_window">
+        <field name="name">Rapport d'expedition des colis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.colis_app.bordereau.expedition</field>
+        <field name="binding_model_id" eval="False"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_rapport_expedition_colis"/>
+        <field name="target">new</field>
+    </record>
+
+
+
+</odoo>

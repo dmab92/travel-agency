@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        
+        <report id="action_report_rapport_colis"
+                string="Rapport d'expedition"
+                model="colis.colis"
+                report_type = "qweb-pdf"
+                file="colis_app.rapport_expedition"
+                name="colis_app.rapport_expedition" 
+        />
+
+    
+        <!-- <record id="action_report_ticket_colis" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="colis_app.sheet_a5"
+            paperformat="colis_app.sheet_a5"/>
+        </record> -->
+
+        <report id="action_report_ticket_colis"
+                string="Ticket d'expedition"
+                model="colis.colis"
+                report_type = "qweb-pdf"
+                file="colis_app.ticket_expedition"
+                name="colis_app.ticket_expedition" 
+        />
+
+        
+
+    </data>
+
+</odoo>
