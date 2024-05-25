@@ -1,0 +1,131 @@
+<odoo>
+    <data>
+    <menuitem name="EasyCAR"
+      id="colis_app.menu_root" 
+      groups="base.group_user" 
+      web_icon="colis_app,static/description/icon.png" />
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!! MENU COLIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+        <!-- <menuitem name="Gestion des colis"
+                  id="colis_app.colis"
+                  parent="colis_app.menu_root"
+                  groups="base.group_user"/>
+
+ -->
+        <menuitem name="Gestion des Voyages"
+                  id="colis_app.voyage_managment"
+                  parent="colis_app.menu_root"
+                  sequence="1"
+                />
+                    <menuitem name="Enregister un Voyage"
+                              id="colis_app.voyage_save"
+                              parent="colis_app.voyage_managment"
+                              action="colis_app.view_voyage_action"
+                              sequence="2"
+                          />
+                    <menuitem name="Departs Douala"
+                              id="colis_app.douala_voyage"
+                              parent="colis_app.voyage_managment"
+                              action="colis_app.view_voyage_action"
+                              sequence="3"
+                          />
+                    <menuitem name="Departs Nkongsamba"
+                              id="colis_app.nkong_voyage"
+                              parent="colis_app.voyage_managment"
+                              action="colis_app.view_voyage_action"
+                              sequence="5"
+                          />
+                    <menuitem name="Tous les Voyages"
+                              id="colis_app.all_voyage"
+                              parent="colis_app.voyage_managment"
+                              action="colis_app.view_voyage_action"
+                              sequence="4"
+                          />
+
+                    <menuitem name="Imprimer les Rapports"
+                              id="colis_app.voyage_rapport"
+                              parent="colis_app.voyage_managment"
+                              sequence="3"
+                          />
+
+
+                    <menuitem name="Gestion des colis"
+                              id="colis_app.colis_management"
+                              parent="colis_app.menu_root"
+                              groups="base.group_user"/>
+
+                  <menuitem name="Envoyer un colis"
+                            id="colis_app.colis_send"
+                            parent="colis_app.colis_management"
+                            action="colis_app.view_colis_colis_action_to_send"
+                            groups="base.group_user"/>
+
+                  <menuitem name="Colis en brouillon"
+                            id="colis_app.colis_draf"
+                            parent="colis_app.colis_management"
+                            action="colis_app.view_colis_colis_action_to_send"
+                            groups="base.group_user"/>
+
+                  <menuitem name="Colis Envoyés"
+                            id="colis_app.colis_send"
+                            parent="colis_app.colis_management"
+                            action="colis_app.view_colis_colis_action_send"
+                            groups="base.group_user"/>
+
+                  <menuitem name="Colis recus"
+                            id="colis_app.colis_receive"
+                            parent="colis_app.colis_management"
+                            action="colis_app.view_colis_colis_action_receive"
+                            groups="base.group_user"/>
+
+
+                  <menuitem name="Tous les Colis"
+                            id="colis_app.all_colis"
+                            parent="colis_app.colis_management"
+                            action="colis_app.view_colis_colis_action"
+                            groups="base.group_user"/>
+
+
+
+                  <!-- <menuitem name="Mes Colis recus"
+                    id="colis_app.my_colis_receive"
+                    parent="colis_app.menu_root"
+                    action="colis_app.view_all_my_colis_action"
+                    groups="base.group_user"/> -->
+
+
+
+<!--                      <menuitem name="Configuration"-->
+<!--                    id="colis_app.config"-->
+<!--                    parent="colis_app.menu_root"-->
+<!--                    groups="base.group_user"-->
+<!--                      sequence="2"/>-->
+
+                    <menuitem name="Configuration"
+                              id="colis_app.config"
+                              parent="colis_app.menu_root"
+                              groups="base.group_user"
+                              sequence="2"/>
+
+                        <menuitem name="Villes d'envoi"
+                                  id="colis_app.ville_envoi"
+                                  parent="colis_app.config"
+                                  action="colis_app.view_ville_envoi_action"
+                                  groups="base.group_user"/>
+
+                        <menuitem name="Villes de reception"
+                                  id="colis_app.ville_recept"
+                                  parent="colis_app.config"
+                                  action="colis_app.view_ville_recept_action"
+                                  groups="base.group_user"/>
+
+<!--                        <menuitem name="Adresse de reception"-->
+<!--                            id="colis_app.adress_recept"-->
+<!--                            parent="colis_app.config"-->
+<!--                            action="colis_app.view_adress_recept_action"-->
+<!--                            groups="base.group_user"/>-->
+
+    </data>
+</odoo>

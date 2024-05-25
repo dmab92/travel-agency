@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_bordeau">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                    <center>
+                        BORDERAU DU VOYAGE No <span t-field="docs.name"/> <br/>
+                        VEHICULE :  <span t-field="docs.license_plate"/>
+                        DATE: <span t-field="docs.date_register"/>
+            </center>
+        <table class="table table-sm o_main_table">
+            <thead class="thead-light">
+                <tr>
+                    <th><strong>No</strong></th>
+                    <th><strong>Noms et Prenoms</strong></th>
+                    <th><b>Destination</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                    <t t-set="index" t-value="1"/>
+                    <tr t-foreach="docs" t-as="line" class="border-black">
+                            <td class="text-left"><span t-esc="index"/></td>
+                            <td class="text-left"><span t-esc="line.passager_ids.partner_id.name"/></td>
+                            <td class="text-left"><span t-esc="line.passager_ids.sexe"/></td>
+                            <td class="text-left"><span t-esc="line.destination_id.name"/></td>
+                            <t t-set="index" t-value="index+1"/>
+                    </tr>
+                    </tbody>
+                </table>
+               Nombre Total de passagers : <span t-sec="index"/>
+            </div>
+    </t>
+     </t>
+
+</template>
+</odoo>
+
+

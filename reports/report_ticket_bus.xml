@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_ticket_bus">
+          <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <center>
+                    <h4>Ticket de Voyage No  <span t-esc="docs.name"/> </h4>
+                    </center>
+
+<!--                     <table class="table table-borderless"> -->
+<!--                            <thead>-->
+<!--                                <th> <h4> EXPEDITEUR </h4></th>-->
+<!--                                <th>  <h4> DESTINATAIRE</h4></th>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                                <tr>-->
+<!--                                    <td>-->
+<!--                                         <p><strong>Date d'envoi</strong> :<span t-esc="docs.sender_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></p>-->
+<!--                                        <p><strong>Noms</strong> :<span t-esc="docs.sender_id.name"/> </p>-->
+<!--                                        <p><strong>Téléphone</strong> : <span t-esc="docs.sender_phone"/> </p>-->
+<!--                                        <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p> -->
+<!--                                        <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p>-->
+<!--                                        <p><strong>Frais d'envoi(FCFA)</strong>:-->
+<!--                                        <span t-field="docs.price" /></p>-->
+<!--                                        -->
+<!--                                        <p><strong>Frais Assurance(FCFA)</strong>:<span t-field="docs.assurance" />   </p>-->
+<!--                                        <p><strong>Frais Emballage(FCFA)</strong>:<span t-field="docs.embalage"/></p>-->
+<!--                                        <p><strong>Frais Phyto Sanitaire(FCFA)</strong>:<span t-field="docs.phyto"/></p> -->
+<!--                                    </td>-->
+<!--                                    <td> -->
+<!--                                        <p><strong>Noms:</strong> <span t-esc="docs.receive_id.name"/> </p>-->
+<!--                                        <p><strong>Téléphone:</strong> <span t-esc="docs.receive_phone"/> </p>-->
+<!--                                        <p><strong>Adresse :</strong> <span t-esc="docs.address_rec.name"/> </p>-->
+<!--                                        <p><strong>Etat :</strong> <span t-esc="docs.state_id.name"/> </p>-->
+<!--                                        <p><strong>Pays : </strong> <span t-esc="docs.country_rec_id.name"/> </p>-->
+<!--                                        <p><strong>Paiement:</strong> -->
+<!--                                        <span t-esc="{'solde': 'SOLDE','notsolde': 'NON SOLDE',}[docs.paiement]"/> -->
+<!--                                        </p>-->
+<!--                                        <p><strong>Nature:</strong> <span t-esc="docs.contenu_colis"/> -->
+<!--                                        </p>-->
+<!--                                        <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/> -->
+<!--                                        </p>-->
+<!--                                        <p><strong>Valeur(FCFA):</strong> <span t-field="docs.valeur_colis"/> -->
+<!--                                        </p>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+
+<!--                            </tbody>-->
+<!--                        </table>-->
+
+
+
+
+
+
+            </div>
+
+        </t>
+        </t>
+
+
+
+</template>
+</odoo>
+
+

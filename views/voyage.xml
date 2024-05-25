@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_voyage_tree">
+            <field name="name">VOYAGES</field>
+            <field name="model">voyage.voyage</field>
+            <field name="arch" type="xml">
+                <tree string="Les VOYAGES">
+                    <field name="name"/>
+                    <field name="date_register"/>
+                    <field name="car_id"/>
+                    <field name="driver_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_voyage_from">
+            <field name="name">Les Voyages</field>
+            <field name="model">voyage.voyage</field>
+            <field name="arch" type="xml">
+                <form string="VOYAGES">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les VOYAGES
+                    </p>
+                    <header>
+
+                         <button name="print_bordeau"
+                                string="Imprimer le Bordereau"
+                                type="object"
+                                class="oe_highlight"
+                                icon="fa-envelope"
+                        />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send" />
+
+                    </header>
+                    <sheet>
+                         <group string="Informations Generales">
+                            <group>
+                                <field name="name"/>
+                                <field name="date_register"/>
+                                <field name="departure_id"/>
+                                <field name="destination_id"/>
+<!--                                <field name="trajet"/>-->
+                            </group>
+                            <group>
+                                <field name="car_id"/>
+                                <field name="passenger_number"/>
+                                <field name="driver_id"/>
+                                <field name="road_fees"/>
+                                <field name="user_id"/>
+                            </group>
+                        </group>
+                        <newline />
+                        <notebook colspan="4">
+                            <page string="Les Passagers">
+                                <field name="passager_ids"  colspan="4">
+                                    <tree string="Nos Passagers" editable="top">
+                                        <field name="sexe" />
+                                        <field name="partner_id" />
+                                        <field name="cni"  string="Numero de CNI/Recepisse/Passport"/>
+                                        <field name="mobile"  />
+                                        <field name="price"/>
+                                        <field name="price_bagage" />
+                                        <button name="print_ticket"
+                                            string="Imprimer le ticket"
+                                            type="object"
+                                            class="oe_highlight"
+                                            icon="fa-print"
+                                        />
+                                    </tree>
+                                </field>
+                                <group colspan="2">
+                                     <field
+                                        name="total_bagage"
+
+                                        widget='monetary'
+                                    />
+                                    <field
+                                        name="total_frais"
+
+                                        widget='monetary'
+                                    />
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_voyage_action" model="ir.actions.act_window">
+                <field name="name">Les voyages</field>
+                <field name="res_model">voyage.voyage</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_voyage_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer un voyage,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+</odoo>
+

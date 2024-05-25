@@ -10,7 +10,7 @@
                     <b> 
             <t t-if="len(ville_reception_ids) != '0' and len(ville_envoi_ids) == '0'">
 
-                            LISTING DES COLIS  EXPEDIES  POUR LA PERIODE DU
+                            LIS..TING DES COLIS  EXPEDIES  POUR LA PERIODE DU
                                 <span t-esc="datas['date_start']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/> 
                                  AU  
                                 <span t-esc="datas['date_end']" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>

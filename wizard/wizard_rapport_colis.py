@@ -17,6 +17,7 @@ class wizard_stock_bordereau_livraison(models.TransientModel):
     def print_rapport(self):
         if self.date_start >= self.date_end:
             raise UserError(_("Erreur !!!! La date de debut ne peut pas etre plus recente que la date de fin"))
+
         datas = {
             'date_start': self.date_start,
             'date_end': self.date_end,

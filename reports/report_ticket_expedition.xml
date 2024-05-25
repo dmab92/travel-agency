@@ -18,13 +18,19 @@
                                     <td>
                                          <p><strong>Date d'envoi</strong> :<span t-esc="docs.sender_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></p>
                                         <p><strong>Noms</strong> :<span t-esc="docs.sender_id.name"/> </p>
-                                        <p><strong>Téléphone</strong> : <span t-esc="docs.sender_id.phone"/> </p>
+                                        <p><strong>Téléphone</strong> : <span t-esc="docs.sender_phone"/> </p>
                                         <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p> 
-                                        <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p> 
+                                        <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p>
+                                        <p><strong>Frais d'envoi(FCFA)</strong>:
+                                        <span t-field="docs.price" /></p>
+                                        
+                                        <p><strong>Frais Assurance(FCFA)</strong>:<span t-field="docs.assurance" />   </p>
+                                        <p><strong>Frais Emballage(FCFA)</strong>:<span t-field="docs.embalage"/></p>
+                                        <p><strong>Frais Phyto Sanitaire(FCFA)</strong>:<span t-field="docs.phyto"/></p> 
                                     </td>
                                     <td> 
                                         <p><strong>Noms:</strong> <span t-esc="docs.receive_id.name"/> </p>
-                                        <p><strong>Téléphone:</strong> <span t-esc="docs.receive_id.phone"/> </p>
+                                        <p><strong>Téléphone:</strong> <span t-esc="docs.receive_phone"/> </p>
                                         <p><strong>Adresse :</strong> <span t-esc="docs.address_rec.name"/> </p>
                                         <p><strong>Etat :</strong> <span t-esc="docs.state_id.name"/> </p>
                                         <p><strong>Pays : </strong> <span t-esc="docs.country_rec_id.name"/> </p>
@@ -35,7 +41,7 @@
                                         </p>
                                         <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/> 
                                         </p>
-                                        <p><strong>Valeur(FCFA):</strong> <span t-esc="docs.valeur_colis"/> 
+                                        <p><strong>Valeur(FCFA):</strong> <span t-field="docs.valeur_colis"/> 
                                         </p>
                                     </td>
                                 </tr>
@@ -78,12 +84,17 @@
                          </div>
                     </div>
  -->
-              
                         
-                          <p class="text-right"> Signature</p>
+                          <p class="text-right"> Signature
+                          <img t-att-src="'data:image/png;base64,%s' % to_text(docs.digital_signature_em)" style="max-height: 4cm; max-width: 8cm;"/>
+                          </p>
                          <br />  
 
-                        <small class="text-right">NB: En cas de destruction du colis par les services de douanes du pays de destination,<br />Régal Shipping se désengage de toute responsabilité</small>
+                        <small class="text-right"> 
+                            NB: <span t-esc="docs.user_id.company_id.name"/>, n’est pas responsable des colis saisis ou détruits par la douane des pays tiers.Les marchandises ayant une valeur de plus de 50.000 FCFA doivent payer 10% d’assurance, nous vous conseillons de toujours les déclarer pour mériter un remboursement en cas de perte détérioration au cours du voyage et des manutentions.
+
+                            <!-- En cas de destruction du colis par les services de douanes du pays de destination,<br />  se désengage de toute responsabilité.
+                        Les marchandises ayant une valeur de plus de 50000 doivent payer 10% d’assurance, nous vous conseillons de toujours les déclarer pour mériter un remboursement en cas de perte détérioration au cours du voyage et des manutentions --></small>
                         <br />
                         <br />
                         <br />

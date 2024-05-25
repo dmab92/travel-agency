@@ -11,18 +11,18 @@
                     <field name="receive_id"/>
                     <field name="state"/>
                     <field name="paiement"/>
-                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+<!--                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>-->
                     <group expand="0" string="Group By">
                         <filter string="Expediteur" name="groupby_sender_id" domain="[]" context="{'group_by': 'sender_id'}"/>
 
                         <filter string="Destinataire" name="groupby_receive_id" domain="[]" 
                             context="{'group_by': 'receive_id'}"/>
 
-                        <filter string="Pays de reception" name="groupby_country_rec_id" domain="[]" 
-                            context="{'group_by': 'country_rec_id'}"/>
+<!--                        <filter string="Pays de reception" name="groupby_country_rec_id" domain="[]" -->
+<!--                            context="{'group_by': 'country_rec_id'}"/>-->
 
-                        <filter string="Pays d'envoi" name="groupby_country_sen_id" domain="[]" 
-                            context="{'group_by': 'country_sen_id'}"/>
+<!--                        <filter string="Pays d'envoi" name="groupby_country_sen_id" domain="[]" -->
+<!--                            context="{'group_by': 'country_sen_id'}"/>-->
 
                         <filter string="Date d'envoi" name="groupby_sender_date" domain="[]" 
                             context="{'group_by': 'sender_date'}"/>
@@ -86,40 +86,49 @@
                             <group string="Informations sur l'Expediteur">
                                 <field name="numero_colis" />
                                 <field name="sender_date" required="1" />
+                                <field name="sexe"  required="1"/>
                                 <field name="sender_id" required="1"  />
 
                                 <field name="sender_phone" required="1" />
                                 
                                 <field name="ville_envoi_id"  required="1"/>
-                                <!-- <field name="price" widget="monetary" /> -->
-                                <field name="country_sen_id"  required="1"/>
-                                <field name="digital_signature" widget="signature" />
+<!--                                <field name="country_sen_id"  required="1"/>-->
+                               <!--  <field name="price" widget="monetary" /> -->
+<!--                                <field name="assurance"  />-->
+<!--                                <field name="embalage"  />-->
+<!--                                <field name="phyto" />-->
+
+<!--                                <field name="digital_signature_em" widget="signature"  string="Signature Emetteur"/>-->
 
 
                             </group>
                             <group string="Informations sur le Destinataire">
+                                <field name="sexe_rec" required="1" />
                                 <field name="receive_id" required="1" />
+
                                 <field name="receive_phone" required="1"/>
                                 <field name="ville_reception_id"  />
-                                <field name="state_id" />
-                                <field name="country_rec_id" />
-                                <field name="address_rec" />
+<!--                                <field name="state_id" />-->
+<!--                                <field name="country_rec_id" />-->
+<!--                                <field name="address_rec" />-->
                                 <field name="price" required='1' force_save="1"/>
-                                <field name="paiement" />
-                                <field name="price_avance" 
-                                    attrs="{'readonly': [('paiement','in',('solde'))]}" force_save="1"/>
-                                <field name="price_rest" attrs="{'readonly': [('paiement','in',('solde','notsolde'))]}" force_save="1"/>
-                                
+<!--                                <field name="paiement" />-->
+<!--                                <field name="price_avance" -->
+<!--                                    attrs="{'readonly': [('paiement','in',('solde'))]}" force_save="1" />-->
+<!--                                <field name="price_rest" widget="monetary" attrs="{'readonly': [('paiement','in',('solde','notsolde'))]}" force_save="1"/>-->
+<!--                                -->
                                 <field name ="contenu_colis" required="1"/>
-                                <field name="weight" />
+<!--                                <field name="weight" />-->
                                 <field name="valeur_colis" />
-                                <field name="receive_date"  required="1"/>
+<!--                                <field name="receive_date"  required="1"/>-->
                                 <field name="info_excat" />
                                 <field name="user_id" readonly="1"/>
+<!--                                <field name="digital_signature" widget="signature"  string="Signature Destinataire"-->
+                                    />
                             </group>
-                            <group>
-                                <field name="digital_signature" widget="signature" />
-                            </group>
+                            <!-- <group>
+                                
+                            </group> -->
                             <!-- attrs="{'required': [('state','=','send')]}" -->
                         </group>
                     </sheet>
@@ -133,18 +142,16 @@
             <field name="model">colis.colis</field>
 
             <field name="arch" type="xml">
-                <tree string="Liste des Colis" decoration-success="paiement == 'solde'"
-                    decoration-danger="paiement == 'notsolde'"
-                     >
+                <tree string="Liste des Colis">
                     <field name="numero_colis"/>
                     <field name="sender_date"/>
                     <field name="sender_id"/>
-                    <field name="country_sen_id"/>
+<!--                    <field name="country_sen_id"/>-->
                     <field name="receive_id"/>
-                    <field name="country_rec_id" />
+<!--                    <field name="country_rec_id" />-->
                     <!-- <field name="receive_date"/> -->
                     <field name="price" widget="monetary" />
-                    <field name="paiement" />
+<!--                    <field name="paiement" />-->
                     <field name="state"/>
                 </tree>
             </field>

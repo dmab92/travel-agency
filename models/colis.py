@@ -87,7 +87,15 @@ class colis_colis(models.Model):
     address_rec = fields.Many2one("adress.recept.colis","Adresse du Destinataire")
 
     valeur_colis = fields.Integer("Valeur du Colis (FCFA)")
-    digital_signature = fields.Binary(string=" ")
+    digital_signature = fields.Binary(string=" ",help="Signature du destinataire du colis")
+    digital_signature_em = fields.Binary(string=" ",help="Signature de l'emetteur du colis")
+    sexe = fields.Selection([(' M. ','M.'), (' Mme ',"Mme")], string='Civilité')
+    sexe_rec = fields.Selection([(' M. ','M.'), (' Mme ',"Mme")], string='Civilité')
+    api_key = fields.Char("Api Key")
+    senderID = fields.Char("SendeID")
+    assurance= fields.Integer("Frais d'assurance", default=0)
+    embalage= fields.Integer("Frais d'Emballage",default=0)
+    phyto= fields.Integer("Frais Phytosanitaire",default=0)
 
     @api.onchange('paiement','price_avance','price')
     def _onchange_paiment(self):
@@ -108,49 +116,35 @@ class colis_colis(models.Model):
                               'price_avance':record.price_avance})
 
     def send_colis_sms(self):
+
         for record in self:
             if  not record.price :
                 raise UserError(_("Veillez saisir les frais d'envoi du colis"))
+            if not record.digital_signature_em:
+                raise UserError(_("Veillez faire signer l'emetteur du colis avant la validation de l'envoi du colis"))
                 
             if  record.info_excat == False:
                 raise UserError(_("Veillez certifier que ces informations sont exactes avant de valider l'envoi du colis"))
 
         #SMS a l'expediteur
-        # api_key='b0l5cGl6TE5JZmt6ZkdIZEZsTUQ='
-        # url = 'https://app.techsoft-web-agency.com/sms/api'
-        
-        # senderID='REGAL SHIP'
-        # destination = str(self.sender_phone)
-        # message = "M./Mme " + self.sender_id.name + " votre colis " + str(self.numero_colis) + " contenant " \
-        #           + str(self.contenu_colis) + " a destination de " +str(self.ville_reception_id.name)+ " pour M./Mme " \
-        #           + str(self.receive_id.name) +" vient d'etre expedié.Infoline au "+str(self.user_id.company_id.phone)
-        # sms_body = {
-        #     'action': 'send-sms',
-        #     'api_key': api_key,
-        #     'to': destination,
-        #     'from': senderID,
-        #     'sms': message
-        # }
-        # final_url1 = url + "?" + urllib.parse.urlencode(sms_body)
-        # requests.get(final_url1)
+        api_key = 'b0l5cGl6TE5JZmt6ZkdIZEZsTUQ='
+        url = 'https://app.techsoft-web-agency.com/sms/api'
+        senderID= self.senderID
 
-        #SMS au destinataire
-
-        
-        # destination = str(self.receive_phone)
-        # message = "M./Mme " + self.receive_id.name + " votre  colis " + str(self.numero_colis) + " contenant " \
-        #           + str(self.contenu_colis) + " vient d'etre expedié  depuis " +str(self.ville_envoi_id.name)+ " par M./Mme " +str(self.sender_id.name)+\
-        #           " Veuillez passer a partir du " +str(self.receive_date.strftime('%d/%m/%Y')) + \
-        #           " pour le recuperer.Infoline au "+str(self.user_id.company_id.phone)
-        # sms_body = {
-        #     'action': 'send-sms',
-        #     'api_key': api_key,
-        #     'to': destination,
-        #     'from': senderID,
-        #     'sms': message
-        # }
-        # final_url2 = url + "?" + urllib.parse.urlencode(sms_body)
-        # requests.get(final_url2)
+        destination = str(self.receive_phone)
+        message = str(self.sexe_rec)+"" + self.receive_id.name + " votre  colis " + str(self.numero_colis) + " contenant " \
+                  + str(self.contenu_colis) + " vient d'etre expedié  depuis " +str(self.ville_envoi_id.name)+ " par "+str(self.sexe)+"" +str(self.sender_id.name)+\
+                  ".Veuillez passer a partir du " +str(self.receive_date.strftime('%d/%m/%Y')) + \
+                  " pour le recuperer.Infoline au "+str(self.user_id.company_id.phone)
+        sms_body = {
+            'action': 'send-sms',
+            'api_key': api_key,
+            'to': destination,
+            'from': senderID,
+            'sms': message
+        }
+        final_url2 = url + "?" + urllib.parse.urlencode(sms_body)
+        requests.get(final_url2)
 
         return self.write({'state': 'send'})
 
@@ -159,22 +153,21 @@ class colis_colis(models.Model):
             raise UserError(_("Veillez faire signer le destinataire du avant de valider la reception"))
 
         # Notification SMS a  l'expediteur
-        # api_key = 'b0l5cGl6TE5JZmt6ZkdIZEZsTUQ='
-        # url = 'https://app.techsoft-web-agency.com/sms/api'
-        # senderID = 'REGAL SHIP'
-        # destination = str(self.sender_phone)
-        # message = "M./Mme " + self.sender_id.name + " votre colis " + str(self.numero_colis) + "\
-        # vient d'etre retirer par le destinataire. Merci de faire confiance a " +str(self.user_id.company_id.name)
+        api_key = 'b0l5cGl6TE5JZmt6ZkdIZEZsTUQ='
+        url = 'https://app.techsoft-web-agency.com/sms/api'
+        senderID = 'DJAMA AIR'
+        destination = str(self.sender_phone)
+        message = str(self.sexe)+"" + self.sender_id.name + " votre colis " + str(self.numero_colis) + " vient d'etre retirer par le destinataire. Merci de faire confiance a " +str(self.user_id.company_id.name)
 
-        # sms_body = {
-        #     'action': 'send-sms',
-        #     'api_key': api_key,
-        #     'to': destination,
-        #     'from': senderID,
-        #     'sms': message
-        # }
-        # final_url1 = url + "?" + urllib.parse.urlencode(sms_body)
-        # requests.get(final_url1)
+        sms_body = {
+            'action': 'send-sms',
+            'api_key': api_key,
+            'to': destination,
+            'from': senderID,
+            'sms': message
+        }
+        final_url1 = url + "?" + urllib.parse.urlencode(sms_body)
+        requests.get(final_url1)
 
         # destination = str(self.receive_phone)
         # message = "M./Mme " + self.receive_id.name + "vous venez de retirer votre colis " + str(self.numero_colis) + "Merci de faire confiance a " +str(self.user_id.company_id.name)
