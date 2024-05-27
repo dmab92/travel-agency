@@ -5,34 +5,53 @@
             <t t-call="web.external_layout">
             <div class="page">
                 <div class="oe_structure"/>
-                    <center>
+                    <center> <h3>
                         BORDERAU DU VOYAGE No <span t-field="docs.name"/> <br/>
-                        VEHICULE :  <span t-field="docs.license_plate"/>
-                        DATE: <span t-field="docs.date_register"/>
+                        VEHICULE :  <span t-field="docs.car_id.name"/> <br/>
+                        CHAUFFEUR :  <span t-field="docs.driver_id.name"/> <br/>
+                        DEPART : <span t-field="docs.departure_id.name"/>
+                        DESTINATION : <span t-field="docs.destination_id.name"/> <br/>
+                        DATE: <span t-field="docs.date_register"/> </h3>
             </center>
         <table class="table table-sm o_main_table">
             <thead class="thead-light">
                 <tr>
                     <th><strong>No</strong></th>
                     <th><strong>Noms et Prenoms</strong></th>
+                    <th><strong>Sexe</strong></th>
                     <th><b>Destination</b></th>
+                    <th><b>Remboursement</b></th>
                 </tr>
             </thead>
             <tbody>
                     <t t-set="index" t-value="1"/>
-                    <tr t-foreach="docs" t-as="line" class="border-black">
+                    <t t-set="remb" t-value="0"/>
+                    <tr t-foreach="docs.passager_ids" t-as="line" class="border-black">
                             <td class="text-left"><span t-esc="index"/></td>
-                            <td class="text-left"><span t-esc="line.passager_ids.partner_id.name"/></td>
-                            <td class="text-left"><span t-esc="line.passager_ids.sexe"/></td>
-                            <td class="text-left"><span t-esc="line.destination_id.name"/></td>
+                            <td class="text-left"><span t-field="line.partner_id.name"/></td>
+                            <td class="text-left"><span t-field="line.sexe"/></td>
+                            <td class="text-left"><span t-field="docs.destination_id.name"/></td>
+                         <td class="text-left"><span t-field="line.rembour"/></td>
                             <t t-set="index" t-value="index+1"/>
+                            <t t-set="remb" t-value="remb+line.rembour"/>
                     </tr>
                     </tbody>
+
+                    <tr class="border-black o_subtotal">
+                          <td with="80%" colspan="3">
+                          <b>Total des remboursements :</b></td>
+                          <td class="text-right" colspan="2">
+                              <h5> <span t-esc="'{:,.0f}'.format(remb).replace(',', ' ')"/></h5>
+                          </td>
+                        </tr>
+
                 </table>
-               Nombre Total de passagers : <span t-sec="index"/>
+                <p>
+                </p>
+               <p class="text-right"> LA DIRECTION </p>
             </div>
-    </t>
-     </t>
+            </t>
+        </t>
 
 </template>
 </odoo>

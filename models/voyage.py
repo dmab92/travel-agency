@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, SUPERUSER_ID, _
+from odoo.exceptions import ValidationError,UserError
 import time
 
 class voyage_voyage(models.Model):
@@ -45,36 +46,49 @@ class voyage_voyage(models.Model):
     car_id = fields.Many2one("fleet.vehicle", "Vehicule")
     driver_id = fields.Many2one("res.partner", "Conducteur")
     passager_ids = fields.One2many('voyage.passager','voayge_id', string="Passagers")
+    state = fields.Selection( [('draft', 'brouillon'),
+                               ('send', 'Valider')],   default='draft',string='Etat')
+    total_bagage = fields.Integer("Total Bagages", compute='_compute_passanger_number')
+    total_frais = fields.Integer("Total de Transport",compute='_compute_passanger_number')
+    total_remb = fields.Integer("Total Remboursement",compute='_compute_passanger_number')
+    total_gain = fields.Integer("Total Gain", compute='_compute_passanger_number')
+    road_fees= fields.Integer("Frais de route")
+    departure_id = fields.Many2one("city.destination", " Depart")
+    destination_id = fields.Many2one("city.depart","Destination")
+
+    price = fields.Integer("Frais de transport", default=3000)
+    license_plate = fields.Integer("Frais de route")
+    passenger_number = fields.Integer("Nombre max de passagers", related='car_id.seats')
 
     depart = fields.Selection([('1', 'DOUALA'),
                                ('2', 'NKONGSAMBA'),
                                ],
-                             string='Depart')
-    state = fields.Selection( [('draft', 'brouillon'),
-                               ('send', 'Valider')], string='Etat')
-    total_bagage = fields.Char("Total Bagages")
-    total_frais = fields.Char("Total de Transport")
-    road_fees= fields.Char("Frais de route")
-    departure_id = fields.Many2one("city.destination", " Depart")
-    destination_id = fields.Many2one("city.depart","Destination")
+                              string='Depart')
 
-    road_fees = fields.Integer("Frais de route")
-    license_plate = fields.Integer("Frais de route")
-    passenger_number = fields.Integer("Nombre max de passagers", related='car_id.seats')
-
+    @api.onchange('passager_ids')
     def _compute_passanger_number(self):
         """Compute the invoice count"""
         for record in self:
-            record.passenger_number = len(record.passager_ids)
+            #record.passenger_number = len(record.passager_ids)
+            record.total_frais += sum(record.passager_ids.mapped('price'))
+            record.total_bagage += sum(record.passager_ids.mapped('price_bagage'))
+            record.total_remb+=sum(record.passager_ids.mapped('rembour'))
+            record.total_gain= record.total_frais + record.total_bagage
 
     @api.constrains('passager_ids')
     def _check_control_date(self):
         for line in self:
             if len(line.passager_ids) > line.passenger_number:
-                raise Warning(" Impossible d'enregistrer car vous avez enregistrer plus de passagers que la normale."
-                              "NB: la capacité maximale de ce vehicule est de  %s  personnes ") %str(line.car_id.seats)
+                raise UserError(_(" Impossible d'enregistrer car le bus est deja plein. NB: la capacité maximale de ce"
+                                  " vehicule est de  %s  personnes. Veillez supprimer le(s) %s derniers "
+                                  "passager(s) que vous avvez ajouter et le(s) programmer si possible au prochain depart. ") %(line.car_id.seats, (len(line.passager_ids) - line.passenger_number)))
         return True
 
+    @api.onchange('price')
+    def _onchange_price(self):
+        "On change the price of transfort"
+        for record in self:
+            record.passager_ids.price = record.price
 
 
     @api.onchange('car_id')
@@ -94,10 +108,12 @@ class voyage_voyage(models.Model):
             record.driver_id = record.car_id.driver_id
 
     def print_bordeau(self):
+
         return self.env.ref('colis_app.action_report_bordeau').report_action(self)
-    def line_check(self):
+    def set_valited(self):
         "Check de nomber of line "
-        pass
+        return self.write({'state': 'send'})
+
 
 
 class passager_voyage(models.Model):
@@ -109,9 +125,9 @@ class passager_voyage(models.Model):
     cni = fields.Char("Numero de CNI")
     mobile = fields.Char("Tel:")
     voayge_id = fields.Many2one("voyage.voyage", "Voyage")
-    price = fields.Char("Frais de Transport")
-    price_bagage = fields.Char("Prix Bagage")
-    remboursement = fields.Char("Remboursement")
+    price = fields.Integer("Frais de Transport", related='voayge_id.price')
+    price_bagage = fields.Integer("Prix Bagage")
+    rembour = fields.Integer("Remboursement")
     sexe = fields.Selection([(' M. ', 'Homme'), (' Mme ', "Femme")], string='Civilité')
 
 
@@ -130,7 +146,3 @@ class city_departure(models.Model):
     _name = 'city.depart'
 
     name= fields.Char("Arrivee")
-
-
-
-

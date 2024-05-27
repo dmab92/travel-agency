@@ -24,11 +24,22 @@
                     <header>
 
                          <button name="print_bordeau"
-                                string="Imprimer le Bordereau"
+                                 string="Imprimer le Bordereau"
+                                 type="object"
+                                 class="oe_highlight"
+                                 icon="fa-print"
+                                 attrs="{'invisible':[('state','=','draft')]}"
+                        />
+
+                         <button name="set_valited"
+                                string="Valider et Imprimer le bordeau"
                                 type="object"
                                 class="oe_highlight"
-                                icon="fa-envelope"
+                                icon="fa-check"
+                                 attrs="{'invisible':[('state','=','send')]}"
                         />
+
+
                     <field name="state" widget="statusbar" statusbar_visible="draft,send" />
 
                     </header>
@@ -39,27 +50,28 @@
                                 <field name="date_register"/>
                                 <field name="departure_id"/>
                                 <field name="destination_id"/>
-<!--                                <field name="trajet"/>-->
+                                <field name="price" widget='monetary'/>
                             </group>
                             <group>
                                 <field name="car_id"/>
                                 <field name="passenger_number"/>
                                 <field name="driver_id"/>
-                                <field name="road_fees"/>
-                                <field name="user_id"/>
+                                <field name="road_fees" widget="monetary"/>
+                                <field name="user_id" />
                             </group>
                         </group>
                         <newline />
                         <notebook colspan="4">
                             <page string="Les Passagers">
                                 <field name="passager_ids"  colspan="4">
-                                    <tree string="Nos Passagers" editable="top">
+                                    <tree string="Les Passagers" editable="top">
                                         <field name="sexe" />
                                         <field name="partner_id" />
-                                        <field name="cni"  string="Numero de CNI/Recepisse/Passport"/>
+                                        <field name="cni"  string="Numero de CNI/Recepisse/Passport" required="1"/>
                                         <field name="mobile"  />
-                                        <field name="price"/>
-                                        <field name="price_bagage" />
+                                        <field name="price"   widget='monetary' readonly="1"/>
+                                        <field name="price_bagage" widget="monetary" />
+                                        <field name="rembour"  widget="monetary"/>
                                         <button name="print_ticket"
                                             string="Imprimer le ticket"
                                             type="object"
@@ -68,17 +80,11 @@
                                         />
                                     </tree>
                                 </field>
-                                <group colspan="2">
-                                     <field
-                                        name="total_bagage"
-
-                                        widget='monetary'
-                                    />
-                                    <field
-                                        name="total_frais"
-
-                                        widget='monetary'
-                                    />
+                                <group colspan="3"  class="oe_subtotal_footer oe_right">>
+                                     <field name="total_bagage"  widget='monetary'/>
+                                     <field name="total_frais" widget='monetary'/>
+                                     <field name="total_remb" widget='monetary'/>
+                                     <field name="total_gain" string="Total Encaissé" widget="monetary" />
                                 </group>
                             </page>
                         </notebook>
