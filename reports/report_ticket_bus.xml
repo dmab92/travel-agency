@@ -5,55 +5,58 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <center>
-                    <h4>Ticket de Voyage No  <span t-esc="docs.name"/> </h4>
+                      <h2>  ENTETE AVEC LOGO DE EASY VOYAGE ICI </h2>
+
+                      <h4>Ticket de Voyage No  <span t-esc="docs.voayge_id.name"/> </h4>
+
                     </center>
 
-<!--                     <table class="table table-borderless"> -->
-<!--                            <thead>-->
-<!--                                <th> <h4> EXPEDITEUR </h4></th>-->
-<!--                                <th>  <h4> DESTINATAIRE</h4></th>-->
-<!--                            </thead>-->
-<!--                            <tbody>-->
-<!--                                <tr>-->
-<!--                                    <td>-->
-<!--                                         <p><strong>Date d'envoi</strong> :<span t-esc="docs.sender_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></p>-->
-<!--                                        <p><strong>Noms</strong> :<span t-esc="docs.sender_id.name"/> </p>-->
-<!--                                        <p><strong>Téléphone</strong> : <span t-esc="docs.sender_phone"/> </p>-->
-<!--                                        <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p> -->
-<!--                                        <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p>-->
-<!--                                        <p><strong>Frais d'envoi(FCFA)</strong>:-->
-<!--                                        <span t-field="docs.price" /></p>-->
-<!--                                        -->
-<!--                                        <p><strong>Frais Assurance(FCFA)</strong>:<span t-field="docs.assurance" />   </p>-->
-<!--                                        <p><strong>Frais Emballage(FCFA)</strong>:<span t-field="docs.embalage"/></p>-->
-<!--                                        <p><strong>Frais Phyto Sanitaire(FCFA)</strong>:<span t-field="docs.phyto"/></p> -->
-<!--                                    </td>-->
-<!--                                    <td> -->
-<!--                                        <p><strong>Noms:</strong> <span t-esc="docs.receive_id.name"/> </p>-->
-<!--                                        <p><strong>Téléphone:</strong> <span t-esc="docs.receive_phone"/> </p>-->
-<!--                                        <p><strong>Adresse :</strong> <span t-esc="docs.address_rec.name"/> </p>-->
-<!--                                        <p><strong>Etat :</strong> <span t-esc="docs.state_id.name"/> </p>-->
-<!--                                        <p><strong>Pays : </strong> <span t-esc="docs.country_rec_id.name"/> </p>-->
-<!--                                        <p><strong>Paiement:</strong> -->
-<!--                                        <span t-esc="{'solde': 'SOLDE','notsolde': 'NON SOLDE',}[docs.paiement]"/> -->
-<!--                                        </p>-->
-<!--                                        <p><strong>Nature:</strong> <span t-esc="docs.contenu_colis"/> -->
-<!--                                        </p>-->
-<!--                                        <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/> -->
-<!--                                        </p>-->
-<!--                                        <p><strong>Valeur(FCFA):</strong> <span t-field="docs.valeur_colis"/> -->
-<!--                                        </p>-->
-<!--                                    </td>-->
-<!--                                </tr>-->
+                    <table class="table table-sm o_main_table">
 
-<!--                            </tbody>-->
-<!--                        </table>-->
+                  <tbody>
+                    <tr class="border-black">
+                          <td with="60%" colspan="3">
+                            <!--<img src="travel_agency_app,static/src/img/icon2.png" class="float-right" style="max-height: 65px; margin-top:20px;" alt="Logo"/> <br/>-->
 
 
 
+                             No: XXXXXX <br/>
+                           NOMS et Prenoms: <span t-esc="docs.partner_id.name"/> <br/>
+                           CNI: <span t-esc="docs.cni"/> <br/>
+                           Tel: <span t-esc="docs.mobile"/> <br/>
+                           Trajet:  <br/>
+                           No BUS: <span t-esc="docs.voayge_id.car_id.name"/> <br/>
+                           Tel: <span t-esc="docs.voayge_id.date_register"/> <br/>
+                           Montant: <span t-esc="docs.price"/> <br/>
+                           Montant Bagage: <span t-esc="docs.price_bagage"/> <br/>
 
 
 
+                              AUTRES INFORMATIONS A INSERER ICI<br/>
+                               AUTRES INFORMATIONS A INSERER ICI <br/>
+
+                          </td>
+
+                          <td with="40%" colspan="3">
+                           No: XXXXXX <br/>
+                           NOMS et Prenoms: <span t-esc="docs.partner_id.name"/> <br/>
+                           CNI: <span t-esc="docs.cni"/> <br/>
+                           Tel: <span t-esc="docs.mobile"/> <br/>
+                           Trajet:  <br/>
+                           No BUS: <span t-esc="docs.voayge_id.car_id.name"/> <br/>
+                           Tel: <span t-esc="docs.voayge_id.date_register"/> <br/>
+                           Montant: <span t-esc="docs.price"/> <br/>
+                           Montant Bagage: <span t-esc="docs.price_bagage"/> <br/>
+                           Numero de Siege:  <br/>
+                           Vendu par: <span t-esc="docs.voayge_id.user_id.name"/> <br/>
+
+
+
+                          </td>
+                        </tr>
+              </tbody>
+
+                </table>
             </div>
 
         </t>

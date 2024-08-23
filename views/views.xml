@@ -2,9 +2,9 @@
   <data>
     <!-- explicit list view definition -->
 <!--
-    <record model="ir.ui.view" id="colis_app.list">
-      <field name="name">colis_app list</field>
-      <field name="model">colis_app.colis_app</field>
+    <record model="ir.ui.view" id="travel_agency_app.list">
+      <field name="name">travel_agency_app list</field>
+      <field name="model">travel_agency_app.travel_agency_app</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
@@ -17,18 +17,18 @@
 
     <!-- actions opening views on models -->
 <!--
-    <record model="ir.actions.act_window" id="colis_app.action_window">
-      <field name="name">colis_app window</field>
-      <field name="res_model">colis_app.colis_app</field>
+    <record model="ir.actions.act_window" id="travel_agency_app.action_window">
+      <field name="name">travel_agency_app window</field>
+      <field name="res_model">travel_agency_app.travel_agency_app</field>
       <field name="view_mode">tree,form</field>
     </record>
 -->
 
     <!-- server action to the one above -->
 <!--
-    <record model="ir.actions.server" id="colis_app.action_server">
-      <field name="name">colis_app server</field>
-      <field name="model_id" ref="model_colis_app_colis_app"/>
+    <record model="ir.actions.server" id="travel_agency_app.action_server">
+      <field name="name">travel_agency_app server</field>
+      <field name="model_id" ref="model_travel_agency_app_travel_agency_app"/>
       <field name="state">code</field>
       <field name="code">
         action = {
@@ -42,19 +42,19 @@
 
     <!-- Top menu item -->
 <!--
-    <menuitem name="colis_app" id="colis_app.menu_root"/>
+    <menuitem name="travel_agency_app" id="travel_agency_app.menu_root"/>
 -->
     <!-- menu categories -->
 <!--
-    <menuitem name="Menu 1" id="colis_app.menu_1" parent="colis_app.menu_root"/>
-    <menuitem name="Menu 2" id="colis_app.menu_2" parent="colis_app.menu_root"/>
+    <menuitem name="Menu 1" id="travel_agency_app.menu_1" parent="travel_agency_app.menu_root"/>
+    <menuitem name="Menu 2" id="travel_agency_app.menu_2" parent="travel_agency_app.menu_root"/>
 -->
     <!-- actions -->
 <!--
-    <menuitem name="List" id="colis_app.menu_1_list" parent="colis_app.menu_1"
-              action="colis_app.action_window"/>
-    <menuitem name="Server to list" id="colis_app" parent="colis_app.menu_2"
-              action="colis_app.action_server"/>
+    <menuitem name="List" id="travel_agency_app.menu_1_list" parent="travel_agency_app.menu_1"
+              action="travel_agency_app.action_window"/>
+    <menuitem name="Server to list" id="travel_agency_app" parent="travel_agency_app.menu_2"
+              action="travel_agency_app.action_server"/>
 -->
   </data>
 </odoo>

@@ -3,120 +3,74 @@
 <template id="ticket_expedition">
           <t t-call="web.html_container">
             <t t-call="web.external_layout">
-                <div class="page">
+              <div class="page">
                     <center>
                     <h3>Recu du colis No  <span t-esc="docs.numero_colis"/> </h3>
                     </center>
-
-                     <table class="table table-borderless"> 
+                     <table class="table table-borderless">
                             <thead>
                                 <th> <h4> EXPEDITEUR </h4></th>
                                 <th>  <h4> DESTINATAIRE</h4></th>
                             </thead>
+
                             <tbody>
                                 <tr>
                                     <td>
                                          <p><strong>Date d'envoi</strong> :<span t-esc="docs.sender_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></p>
                                         <p><strong>Noms</strong> :<span t-esc="docs.sender_id.name"/> </p>
                                         <p><strong>Téléphone</strong> : <span t-esc="docs.sender_phone"/> </p>
-                                        <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p> 
+                                        <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p>
                                         <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p>
                                         <p><strong>Frais d'envoi(FCFA)</strong>:
-                                        <span t-field="docs.price" /></p>
-                                        
-                                        <p><strong>Frais Assurance(FCFA)</strong>:<span t-field="docs.assurance" />   </p>
+                                        <span t-field="docs.price"/></p>
+
+                                        <p><strong>Frais Assurance(FCFA)</strong>:<span t-field="docs.assurance"/>   </p>
                                         <p><strong>Frais Emballage(FCFA)</strong>:<span t-field="docs.embalage"/></p>
-                                        <p><strong>Frais Phyto Sanitaire(FCFA)</strong>:<span t-field="docs.phyto"/></p> 
+                                        <p><strong>Frais Phyto Sanitaire(FCFA)</strong>:<span t-field="docs.phyto"/></p>
                                     </td>
-                                    <td> 
+                                    <td>
                                         <p><strong>Noms:</strong> <span t-esc="docs.receive_id.name"/> </p>
                                         <p><strong>Téléphone:</strong> <span t-esc="docs.receive_phone"/> </p>
                                         <p><strong>Adresse :</strong> <span t-esc="docs.address_rec.name"/> </p>
                                         <p><strong>Etat :</strong> <span t-esc="docs.state_id.name"/> </p>
                                         <p><strong>Pays : </strong> <span t-esc="docs.country_rec_id.name"/> </p>
-                                        <p><strong>Paiement:</strong> 
-                                        <span t-esc="{'solde': 'SOLDE','notsolde': 'NON SOLDE',}[docs.paiement]"/> 
+                                        <p><strong>Paiement:</strong>
+                                        <span t-esc="{'solde': 'SOLDE','notsolde': 'NON SOLDE',}[docs.paiement]"/>
                                         </p>
-                                        <p><strong>Nature:</strong> <span t-esc="docs.contenu_colis"/> 
+                                        <p><strong>Nature:</strong> <span t-esc="docs.contenu_colis"/>
                                         </p>
-                                        <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/> 
+                                        <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/>
                                         </p>
-                                        <p><strong>Valeur(FCFA):</strong> <span t-field="docs.valeur_colis"/> 
+                                        <p><strong>Valeur(FCFA):</strong> <span t-field="docs.valeur_colis"/>
                                         </p>
                                     </td>
                                 </tr>
 
                             </tbody>
                         </table>
-
-                    <!-- <div class="row" width="100%">
-                        <div width="50%">
-                          <h3 style="text-align: left"><b>EXPEDITEUR</b></h3>
-                            <p><strong>Date d'envoi</strong> :<span t-esc="docs.sender_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/></p>
-                            <p><strong>Noms</strong> :<span t-esc="docs.sender_id.name"/> </p>
-                            <p><strong>Téléphone</strong> : <span t-esc="docs.sender_id.phone"/> </p>
-                            <p><strong>Ville</strong>:<span t-esc="docs.ville_envoi_id.name"/> </p> 
-                            <p><strong>Pays</strong>:<span t-esc="docs.country_sen_id.name"/></p>
-                         </div>
-
-
-                         <div  width="50%">
-                            <h3 style="text-align: right"><b>DESTINATAIRE</b></h3>
-                            <p><strong>Nom:</strong> 
-                                         <span t-esc="docs.receive_id.name"/> 
-                            </p>
-                            <p><strong>Téléphone:</strong> <span t-esc="docs.receive_id.phone"/> 
-                            </p>
-                            <p><strong>Adresse :</strong> <span t-esc="docs.address_rec.name"/> 
-                            </p>
-                            <p><strong>Etat :</strong> <span t-esc="docs.state_id.name"/> 
-                            </p>
-                            <p><strong>Pays : </strong> <span t-esc="docs.country_rec_id.name"/>
-                            </p>
-                            <p><strong>Paiement:</strong> <span t-esc="{'solde': 'SOLDE','notsolde': 'NON SOLDE',}[docs.paiement]"/> 
-                            </p>
-                            <p><strong>Nature:</strong> <span t-esc="docs.valeur_colis"/> 
-                            </p>
-                            <p><strong>Poids(Kg):</strong> <span t-esc="docs.weight"/> 
-                            </p>
-                            <p><strong>Valeur(FCFA):</strong> <span t-esc="docs.valeur_colis"/> 
-                            </p>
-                         </div>
-                    </div>
- -->
-                        
                           <p class="text-right"> Signature
-                          <img t-att-src="'data:image/png;base64,%s' % to_text(docs.digital_signature_em)" style="max-height: 4cm; max-width: 8cm;"/>
+                          <!--<img t-att-src="'data:image/png;base64,%s' % to_text(docs.digital_signature_em)" style="max-height: 4cm; max-width: 8cm;"/>-->
                           </p>
-                         <br />  
-
-                        <small class="text-right"> 
-                            NB: <span t-esc="docs.user_id.company_id.name"/>, n’est pas responsable des colis saisis ou détruits par la douane des pays tiers.Les marchandises ayant une valeur de plus de 50.000 FCFA doivent payer 10% d’assurance, nous vous conseillons de toujours les déclarer pour mériter un remboursement en cas de perte détérioration au cours du voyage et des manutentions.
-
-                            <!-- En cas de destruction du colis par les services de douanes du pays de destination,<br />  se désengage de toute responsabilité.
-                        Les marchandises ayant une valeur de plus de 50000 doivent payer 10% d’assurance, nous vous conseillons de toujours les déclarer pour mériter un remboursement en cas de perte détérioration au cours du voyage et des manutentions --></small>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                         <br/>
+                            <small>
+                                NB: <span t-esc="docs.user_id.company_id.name"/>, n’est pas responsable des colis saisis ou détruits par la
+                                douane des pays tiers.Les marchandises ayant une valeur de plus de 50.000 FCFA doivent payer 10% d’assurance,
+                                nous vous conseillons de toujours les déclarer pour mériter un remboursement en cas de perte détérioration au cours du voyage et des manutentions.
+                            </small>
+                        <br/>
+                        <br/>
+                        <br/>
                         <hr/>
                           <hr/>
-                          
 
-                                            <center>
-                           <h3> FICHE D'ENVOI  </h3>
-                           <h4> COLIS No  <span t-esc="docs.numero_colis"/></h4>
-                    
-                    <p> Your Satisfaction is our priority <br />
+                    <p> Your Satisfaction is our priority <br/>
                     Tel:<span t-esc="docs.user_id.company_id.phone"/> </p>
-                    </center> 
-                      
-            </div>
+                <div />
 
-        </t>
-        </t>
+              </div>
 
-   
+            </t>
+        </t>
 
 </template>
 </odoo>

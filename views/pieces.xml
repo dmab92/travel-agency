@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_piece_vehicule_tree">
+            <field name="name">PIECES VEHICULES</field>
+            <field name="model">dossier.vehicule</field>
+            <field name="arch" type="xml">
+                <tree string="Les PIECES DU VEHICULE">
+                    <field name="name"/>
+                    <field name="validity" />
+                </tree>
+            </field>
+        </record>
+
+
+         <record model="ir.ui.view" id="view_piece_vehicule_from">
+            <field name="name">Les PIECES VEHICULES</field>
+            <field name="model">dossier.vehicule</field>
+            <field name="arch" type="xml">
+                <form string="VOYAGES">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Donnees de PIECES VEHICULES
+                    </p>
+                    <header>
+
+<!--                    <field name="state" widget="statusbar" statusbar_visible="draft,send" />-->
+                    </header>
+                    <sheet>
+                         <group string="Informations Generales">
+                           <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="validity" />
+                                    <field name="date_emi" invisible="1"/>
+                                    <field name="date_expi" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                </group>
+                            </group>
+                        </group>
+                        <newline />
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+         <record id="view_piece_vehicule_action" model="ir.actions.act_window">
+                    <field name="name">Les Pieces du Vehicule</field>
+                    <field name="res_model">dossier.vehicule</field>
+                    <field name="type">ir.actions.act_window</field>
+                    <field name="view_id" ref="view_piece_vehicule_tree"/>
+                    <field name="view_mode">tree,form</field>
+                    <field name="help" type="html">
+                  <p class="o_view_nocontent_smiling_face">
+                    Creez vos Pieces de Vehicules ICI
+                  </p><p>
+                    Pour creer un enregistrement,
+                    cliquer sur le buton creer en haut a gauche de ce message
+                  </p>
+                </field>
+            </record>
+
+
+
+    <record model="ir.ui.view" id="view_piece_chauffeur_tree">
+            <field name="name">PIECES VEHICULES</field>
+            <field name="model">dossier.vehicule</field>
+            <field name="arch" type="xml">
+                <tree string="Les PIECES DU VEHICULE">
+                    <field name="name"/>
+                    <field name="validity" />
+
+                </tree>
+            </field>
+        </record>
+
+
+         <record model="ir.ui.view" id="view_piece_chauffeur_from">
+            <field name="name">Les PIECES chauffeurs</field>
+            <field name="model">dossier.chauffeur</field>
+            <field name="arch" type="xml">
+                <form string="VOYAGES">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Donnees de PIECES chauffeurs
+                    </p>
+                    <header>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send" />
+                    </header>
+                    <sheet>
+                         <group string="Informations Generales">
+                           <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="validity" />
+                                    <field name="date_emi" invisible="1"/>
+                                    <field name="date_expi" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                </group>
+                            </group>
+                        </group>
+                        <newline />
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+         <record id="view_piece_chauffeur_action" model="ir.actions.act_window">
+                    <field name="name">Les Pieces du chauffeur</field>
+                    <field name="res_model">dossier.chauffeur</field>
+                    <field name="type">ir.actions.act_window</field>
+                    <field name="view_id" ref="view_piece_chauffeur_tree"/>
+                    <field name="view_mode">tree,form</field>
+                    <field name="help" type="html">
+                  <p class="o_view_nocontent_smiling_face">
+                    Creez vos Pieces de Vehicules ICI
+                  </p><p>
+                    Pour creer un enregistrement,
+                    cliquer sur le buton creer en haut a gauche de ce message
+                  </p>
+                </field>
+            </record>
+
+</odoo>

@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "colis_app",
+    'name': "Travel Agency Managment System",
 
     'summary': """
-       Ce module vous permet de gerer les livraisions de vos colis""",
+       Ce module vous permet de gerer l'enseignment des activites d'une agence de transport interurbain
+       """,
 
     'description': """
-        Ce module vous permet de gerer les livraisions de vos colis
-        Envoyer les SMS a l'Expediteur et  au Destinataire
+         Ce module vous permet de gerer l'enseignment des activites d'une agence de transport
+       de l'enregistremnt des voyages, les badages, l'impression des tickets, des bordeau de route et bien d'autres elements
         d'Editer vos etats Statistiques aux format PDF et Excel
     """,
-    'author': "MT Consulting and Services",
-    'email': "contact@mtconsultingandservices.com",
-    'website': "http://www.mtconsultingandservices.com",
+    'author': "MT Consulting  SARL",
+    'email': "contact@mtconsulting.cm",
+    'website': "http://www.mtconsulting.cm",
     'phone': "+237 678128120 /697005649",
     'category': 'Uncategorized',
     'version': '0.1',
@@ -22,18 +23,25 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
-        #'data/layouts.xml',
+        #'security/groups.xml'
+        'data/layouts.xml',
+        'security/ir.model.access.csv',
+
         'views/colis_views.xml',
         'views/colis_config.xml',
-        'views/voyage.xml',
+        'views/voyages.xml',
+        'views/transport.xml',
+        'views/pieces.xml',
+        #'views/sales_dashboard.xml',
         'wizard/wizard_rapport_colis.xml',
         'reports/report_ticket_expedition.xml',
         'reports/report_rapport_expedition.xml',
         'reports/report_borderau.xml',
         'reports/report_ticket_bus.xml',
-        'report_colis.xml',
+        'report_voyage.xml',
         'menu_voyage.xml',
+
+
 
         #'views/templates.xml',
     ],

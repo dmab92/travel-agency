@@ -3,7 +3,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 class rapoort_expedition_parser(models.AbstractModel):
-    _name = 'report.colis_app.rapport_expedition'
+    _name = 'report.travel_agency_app.rapport_expedition'
     _description = 'Rapport  des expeditions des colis'
 
 
@@ -26,7 +26,7 @@ class rapoort_expedition_parser(models.AbstractModel):
         # if data.get('mode_payement'):
         #     domain.append(('mode_payement', '=', data.get('mode_payement')))
 
-        docs = self.env['colis.colis'].search(domain, order="sender_date desc")  
+        docs = self.env['voyage.colis'].search(domain, order="sender_date desc")
 
         #company_ids = self.env['res.company'].browse(data.get('company_ids'))
 
@@ -40,7 +40,7 @@ class rapoort_expedition_parser(models.AbstractModel):
 
         return {
             'doc_ids': docs.ids,
-            'doc_model': 'colis.colis',
+            'doc_model': 'voyage.colis',
             'docs': docs,
             'datas': data,
             'ville_reception_ids':ville_reception_ids,

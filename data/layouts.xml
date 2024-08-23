@@ -2,7 +2,26 @@
 <odoo>
     <data>
 
-        <record id="sheet_a5" model="report.paperformat">
+         <record model="ir.module.category" id="caisse_voyages_accesss">
+            <field name="name">Caissieres</field>
+        </record>
+
+        <record id="group_caisse_voyages" model="res.groups">
+            <field name="name">Caissieres Groups</field>
+            <field name="category_id" ref="travel_agency_app.caisse_voyages_accesss"/>
+        </record>
+
+
+        <record model="ir.module.category" id="managers_voyages_accesss">
+            <field name="name">Managers</field>
+        </record>
+
+        <record id="group_managers_voyages" model="res.groups">
+            <field name="name">Managers Groups</field>
+            <field name="category_id" ref="travel_agency_app.managers_voyages_accesss"/>
+        </record>
+
+          <record id="sheet_a5" model="report.paperformat">
             <field name="name">A5 Format</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
@@ -19,7 +38,7 @@
         </record>
 
         <!-- <record id="action_report_ticket_colis" model="ir.actions.report.xml">
-            <field name="paperformat_id" ref="colis_app.sheet_a5"/>
+            <field name="paperformat_id" ref="travel_agency_app.sheet_a5"/>
         </record> -->
 
 

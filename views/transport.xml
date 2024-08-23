@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- views/sales_dashboard_graph_view.xml -->
+<!--<odoo>-->
+<!--    <record id="view_vehicule_graph" model="ir.ui.view">-->
+<!--        <field name="name">vehicule.voyage.graph</field>-->
+<!--        <field name="model">vehicule.voyage</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <graph string="Sales Dashboard">-->
+<!--                <field name="total_sales" type="measure"/>-->
+<!--                <field name="sales_count" type="measure"/>-->
+<!--            </graph>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->
+
+
+    <record id="view_vehicule_kanban" model="ir.ui.view">
+        <field name="name">vehicule.voyage.kanban</field>
+        <field name="model">vehicule.voyage</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="state"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_vehicule_tree">
+        <field name="name">VEHICULES</field>
+        <field name="model">vehicule.voyage</field>
+        <field name="arch" type="xml">
+            <tree string="Les VEHICULES">
+                <field name="name"/>
+                <field name="date_register"/>
+                <field name="car_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+        <record model="ir.ui.view" id="view_voyage_from">
+            <field name="name">Les VEHICULES</field>
+            <field name="model">vehicule.voyage</field>
+            <field name="arch" type="xml">
+                <form string="VOYAGES">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Donnees de VEHICULES
+                    </p>
+                    <header>
+<!--                        <button name="upload_car_doc"-->
+<!--                                 string="Telecharger la liste des documents"-->
+<!--                                 type="object"-->
+<!--                                 class="oe_highlight"-->
+<!--                                 icon="fa-print"-->
+<!--                                 attrs="{'invisible':[('state','!=','draft')]}"-->
+<!--                        />-->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send" />
+
+                    </header>
+                    <sheet>
+                         <group string="Informations Generales">
+                             <group>
+                                 <field name="name"/>
+                                 <field name="car_id"  string="Vehicule"/>
+                                 <field name="date_register" readonly="1"/>
+                                 <field name="destination"/>
+                             </group>
+                           <group>
+                                <group string="Carte Grise">
+                                    <field name="date_grise_e"/>
+                                    <field name="validity_gris" />
+                                    <field name="date_grise_expi"/>
+
+                                </group>
+
+                               <group string="Carte Bleue">
+                                    <field name="date_blue_e"/>
+                                   <field name="validity_bleu" />
+                                    <field name="date_blue_expi"/>
+
+                                </group>
+
+                               <group string="Licence de Transport">
+                                    <field name="date_lic_e"/>
+                                   <field name="validity_lic" />
+                                    <field name="date_lic_expi"/>
+                                </group>
+                               <group string="VISISTE TECHNIQUE">
+                                    <field name="date_visit_e"/>
+                                   <field name="validity_visit" />
+                                    <field name="date_visit_expi"/>
+
+                                </group>
+                           </group>
+                            <newline />
+                             <newline />
+<!--                        <notebook colspan="4">-->
+<!--                            <page string="LES PIECES DU DOSSIERS">-->
+<!--                                <field name="dossiers_ids"  colspan="4"  context="{'default_vehicule_id': vehicule_id}">-->
+<!--                                    <tree string="LES PIECES DU DOSSIERS" editable="top">-->
+<!--                                        <field name="name" />-->
+<!--                                        <field name="date_emi"/>-->
+<!--                                        <field name="date_expi"/>-->
+<!--                                        <field name="state"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+
+<!--                            </page>-->
+<!--                        </notebook>-->
+                             <group>
+                                <group string="Agreement">
+                                    <field name="date_agre_e"/>
+                                    <field name="validity_agre"/>
+                                    <field name="date_agre_expi"/>
+                                </group>
+
+                               <group string="Certificat de Jouageage">
+                                    <field name="date_certif_e"/>
+                                   <field name="validity_cert"/>
+                                    <field name="date_certif_expi"/>
+                                </group>
+
+                               <group string="Assurance">
+                                    <field name="date_assur_e"/>
+                                   <field name="validity_assur"/>
+                                    <field name="date_assur_expi"/>
+                                </group>
+
+                                 <group string="Conformité Fiscale">
+                                    <field name="date_fisc_e"/>
+                                     <field name="validity_fisc"/>
+                                    <field name="date_fisc_expi"/>
+                                 </group>
+                           </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_vehicule_action" model="ir.actions.act_window">
+                <field name="name">Les Vehicules</field>
+                <field name="res_model">vehicule.voyage</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_vehicule_tree"/>
+                <field name="view_mode">kanban,tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer un enregistrement,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+
+
+     <record model="ir.ui.view" id="view_driver_tree">
+            <field name="name">CHAUFFEURS</field>
+            <field name="model">driver.voyage</field>
+            <field name="arch" type="xml">
+                <tree string="Les CHAFFEURS">
+                    <field name="name"/>
+                    <field name="date_register"/>
+                    <field name="driver_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_driver_from">
+            <field name="name">Les CHAUFFEURS</field>
+            <field name="model">driver.voyage</field>
+            <field name="arch" type="xml">
+                <form string="VOYAGES">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Donnees de CHAUFEURS
+                    </p>
+                    <header>
+<!--                         <button name="upload_driver_doc"-->
+<!--                                 string="Telecharger la liste des documents"-->
+<!--                                 type="object"-->
+<!--                                 class="oe_highlight"-->
+<!--                                 icon="fa-print"-->
+<!--                                 attrs="{'invisible':[('state','!=','draft')]}"-->
+<!--                        />-->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send" />
+                    </header>
+                    <sheet>
+                         <group string="Informations Generales">
+                           <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="date_register"/>
+                                    <field name="driver_id"/>
+                                </group>
+
+                               <group string="Permis de conduire">
+                                    <field name="date_permis_e"/>
+                                    <field name="date_permis_expi"/>
+                                </group>
+                               <group string="CNI">
+                                    <field name="date_cni_e"/>
+                                    <field name="date_cni_expi"/>
+                                </group>
+                               <group string="Habilitation SCDP">
+                                    <field name="date_scdp_e"/>
+                                    <field name="date_scpd_expi"/>
+                                </group>
+                            </group>
+                        </group>
+                        <newline />
+                         <notebook colspan="4">
+                            <page string="LES PIECES DU DOSSIER">
+<!--                                <field name="doc_chauf_ids"  colspan="4">-->
+<!--                                    <tree string="LES PIECES DU DOSSIERS" editable="top">-->
+<!--                                        <field name="name" />-->
+<!--                                        <field name="date_emi"/>-->
+<!--                                        <field name="date_expi"/>-->
+<!--                                        <field name="state"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_driver_action" model="ir.actions.act_window">
+                <field name="name">Les Chauffeurs</field>
+                <field name="res_model">driver.voyage</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_driver_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer un enregistrement,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+
+
+    <!-- views/your_model_views.xml -->
+
+
+
+
+
+
+    <data noupdate="1">
+       <record id="ir_cron_transport_action" model="ir.cron">
+           <field name="name">Transport Cron</field>
+           <field name="model_id" ref="model_vehicule_voyage"/>
+           <field name="state">code</field>
+           <field name="code">model.send_sms()</field>
+           <field name="user_id" ref="base.user_root"/>
+           <field name="interval_number">1</field>
+           <field name="interval_type">weeks</field>
+           <field name="numbercall">-1</field>
+           <field name="priority">5</field>
+       </record>
+    </data>
+
+
+
+
+</odoo>
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        
+        <report id="action_report_rapport_colis"
+                string="Rapport d'expedition"
+                model="voyage.colis"
+                report_type = "qweb-pdf"
+                file="travel_agency_app.rapport_expedition"
+                name="travel_agency_app.rapport_expedition"
+        />
+
+    
+        <!-- <record id="action_report_ticket_colis" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="travel_agency_app.sheet_a5"
+            paperformat="travel_agency_app.sheet_a5"/>
+        </record> -->
+
+        <report id="action_report_ticket_colis"
+                string="Ticket d'expedition"
+                model="voyage.colis"
+                report_type = "qweb-pdf"
+                file="travel_agency_app.ticket_expedition"
+                name="travel_agency_app.ticket_expedition"
+        />
+
+        <!-- Reports  Bordeau-->
+          <report id="action_report_bordeau"
+                string="Bordeau de Voyage"
+                model="voyage.voyage"
+                report_type = "qweb-pdf"
+                file="travel_agency_app.report_bordeau"
+                name="travel_agency_app.report_bordeau"
+        />
+
+        <record id="paperformat_report_ticket" model="report.paperformat">
+            <field name="name">Format Ticket </field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">100</field>
+            <field name="page_width">80</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">3</field>
+            <field name="dpi">130</field>
+        </record>
+         <record id="paperformat_report_ticket" model="report.paperformat">
+            <field name="name">Format Ticket</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">80</field>
+            <field name="page_width">100</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">3</field>
+            <field name="dpi">130</field>
+        </record>
+
+        <report id="action_report_ticket"
+                string="Ticket de Voyage"
+                model="voyage.passager"
+                report_type = "qweb-pdf"
+                file="travel_agency_app.report_ticket_bus"
+                name="travel_agency_app.report_ticket_bus"
+                paperformat="travel_agency_app.paperformat_report_ticket"
+                />
+
+
+    </data>
+
+</odoo>

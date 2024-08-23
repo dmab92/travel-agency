@@ -2,10 +2,16 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_voyage_voyage,voyage.voyage,model_voyage_voyage,travel_agency_app.group_caisse_voyages,1,1,1,0
 access_voyage_passager,voyage.passager,model_voyage_passager,travel_agency_app.group_caisse_voyages,1,1,1,1
 access_voyage_destination,city.destination,model_city_destination,travel_agency_app.group_caisse_voyages,1,1,1,1
-access_city_depart,city.depart,model_city_depart,travel_agency_app.group_caisse_voyages,1,1,1,1
+access_city_departure,city.depart,model_city_departure,travel_agency_app.group_caisse_voyages,1,1,1,1
+access_city_departure,city.depart,model_city_departure,travel_agency_app.group_caisse_voyages,1,1,1,1
+access_city_departure,city.depart,model_city_departure,travel_agency_app.group_caisse_voyages,1,1,1,1
 access_voyage_colis,voyage.colis,model_voyage_colis,travel_agency_app.group_caisse_voyages,1,1,1,0
 access_ville_envoi_colis,ville.envoi.colis,model_ville_envoi_colis,travel_agency_app.group_caisse_voyages,1,1,1,0
 access_ville_recept_colis,ville.recept.colis,model_ville_recept_colis,travel_agency_app.group_caisse_voyages,1,1,1,0
+
+access_vehicule_voyage,vehicule.voyage,model_vehicule_voyage,travel_agency_app.group_caisse_voyages,1,1,1,0
+
+access_driver_voyage,driver.voyage,model_driver_voyage,travel_agency_app.group_caisse_voyages,1,1,1,0
 
 
 

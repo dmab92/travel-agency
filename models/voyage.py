@@ -41,39 +41,47 @@ class voyage_voyage(models.Model):
 
 
     date_register = fields.Datetime('Date et Heure de depart', default=fields.datetime.now())
-    name = fields.Char("Numero du Voyage",readonly="True",default = lambda self: self._get_next_reference())
-    user_id = fields.Many2one("res.users", "Caissiere", default=lambda self: self.env.user)
-    car_id = fields.Many2one("fleet.vehicle", "Vehicule")
-    driver_id = fields.Many2one("res.partner", "Conducteur")
+    name = fields.Char("Numero du Voyage",readonly="True", default = lambda self: self._get_next_reference())
+    user_id = fields.Many2one("res.users", "Caissiere", default=lambda self: self.env.user, required=1)
+    car_id = fields.Many2one("fleet.vehicle", "Vehicule",required=1)
+    driver_id = fields.Many2one("res.partner", "Conducteur",required=1)
     passager_ids = fields.One2many('voyage.passager','voayge_id', string="Passagers")
+    #lines_ids = fields.One2many('lines.voyage','voayge_id',string="Passagers")
     state = fields.Selection( [('draft', 'brouillon'),
                                ('send', 'Valider')],   default='draft',string='Etat')
     total_bagage = fields.Integer("Total Bagages", compute='_compute_passanger_number')
-    total_frais = fields.Integer("Total de Transport",compute='_compute_passanger_number')
-    total_remb = fields.Integer("Total Remboursement",compute='_compute_passanger_number')
-    total_gain = fields.Integer("Total Gain", compute='_compute_passanger_number')
-    road_fees= fields.Integer("Frais de route")
-    departure_id = fields.Many2one("city.destination", " Depart")
-    destination_id = fields.Many2one("city.depart","Destination")
+    total_frais = fields.Integer("Total de Transport",compute='_compute_passanger_number',digits=0)
+    total_remb = fields.Integer("Total Remboursement",compute='_compute_passanger_number',digits=0)
+    total_gain = fields.Integer("Total Gain", compute='_compute_passanger_number',digits=0)
+    road_fees= fields.Integer("Frais de route", digits=0)
+    departure_id = fields.Many2one("city.destination", " Depart",required=1)
+    destination_id = fields.Many2one("city.depart","Destination",required=1)
 
-    price = fields.Integer("Frais de transport", default=3000)
+    price = fields.Integer("Frais de transport", default=3000, digits=(6,0))
     license_plate = fields.Integer("Frais de route")
     passenger_number = fields.Integer("Nombre max de passagers", related='car_id.seats')
 
-    depart = fields.Selection([('1', 'DOUALA'),
-                               ('2', 'NKONGSAMBA'),
-                               ],
-                              string='Depart')
+    type = fields.Selection([('classic', 'Classique'),
+                               ('vip', 'VIP'),
+                               ],require=1,
+                              string='Type de Voyage')
+    # arriv = fields.Selection([('1', 'DOUALA'),
+    #                            ('2', 'NKONGSAMBA'),
+    #                            ], require=1,
+    #                           string='Destination')
+
+    confirm = fields.Boolean("Je confirme avoir reelu cette fiche et n'avoir apercu aucune anomalie")
+    
 
     @api.onchange('passager_ids')
     def _compute_passanger_number(self):
         """Compute the invoice count"""
         for record in self:
             #record.passenger_number = len(record.passager_ids)
-            record.total_frais += sum(record.passager_ids.mapped('price'))
-            record.total_bagage += sum(record.passager_ids.mapped('price_bagage'))
-            record.total_remb+=sum(record.passager_ids.mapped('rembour'))
-            record.total_gain= record.total_frais + record.total_bagage
+            record.total_frais = sum(record.passager_ids.mapped('price'))
+            record.total_bagage = sum(record.passager_ids.mapped('price_bagage'))
+            record.total_remb =sum(record.passager_ids.mapped('rembour'))
+            record.total_gain= record.total_frais + record.total_bagage - record.total_remb
 
     @api.constrains('passager_ids')
     def _check_control_date(self):
@@ -107,32 +115,75 @@ class voyage_voyage(models.Model):
             record.license_plate = record.car_id.license_plate
             record.driver_id = record.car_id.driver_id
 
+
+
+
     def print_bordeau(self):
 
-        return self.env.ref('colis_app.action_report_bordeau').report_action(self)
+        return self.env.ref('travel_agency_app.action_report_bordeau').report_action(self)
     def set_valited(self):
         "Check de nomber of line "
+        if len(self.passager_ids) == 0 :
+            raise UserError(_("'Alert !!! Veuillez inserer au moins un passager avant de valider ce voyage '"))
+
+        if not self.confirm :
+            raise UserError(_("'Alert !!! Veuillez  confirmer l'exactude des ces informations avant de les valider'"))
+
         return self.write({'state': 'send'})
 
+    def set_draft(self):
+        return self.write({'state':'draft'})
 
 
-class passager_voyage(models.Model):
+
+
+class voyage_passager(models.Model):
     """Defining the passengers ."""
     _description = 'Passagers'
     _name = 'voyage.passager'
+    _rec_name = 'mobile'
 
     partner_id = fields.Many2one('res.partner' , "Noms et Prenoms")
     cni = fields.Char("Numero de CNI")
     mobile = fields.Char("Tel:")
+
     voayge_id = fields.Many2one("voyage.voyage", "Voyage")
     price = fields.Integer("Frais de Transport", related='voayge_id.price')
     price_bagage = fields.Integer("Prix Bagage")
     rembour = fields.Integer("Remboursement")
     sexe = fields.Selection([(' M. ', 'Homme'), (' Mme ', "Femme")], string='Civilité')
 
-
     def print_ticket(self):
-         return self.env.ref('colis_app.action_report_ticket').report_action(self)
+         return self.env.ref('travel_agency_app.action_report_ticket').report_action(self)
+
+class voyage_line(models.Model):
+    """Defining the passengers ."""
+    _description = 'Les lignes de voyages'
+    _name = 'lines.voyage'
+    _rec_name = 'mobile'
+
+    partner_id = fields.Many2one('res.partner', "Noms et Prenoms")
+    cni = fields.Char("Numero de CNI")
+    mobile = fields.Char("Tel:")
+
+    voayge_id = fields.Many2one("voyage.voyage", "Voyage")
+    price = fields.Integer("Frais de Transport", related='voayge_id.price')
+    price_bagage = fields.Integer("Prix Bagage")
+    rembour = fields.Integer("Remboursement")
+    sexe = fields.Selection([(' M. ', 'Homme'), (' Mme ', "Femme")], string='Civilité')
+    passager_id = fields.Many2one('voyage.passager')
+
+
+
+    # @api.onchange('mobile')
+    # def _onchange_mobile(self):
+    #     for record in self:
+    #         record.partner_id = record.passager_id.partner_id
+    #         record.license_plate = record.car_id.license_plate
+    #         record.driver_id = record.car_id.driver_id
+
+
+
 class city_destination(models.Model):
     """Defining  for destinatation."""
     _description = ' Ville de Destination'
@@ -140,7 +191,7 @@ class city_destination(models.Model):
 
     name= fields.Char("Destination")
 
-class city_departure(models.Model):
+class city_depart(models.Model):
     """Defining   the city of departure of car."""
     _description = "Vlle d'arrivee"
     _name = 'city.depart'

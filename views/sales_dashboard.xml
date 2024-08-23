@@ -1,0 +1,110 @@
+<!-- views/sales_dashboard_graph_view.xml -->
+<odoo>
+    <record id="view_sales_dashboard_graph" model="ir.ui.view">
+        <field name="name">sales.dashboard.graph</field>
+        <field name="model">sales.dashboard</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Dashboard">
+                <field name="total_sales" type="measure"/>
+                <field name="sales_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+<!-- views/sales_dashboard_kanban_view.xml -->
+
+    <record id="view_sales_dashboard_kanban" model="ir.ui.view">
+        <field name="name">sales.dashboard.kanban</field>
+        <field name="model">sales.dashboard</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="total_sales"/>
+                <field name="sales_count"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div>
+                                <strong><field name="name"/></strong>
+                            </div>
+                            <div>
+                                <span>Total Sales: <field name="total_sales"/></span>
+                            </div>
+                            <div>
+                                <span>Sales Count: <field name="sales_count"/></span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+<!-- views/sales_dashboard_list_view.xml -->
+
+    <record id="view_sales_dashboard_list" model="ir.ui.view">
+        <field name="name">sales.dashboard.list</field>
+        <field name="model">sales.dashboard</field>
+        <field name="arch" type="xml">
+            <tree string="Sales Dashboard">
+                <field name="name"/>
+                <field name="total_sales"/>
+                <field name="sales_count"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+<!-- views/sales_dashboard.xml -->
+    <record id="view_sales_dashboard" model="ir.ui.view">
+        <field name="name">sales.dashboard</field>
+        <field name="model">sales.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Sales Dashboard">
+                <sheet>
+                    <div class="o_dashboard">
+                        <div class="o_dashboard_section">
+                            <h2>Total Sales</h2>
+                            <graph string="Total Sales" type="bar" model="sales.dashboard">
+                                <field name="total_sales" type="measure"/>
+                                <field name="sales_count" type="measure"/>
+                            </graph>
+                        </div>
+                        <div class="o_dashboard_section">
+                            <h2>Sales Count</h2>
+                            <kanban model="sales.dashboard">
+                                <field name="name"/>
+                                <field name="total_sales"/>
+                                <field name="sales_count"/>
+                            </kanban>
+                        </div>
+                        <div class="o_dashboard_section">
+                            <h2>Sales List</h2>
+                            <tree model="sales.dashboard">
+                                <field name="name"/>
+                                <field name="total_sales"/>
+                                <field name="sales_count"/>
+                            </tree>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!-- views/sales_dashboard_action.xml -->
+
+    <record id="action_sales_dashboard" model="ir.actions.act_window">
+        <field name="name">Sales Dashboard</field>
+        <field name="res_model">sales.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+    </record>
+<!-- views/sales_dashboard_menu.xml -->
+
+    <menuitem id="menu_sales_dashboard" name="Sales Dashboard" sequence="10"/>
+    <menuitem id="submenu_sales_dashboard" name="Dashboard" parent="menu_sales_dashboard" action="action_sales_dashboard" sequence="10"/>
+</odoo>
+
+
+
+
+

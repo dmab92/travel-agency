@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-
 <odoo>
     <data>
 
@@ -8,7 +7,7 @@
 <!--            <field name="users" eval="[(4, ref(base.group_user'))]"/>-->
 <!--        </record>-->
 
-         <record model="ir.module.category" id="caisse_voyages_accesss">
+        <record model="ir.module.category" id="caisse_voyages_accesss">
             <field name="name">Caissieres</field>
         </record>
 
@@ -28,6 +27,4 @@
         </record>
 
     </data>
-
-
 </odoo>

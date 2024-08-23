@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
         <record id="view_colis_colis_filter" model="ir.ui.view">
-            <field name="name">colis.colis.filter</field>
-            <field name="model">colis.colis</field>
+            <field name="name">voyage.colis.filter</field>
+            <field name="model">voyage.colis</field>
             <field name="arch" type="xml">
                 <search string="Colis">
                     <field name="sender_id"/>
@@ -39,7 +39,7 @@
 
         <record model="ir.ui.view" id="view_colis_form">
             <field name="name">Colis</field>
-            <field name="model">colis.colis</field>
+            <field name="model">voyage.colis</field>
             <field name="arch" type="xml">
                 <form string="Ensignants">
                         <p class="oe_grey">
@@ -129,7 +129,7 @@
 
         <record model="ir.ui.view" id="view_colis_colis_tree">
             <field name="name">Liste des colis</field>
-            <field name="model">colis.colis</field>
+            <field name="model">voyage.colis</field>
 
             <field name="arch" type="xml">
                 <tree string="Liste des Colis" decoration-success="paiement == 'solde'"
@@ -152,7 +152,7 @@
 
         <record id="view_colis_colis_action" model="ir.actions.act_window">
             <field name="name">Liste des Colis</field>
-            <field name="res_model">colis.colis</field>
+            <field name="res_model">voyage.colis</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
@@ -166,7 +166,7 @@
 
         <record id="view_colis_colis_action_to_send" model="ir.actions.act_window">
             <field name="name">Liste des Colis à Envoyer </field>
-            <field name="res_model">colis.colis</field>
+            <field name="res_model">voyage.colis</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[ ('state', '=', 'draft') ]</field>
@@ -180,7 +180,7 @@
         </record>
         <record id="view_colis_colis_action_send" model="ir.actions.act_window">
             <field name="name">Liste des Colis Envoyés</field>
-            <field name="res_model">colis.colis</field>
+            <field name="res_model">voyage.colis</field>
             <field name="domain">[ ('state', '=', 'send') ]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
@@ -195,7 +195,7 @@
 
         <record id="view_colis_colis_action_receive" model="ir.actions.act_window">
             <field name="name">Liste des Colis Récus</field>
-            <field name="res_model">colis.colis</field>
+            <field name="res_model">voyage.colis</field>
             <field name="domain">[ ('state', '=', 'receive') ]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
@@ -212,7 +212,7 @@
 
         <record id="view_colis_my_colis_action_receive" model="ir.actions.act_window">
             <field name="name">Mes Colis recus</field>
-            <field name="res_model">colis.colis</field>
+            <field name="res_model">voyage.colis</field>
             <field name="domain">[('country_rec_id', '=', user_id.partner_id.country_id.id)]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
@@ -227,7 +227,7 @@
 
         <record id="view_colis_my_colis_action_send" model="ir.actions.act_window">
             <field name="name">Liste des Colis Envoyés</field>
-            <field name="res_model">colis.colis</field>
+            <field name="res_model">voyage.colis</field>
             <field name="domain">[ ('state', '=', 'send') ]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>

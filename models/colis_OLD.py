@@ -10,7 +10,7 @@ from odoo.exceptions import UserError, Warning, ValidationError
 class colis_colis(models.Model):
     """Defining model for radio camando."""
     _description = 'Envoi des Colis'
-    _name = 'colis.colis'
+    _name = 'voyage.colis'
     _rec_name ='numero_colis'
     _order = 'id DESC'
 
@@ -207,7 +207,7 @@ class colis_colis(models.Model):
 
 
     def print_ticket(self):
-        return self.env.ref('colis_app.action_report_ticket_colis').report_action(self)
+        return self.env.ref('travel_agency_app.action_report_ticket_colis').report_action(self)
 
 
 

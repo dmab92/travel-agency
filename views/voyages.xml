@@ -9,11 +9,16 @@
                     <field name="date_register"/>
                     <field name="car_id"/>
                     <field name="driver_id"/>
+                    <field name="total_bagage"  options="{'precision': 0}"/>
+                    <field name="total_frais" options="{'precision': 0}"/>
+                    <field name="total_remb" options="{'precision': 0}"/>
+                    <field name="total_gain" string="Total Encaissé" options="{'precision': 0}" />
+                    <field name="state"  />
                 </tree>
             </field>
         </record>
 
-        <record model="ir.ui.view" id="view_voyage_from">
+        <record model="ir.ui.view" id="view_voyage_voyage_from">
             <field name="name">Les Voyages</field>
             <field name="model">voyage.voyage</field>
             <field name="arch" type="xml">
@@ -38,7 +43,12 @@
                                 icon="fa-check"
                                  attrs="{'invisible':[('state','=','send')]}"
                         />
-
+                        <button name="set_draft"
+                                string="Remettre en brouillon"
+                                type="object"
+                                icon="fa-pencil"
+                                 attrs="{'invisible':[('state','=','draft')]}"
+                        />
 
                     <field name="state" widget="statusbar" statusbar_visible="draft,send" />
 
@@ -50,41 +60,46 @@
                                 <field name="date_register"/>
                                 <field name="departure_id"/>
                                 <field name="destination_id"/>
-                                <field name="price" widget='monetary'/>
+                                <field name="price" options="{'precision': 0}"/>
                             </group>
                             <group>
                                 <field name="car_id"/>
                                 <field name="passenger_number"/>
                                 <field name="driver_id"/>
-                                <field name="road_fees" widget="monetary"/>
+                                <field name="road_fees" options="{'precision': 0}"/>
                                 <field name="user_id" />
+                                <field name="confirm"/>
+
+
+                                <field name="state"  invisible="1"/>
                             </group>
                         </group>
-                        <newline />
-                        <notebook colspan="4">
+
+                        <notebook>
                             <page string="Les Passagers">
-                                <field name="passager_ids"  colspan="4">
-                                    <tree string="Les Passagers" editable="top">
-                                        <field name="sexe" />
+                                <field name="passager_ids"  attrs="{'readonly':[('state','=','send')]}" colspan="4">
+                                    <tree string="Les Passagers"   editable="top">
                                         <field name="partner_id" />
-                                        <field name="cni"  string="Numero de CNI/Recepisse/Passport" required="1"/>
+                                        <field name="sexe" />
                                         <field name="mobile"  />
-                                        <field name="price"   widget='monetary' readonly="1"/>
-                                        <field name="price_bagage" widget="monetary" />
-                                        <field name="rembour"  widget="monetary"/>
+                                        <field name="cni"  string="Numero CNI" required="1"/>
+                                        <field name="price"   options="{'precision': 0}" readonly="1"/>
+                                        <field name="price_bagage" options="{'precision': 0}" />
+                                        <field name="rembour"  options="{'precision': 0}"/>
                                         <button name="print_ticket"
                                             string="Imprimer le ticket"
                                             type="object"
                                             class="oe_highlight"
                                             icon="fa-print"
                                         />
+
                                     </tree>
                                 </field>
                                 <group colspan="3"  class="oe_subtotal_footer oe_right">>
-                                     <field name="total_bagage"  widget='monetary'/>
-                                     <field name="total_frais" widget='monetary'/>
-                                     <field name="total_remb" widget='monetary'/>
-                                     <field name="total_gain" string="Total Encaissé" widget="monetary" />
+                                     <field name="total_bagage"  options="{'precision': 0}"/>
+                                     <field name="total_frais" options="{'precision': 0}"/>
+                                     <field name="total_remb" options="{'precision': 0}"/>
+                                     <field name="total_gain" string="Total Encaissé" options="{'precision': 0}" />
                                 </group>
                             </page>
                         </notebook>

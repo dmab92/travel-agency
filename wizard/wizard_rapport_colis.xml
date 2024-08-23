@@ -2,7 +2,7 @@
 <odoo>
     <record id="view_rapport_expedition_colis" model="ir.ui.view">
         <field name="name">wizard Rapports Colis</field>
-        <field name="model">wizard.colis_app.bordereau.expedition</field>
+        <field name="model">wizard.travel.expedit</field>
         <field name="arch" type="xml">
             <form string="Rapport d'Expedition des colis">
                 <group>
@@ -33,7 +33,7 @@
     <record id="action_wizard_rapport_expedition" model="ir.actions.act_window">
         <field name="name">Rapport d'expedition des colis</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.colis_app.bordereau.expedition</field>
+        <field name="res_model">wizard.travel.expedit</field>
         <field name="binding_model_id" eval="False"/>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_rapport_expedition_colis"/>

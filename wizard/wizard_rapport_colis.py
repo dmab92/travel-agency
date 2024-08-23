@@ -3,8 +3,8 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
-class wizard_stock_bordereau_livraison(models.TransientModel):
-    _name = 'wizard.colis_app.bordereau.expedition'
+class wizard_stock_bordereau(models.TransientModel):
+    _name = 'wizard.travel.expedit'
     _description ='Borderau d''expedition des colis'
 
 
@@ -25,7 +25,7 @@ class wizard_stock_bordereau_livraison(models.TransientModel):
             'ville_reception_ids':self.ville_reception_ids.ids,
         }
         
-        return self.env.ref('colis_app.action_report_rapport_colis').report_action(self, data=datas)
+        return self.env.ref('travel_agency_app.action_report_rapport_colis').report_action(self, data=datas)
 
 
 

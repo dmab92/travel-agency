@@ -10,7 +10,7 @@ import xlwt
 
 class wizard_colis_report(models.TransientModel):
 
-    _name = "colis_app.wizard.colis.report"
+    _name = "agency.wizard.coli.report"
     _description = "wizard Caisse des colis"
 
     date_start = fields.Datetime('Date de debut', index=True, required=True)
@@ -95,7 +95,7 @@ class wizard_colis_report(models.TransientModel):
                 return {
                     'name': 'Exportation des fichiers',
                     'type': 'ir.actions.act_window',
-                    'res_model': 'colis_app.wizard.colis.report',
+                    'res_model': 'travel_agency_app.wizard.colis.report',
                     'view_mode': 'form',
                     'view_type': 'form',
                     'res_id': elt.id,
@@ -107,7 +107,7 @@ class wizard_colis_report(models.TransientModel):
     @api.model
     def _get_colis_data(self, date_start, date_end, ville_envoi_ids,ville_reception_ids):
 
-        colis_obj = self.env.get('colis.colis')
+        colis_obj = self.env.get('voyage.colis')
         #speciality_obj = self.env.get('hr.specialite')
         total_amount = 0.0;
         # 
@@ -155,7 +155,7 @@ class wizard_colis_report(models.TransientModel):
 
 
 # class wizard_rapport_colis(models.TransientModel):
-#     _name = 'wizard.colis_app.rapport.colis'
+#     _name = 'wizard.travel_agency_app.rapport.colis'
 #     _description = 'Rapport  des colis'
 
 #     date_start = fields.Datetime('Date de debut', index=True, required=True)
@@ -172,7 +172,7 @@ class wizard_colis_report(models.TransientModel):
 #                 'ville_envoi_ids': self.ville_envoi_ids.ids,
 #                 'ville_reception_ids': self.ville_reception_ids.ids}
 
-#         return self.env.ref('colis_app.action_report_rapport_colis').report_action(self, data=datas)
+#         return self.env.ref('travel_agency_app.action_report_rapport_colis').report_action(self, data=datas)
 
 
 

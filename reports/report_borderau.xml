@@ -5,13 +5,13 @@
             <t t-call="web.external_layout">
             <div class="page">
                 <div class="oe_structure"/>
-                    <center> <h3>
+                    <center> <h5>
                         BORDERAU DU VOYAGE No <span t-field="docs.name"/> <br/>
                         VEHICULE :  <span t-field="docs.car_id.name"/> <br/>
                         CHAUFFEUR :  <span t-field="docs.driver_id.name"/> <br/>
                         DEPART : <span t-field="docs.departure_id.name"/>
                         DESTINATION : <span t-field="docs.destination_id.name"/> <br/>
-                        DATE: <span t-field="docs.date_register"/> </h3>
+                        DATE: <span t-field="docs.date_register"/> </h5>
             </center>
         <table class="table table-sm o_main_table">
             <thead class="thead-light">
