@@ -1,0 +1,15 @@
+/* Orange for draft */
+.tree-view-orange .o_data_row {
+    background-color: orange !important;
+}
+
+/* Blue for validated */
+.tree-view-blue .o_data_row {
+    background-color: blue !important;
+    color: white; /* Facultatif : Pour un meilleur contraste */
+}
+
+/* Yellow for canceled */
+.tree-view-yellow .o_data_row {
+    background-color: yellow !important;
+}

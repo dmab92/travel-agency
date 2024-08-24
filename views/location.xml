@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_location_tree">
+            <field name="name">LOCATIONS</field>
+            <field name="model">location.vehicule</field>
+            <field name="arch" type="xml">
+                <tree string="Les LOCATIONS"
+                      decoration-muted="state == 'draft'"
+                      decoration-success="state == 'valid'"
+                      decoration-danger="state == 'cancel'" >
+                    <field name="name"/>
+                    <field name="car_id"/>
+                    <field name="driver_id"/>
+                    <field name="date_debut"/>
+                    <field name="date_fin"/>
+                    <field name="partner_id"/>
+                    <field name="phone"/>
+                    <field name="user_id"/>
+                    <field name="state" />
+                      <field name="state"  />
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_location_form">
+            <field name="name">Les LOCATIONS</field>
+            <field name="model">location.vehicule</field>
+            <field name="arch" type="xml">
+                <form string="LOCATIONS">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les LOCATIONS
+                    </p>
+                    <header>
+
+<!--                         <button name="print_bordeau"-->
+<!--                                 string="Imprimer le Bordereau"-->
+<!--                                 type="object"-->
+<!--                                 class="oe_highlight"-->
+<!--                                 icon="fa-print"-->
+<!--                                 attrs="{'invisible':[('state','=','draft')]}"-->
+<!--                        />-->
+
+
+                         <button name="set_cancel"
+                                string="Annuler la location"
+                                type="object"
+                                icon="fa-check-circle"
+                                 attrs="{'invisible':[('state','!=','send')]}"
+                        />
+
+                         <button name="set_valited"
+                                string="Valider la location"
+                                type="object"
+                                class="oe_highlight"
+                                icon="fa-check"
+                                 attrs="{'invisible':[('state','=','send')]}"
+                        />
+                        <button name="set_draft"
+                                string="Remettre en brouillon"
+                                type="object"
+                                icon="fa-pencil"
+                                 attrs="{'invisible':[('state','=','draft')]}"
+                        />
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,valid,cancel" />
+
+                    </header>
+                    <sheet>
+                         <group string="Informations Generales">
+                            <group>
+                                <field name="date_register" readonly="1"/>
+                                <field name="name"/>
+                                <field name="partner_id" require="1"/>
+                                <field name="phone"/>
+                                <field name="cni" require="1"/>
+                                <field name="departure_id"  require="1"/>
+                                <field name="destination_id"  require="1"/>
+                                <field name="date_debut" require="1" />
+                                <field name="date_fin" require="1"/>
+                                <field name="price" require="1"/>
+                            </group>
+                            <group>
+                                <field name="car_id" require="1" />
+                                <field name="driver_id"/>
+
+                                <field name="ration" options="{'precision': 0}"/>
+                                <field name="road_fees" options="{'precision': 0}"/>
+                                <field name="user_id" />
+                                <field name="confirm"/>
+                                <field name="state"  invisible="1"/>
+
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Notice">
+                               <field name="notice" />
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_location_action" model="ir.actions.act_window">
+                <field name="name">Les Locations</field>
+                <field name="res_model">location.vehicule</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_location_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer une location,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+</odoo>
+

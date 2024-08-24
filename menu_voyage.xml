@@ -103,12 +103,18 @@
 <!--                    groups="base.group_user"-->
 <!--                      sequence="2"/>-->
 
+                <menuitem name="Locations"
+                          id="travel_agency_app.location"
+                          parent="travel_agency_app.menu_root"
+                          action="travel_agency_app.view_location_action"
+                          sequence="2"
+                  />
+
                     <menuitem name="Configuration"
                               id="travel_agency_app.config"
                               parent="travel_agency_app.menu_root"
                               groups="base.group_user"
                               sequence="3"/>
-
                     <menuitem name="Pieces Vehicules"
                                   id="travel_agency_app.vehicule"
                                   parent="travel_agency_app.config"
@@ -141,25 +147,34 @@
 
 
 
-         <menuitem name="Gestion Administrative"
-                  id="travel_agency_app.administration"
-                  parent="travel_agency_app.menu_root"
-                  sequence="1"
-                />
+          <menuitem name="Type de voyage"
+                  id="travel_agency_app.type_voyage"
+                  parent="travel_agency_app.config"
+                  groups="base.group_user"
+                  action="travel_agency_app.view_typ_voyage_action"
+                  sequence="6"/>
 
-        <menuitem name="Gestion des Vehicules"
-                  id="travel_agency_app.vehicle"
-                  parent="travel_agency_app.administration"
-                  action="travel_agency_app.view_vehicule_action"
-                  sequence="1"
-                />
 
-         <menuitem name="Gestion des Chaufeurs"
-                  id="travel_agency_app.driver"
-                  parent="travel_agency_app.administration"
-                   action="travel_agency_app.view_driver_action"
-                  sequence="2"
-                />
+
+<!--         <menuitem name="Gestion Administrative"-->
+<!--                  id="travel_agency_app.administration"-->
+<!--                  parent="travel_agency_app.menu_root"-->
+<!--                  sequence="1"-->
+<!--                />-->
+
+<!--        <menuitem name="Gestion des Vehicules"-->
+<!--                  id="travel_agency_app.vehicle"-->
+<!--                  parent="travel_agency_app.administration"-->
+<!--                  action="travel_agency_app.view_vehicule_action"-->
+<!--                  sequence="1"-->
+<!--                />-->
+
+<!--         <menuitem name="Gestion des Chaufeurs"-->
+<!--                  id="travel_agency_app.driver"-->
+<!--                  parent="travel_agency_app.administration"-->
+<!--                   action="travel_agency_app.view_driver_action"-->
+<!--                  sequence="2"-->
+<!--                />-->
 
 
 

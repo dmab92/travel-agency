@@ -38,6 +38,8 @@ class voyage_voyage(models.Model):
 
         if data < 1000 and data >= 100:
             return '00' + str(data + 1) + '/' + sort_year
+        if data < 10000 and data >= 1000:
+            return '0' + str(data + 1) + '/' + sort_year
 
 
     date_register = fields.Datetime('Date et Heure de depart', default=fields.datetime.now())
@@ -47,8 +49,12 @@ class voyage_voyage(models.Model):
     driver_id = fields.Many2one("res.partner", "Conducteur",required=1)
     passager_ids = fields.One2many('voyage.passager','voayge_id', string="Passagers")
     #lines_ids = fields.One2many('lines.voyage','voayge_id',string="Passagers")
-    state = fields.Selection( [('draft', 'brouillon'),
-                               ('send', 'Valider')],   default='draft',string='Etat')
+    state = fields.Selection([('draft', 'Brouillon'),
+                              ('send', 'Validé'),
+                              ('cancel', 'Annulé'),
+                              ], require=1, default='draft',
+                             string='Etat')
+
     total_bagage = fields.Integer("Total Bagages", compute='_compute_passanger_number')
     total_frais = fields.Integer("Total de Transport",compute='_compute_passanger_number',digits=0)
     total_remb = fields.Integer("Total Remboursement",compute='_compute_passanger_number',digits=0)
@@ -56,22 +62,23 @@ class voyage_voyage(models.Model):
     road_fees= fields.Integer("Frais de route", digits=0)
     departure_id = fields.Many2one("city.destination", " Depart",required=1)
     destination_id = fields.Many2one("city.depart","Destination",required=1)
-
-    price = fields.Integer("Frais de transport", default=3000, digits=(6,0))
+    type_id = fields.Many2one("voyage.type", "Type")
+    price = fields.Integer("Frais de transport",  related='type_id.price', digits=(6,0))
     license_plate = fields.Integer("Frais de route")
     passenger_number = fields.Integer("Nombre max de passagers", related='car_id.seats')
 
-    type = fields.Selection([('classic', 'Classique'),
-                               ('vip', 'VIP'),
-                               ],require=1,
-                              string='Type de Voyage')
+    # type = fields.Selection([('classic', 'Classique'),
+    #                            ('vip', 'VIP'),
+    #                            ],require=1,
+    #                           string='Type de Voyage')
     # arriv = fields.Selection([('1', 'DOUALA'),
     #                            ('2', 'NKONGSAMBA'),
     #                            ], require=1,
     #                           string='Destination')
 
     confirm = fields.Boolean("Je confirme avoir reelu cette fiche et n'avoir apercu aucune anomalie")
-    
+
+
 
     @api.onchange('passager_ids')
     def _compute_passanger_number(self):
@@ -134,6 +141,9 @@ class voyage_voyage(models.Model):
     def set_draft(self):
         return self.write({'state':'draft'})
 
+    def set_cancel(self):
+        return self.write({'state': 'cancel'})
+
 
 
 
@@ -147,11 +157,27 @@ class voyage_passager(models.Model):
     cni = fields.Char("Numero de CNI")
     mobile = fields.Char("Tel:")
 
+
     voayge_id = fields.Many2one("voyage.voyage", "Voyage")
     price = fields.Integer("Frais de Transport", related='voayge_id.price')
     price_bagage = fields.Integer("Prix Bagage")
     rembour = fields.Integer("Remboursement")
     sexe = fields.Selection([(' M. ', 'Homme'), (' Mme ', "Femme")], string='Civilité')
+
+    siege_number = fields.Integer(string="Sequence", compute="_compute_sequence", store=True)
+
+    @api.depends('voayge_id.passager_ids')
+    def _compute_sequence(self):
+        for record in self:
+            if record.voayge_id:
+                # Iterate through the One2many field and assign the sequence number
+                for index, line in enumerate(record.voayge_id.passager_ids, start=1):
+                    line.siege_number = index
+
+    @api.onchange('partner_id')
+    def _onc_siege_number(self):
+        for record in self:
+            record.siege_number += 1
 
     def print_ticket(self):
          return self.env.ref('travel_agency_app.action_report_ticket').report_action(self)
@@ -197,3 +223,14 @@ class city_depart(models.Model):
     _name = 'city.depart'
 
     name= fields.Char("Arrivee")
+
+
+
+
+class voyage_type(models.Model):
+    """Defining   the city of departure of car."""
+    _description = " Type de voyage"
+    _name = 'voyage.type'
+
+    name= fields.Char("Type")
+    price =fields.Integer("Prix")

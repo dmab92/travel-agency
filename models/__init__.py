@@ -7,3 +7,4 @@ from . import voyage
 from . import transport
 from . import pieces
 from . import bulk_sms
+from . import location

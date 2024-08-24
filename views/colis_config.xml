@@ -144,5 +144,56 @@
               </p>
             </field>
         </record>
-        
+
+
+<!--TYPE DE VOYAGE -->
+
+     <record model="ir.ui.view" id="view_type_voyage_form">
+            <field name="name">Type de voyage</field>
+            <field name="model">voyage.type</field>
+            <field name="arch" type="xml">
+                <form string="Type de voyage">
+                        <p class="oe_grey">
+                            Cr&#233;ez / &#233;ditez vos donn&#233;es sur les type de voyage
+                        </p>
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Informations Generales">
+                                <field name="name" required="1"/>
+                                <field name="price" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="view_type_voyage_tree">
+            <field name="name">Type de voyage</field>
+            <field name="model">voyage.type</field>
+            <field name="arch" type="xml">
+                <tree string="Type de Voyage">
+                    <field name="name" required="1"/>
+                    <field name="price" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="view_typ_voyage_action" model="ir.actions.act_window">
+                <field name="name">Les Types de Voyages</field>
+                <field name="res_model">voyage.type</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_type_voyage_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Types de Voyages ici
+              </p><p>
+                Pour creer une location,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
 </odoo>

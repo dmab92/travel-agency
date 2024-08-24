@@ -33,6 +33,7 @@
         'views/transport.xml',
         'views/pieces.xml',
         #'views/sales_dashboard.xml',
+        'views/location.xml',
         'wizard/wizard_rapport_colis.xml',
         'reports/report_ticket_expedition.xml',
         'reports/report_rapport_expedition.xml',
@@ -40,9 +41,6 @@
         'reports/report_ticket_bus.xml',
         'report_voyage.xml',
         'menu_voyage.xml',
-
-
-
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode
@@ -52,4 +50,10 @@
     'installable': True,
     'application': True,
     'auto_install': False,
+
+'assets': {
+    'web.assets_backend': [
+        'travel_agency_app/static/src/css/custom_styles.css',
+    ],
+},
 }
