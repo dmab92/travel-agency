@@ -46,7 +46,6 @@
                                     Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Colis
                                </p>
                     <header>
-                        
                         <button name="send_colis_sms"
                                 string="Valider l'envoi du colis"
                                 type="object"
@@ -54,7 +53,6 @@
                                 icon="fa-check-circle"
                                 attrs="{'invisible': [('state','in',('send','receive'))]}"
                         />
-
                         <button name="receive_colis_sms"
                                 string="Valider la reception du colis"
                                 type="object"
@@ -73,11 +71,11 @@
                                 />
 
 
-                        <button name="generate_emails"
-                        string="Genrer les mails"
-                        type="object"
+<!--                        <button name="generate_emails"-->
+<!--                        string="Genrer les mails"-->
+<!--                        type="object"-->
 
-                        />
+<!--                        />-->
                         <button name="set_to_draft"
                         string="Remettre en broullion"
                         type="object"
@@ -91,14 +89,15 @@
                         <group>
                             <group string="Informations sur l'Expediteur">
                                 <field name="numero_colis" />
-                                <field name="sender_date" required="1" />
-                                <field name="sexe"  required="1"/>
+                                <field name="date_register"  required="1"/>
+<!--                                <field name="sender_date" required="1" />-->
+<!--                                <field name="sexe"  required="1"/>-->
                                 <field name="sender_id" required="1"  />
 
                                 <field name="sender_phone" required="1" />
                                 
                                 <field name="ville_envoi_id"  required="1"/>
-<!--                                <field name="country_sen_id"  required="1"/>-->
+
                                <!--  <field name="price" widget="monetary" /> -->
 <!--                                <field name="assurance"  />-->
 <!--                                <field name="embalage"  />-->
@@ -106,14 +105,13 @@
 
 <!--                                <field name="digital_signature_em" widget="signature"  string="Signature Emetteur"/>-->
 
-
                             </group>
                             <group string="Informations sur le Destinataire">
-                                <field name="sexe_rec" required="1" />
-                                <field name="receive_id" required="1" />
 
+                                <field name="receive_id" required="1" />
                                 <field name="receive_phone" required="1"/>
-                                <field name="ville_reception_id"  />
+                                <field name="cni_exp" required="1" />
+                                <field name="ville_reception_id"   required="1" />
 <!--                                <field name="state_id" />-->
 <!--                                <field name="country_rec_id" />-->
 <!--                                <field name="address_rec" />-->
