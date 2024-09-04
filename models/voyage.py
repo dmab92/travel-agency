@@ -161,6 +161,7 @@ class voyage_passager(models.Model):
     voayge_id = fields.Many2one("voyage.voyage", "Voyage")
     price = fields.Integer("Frais de Transport", related='voayge_id.price')
     price_bagage = fields.Integer("Prix Bagage")
+    bagage = fields.Char("Bagages")
     rembour = fields.Integer("Remboursement")
     sexe = fields.Selection([(' M. ', 'Homme'), (' Mme ', "Femme")], string='Civilité')
 

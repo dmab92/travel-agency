@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet'],
+    'depends': ['base','fleet','sale_management','board'],
 
     # always loaded
     'data': [
@@ -53,7 +53,12 @@
 
 'assets': {
     'web.assets_backend': [
-        'travel_agency_app/static/src/css/custom_styles.css',
+
+        #'travel_agency_app/static/src/components/**/*.js',
+        #'travel_agency_app/static/src/components  /**/*.xml',
+         #'travel_agency_app/static/src/components/**/*.scss',
+       # 'travel_agency_app/static/src/css/custom_styles.css',
+
     ],
 },
 }

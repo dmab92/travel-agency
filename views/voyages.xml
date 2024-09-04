@@ -92,11 +92,14 @@
                                 <field name="passager_ids"  attrs="{'readonly':[('state','=','send')]}" colspan="4">
                                     <tree string="Les Passagers"   editable="top">
                                         <field name="siege_number" string="No." readonly="1"/>
-                                        <field name="partner_id" />
-                                        <field name="sexe" />
+                                        <field name="partner_id"  required="1"/>
+                                        <field name="sexe"  required="1"/>
                                         <field name="mobile"  />
+
                                         <field name="cni"  string="Numero CNI" required="1"/>
+
                                         <field name="price"   options="{'precision': 0}" readonly="1"/>
+                                        <field name="bagage" />
                                         <field name="price_bagage" options="{'precision': 0}" />
                                         <field name="rembour"  options="{'precision': 0}"/>
                                         <button name="print_ticket"

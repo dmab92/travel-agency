@@ -53,8 +53,8 @@
             <field name="name">Format Ticket</field>
             <field name="default" eval="True"/>
             <field name="format">custom</field>
-            <field name="page_height">80</field>
-            <field name="page_width">100</field>
+            <field name="page_height">180</field>
+            <field name="page_width">80</field>
             <field name="orientation">Portrait</field>
             <field name="margin_top">1</field>
             <field name="margin_bottom">1</field>

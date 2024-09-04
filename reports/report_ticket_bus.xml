@@ -2,67 +2,137 @@
 <odoo>
 <template id="report_ticket_bus">
           <t t-call="web.html_container">
-            <t t-call="web.external_layout">
-                <div class="page">
-                    <center>
-                      <h2>  ENTETE AVEC LOGO DE EASY VOYAGE ICI </h2>
+               <div class="page">
+                    <style>
+                      .bottom-text {
+                          position: absolute;
+                          bottom: 20px;      /* Position the text at the bottom */
+                          left: 0;        /* Align it to the left side */
+                          width: 100%;    /* Ensure it spans the full width */
+                          text-align: left; /* Center the text horizontally */
+                          font-size: 18px;
+                      }
+                      .top-text {
+                          position: absolute;
+                          top: 60px;      /* Position the text at the bottom */
+                          left: 0;        /* Align it to the left side */
+                          width: 100%;    /* Ensure it spans the full width */
+                          text-align: left; /* Center the text horizontally */
 
-                      <h4>Ticket de Voyage No  <span t-esc="docs.voayge_id.name"/> </h4>
+                          font-weight: bold; /* Optional: Make the text bold */
+                          color: #333; /* Optional: Set the text color */
 
-                    </center>
+                      }
+                    </style>
+                 <div class="top-text" style="transform: rotate(270deg); -webkit-transform: rotate(270deg);">
+                    <table>
+                        <tr style="font-size: 24px;">
+                        <td>
+                          <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
+                          <td colspan="4"> <strong>
+                                Agence de Douala: <br/> Sis a Deido Vallee 3 boutiques <br/>
+                             Tel : </strong> <span t-esc="docs.voayge_id.user_id.company_id.mobile"/> <br/>
+                            <strong>  <br/> Agence de Nongsamba:  <br/> Sis au center commercial face Charter Express  <br/>
+                           Tel: </strong> <span t-esc="docs.voayge_id.user_id.company_id.phone"/></td>
+                       </tr>
 
-                    <table class="table table-sm o_main_table">
+                       <tr style="font-size: 24px;">
+                         <br/>
+                       <td colspan="4"> <strong> <h3> BILLET D'ACCES A BORD </h3> </strong></td>
+                       </tr>
 
-                  <tbody>
-                    <tr class="border-black">
-                          <td with="60%" colspan="3">
-                            <!--<img src="travel_agency_app,static/src/img/icon2.png" class="float-right" style="max-height: 65px; margin-top:20px;" alt="Logo"/> <br/>-->
+                       <tr style="font-size: 24px;">
+                           <td>   </td>
+                           <td>    </td>
+                       </tr>
+                       <tr style="font-size: 22px;">
+                         <td>   </td>
+                          <td>    </td>
+                          <td> </td>
+                          <td>   </td>
 
+                      </tr>
+                     <tr style="font-size: 28px;">
+                         <td> <strong>CarN:</strong>
+                           <span t-esc="docs.voayge_id.car_id.license_plate"/>  </td>
+                             <td>    </td>
+                         <td> </td>
+                     </tr>
+                        <tr style="font-size: 28px;">
 
-
-                             No: XXXXXX <br/>
-                           NOMS et Prenoms: <span t-esc="docs.partner_id.name"/> <br/>
-                           CNI: <span t-esc="docs.cni"/> <br/>
-                           Tel: <span t-esc="docs.mobile"/> <br/>
-                           Trajet:  <br/>
-                           No BUS: <span t-esc="docs.voayge_id.car_id.name"/> <br/>
-                           Tel: <span t-esc="docs.voayge_id.date_register"/> <br/>
-                           Montant: <span t-esc="docs.price"/> <br/>
-                           Montant Bagage: <span t-esc="docs.price_bagage"/> <br/>
-
-
-
-                              AUTRES INFORMATIONS A INSERER ICI<br/>
-                               AUTRES INFORMATIONS A INSERER ICI <br/>
-
-                          </td>
-
-                          <td with="40%" colspan="3">
-                           No: XXXXXX <br/>
-                           NOMS et Prenoms: <span t-esc="docs.partner_id.name"/> <br/>
-                           CNI: <span t-esc="docs.cni"/> <br/>
-                           Tel: <span t-esc="docs.mobile"/> <br/>
-                           Trajet:  <br/>
-                           No BUS: <span t-esc="docs.voayge_id.car_id.name"/> <br/>
-                           Tel: <span t-esc="docs.voayge_id.date_register"/> <br/>
-                           Montant: <span t-esc="docs.price"/> <br/>
-                           Montant Bagage: <span t-esc="docs.price_bagage"/> <br/>
-                           Numero de Siege:  <br/>
-                           Vendu par: <span t-esc="docs.voayge_id.user_id.name"/> <br/>
-
-
-
-                          </td>
+                         <td> <strong>Siege N:</strong>  <span t-esc="docs.siege_number"/> </td>
+                         <td>    </td>
+                          <td> </td>
                         </tr>
-              </tbody>
+                       <tr style="font-size: 22px;">
+                          <td>   </td>
+                          <td>    </td>
+                          <td> </td>
+                          <td>   </td>
+                      </tr>
+                    </table>
+                </div>
+                 <div class="bottom-text" style="transform: rotate(270deg); -webkit-transform: rotate(270deg); -ms-transform: rotate(90deg);  position:absolute; ">
 
-                </table>
-            </div>
+                   <table>
+                                    <tr style="font-size: 24px;">
+                                    <td>
+                                      <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
+                                      <td colspan="4"> <strong>
+                                            Agence de Douala: Sis a Deido Vallee 3 boutiques
+                                         Tel : </strong> <span t-esc="docs.voayge_id.user_id.company_id.mobile"/>
+                                        <strong>  <br/> Agence de Nongsamba: Sis au center commercial face Charter Express  <br/>
+                                       Tel: </strong> <span t-esc="docs.voayge_id.user_id.company_id.phone"/></td>
+                                   </tr>
+
+                                   <tr style="font-size: 24px;">
+                                   <td> <strong> Noms et Prénoms: </strong></td>
+                                   <td><span t-esc="docs.partner_id.name"/> </td>
+
+                                   </tr>
+                                   <tr style="font-size: 22px;">
+                                     <td> <strong> Destination:  </strong>  </td>
+                                      <td> <span t-esc="docs.voayge_id.destination_id.name"/>   </td>
+                                      <td> <strong>CarN:</strong></td>
+                                      <td> <span t-esc="docs.voayge_id.car_id.license_plate"/>  </td>
+
+                                  </tr>
+
+
+                                   <tr style="font-size: 22px;">
+                                      <td> <strong> Date et Heure de Depart:  </strong>  </td>
+                                      <td> <span t-esc="docs.voayge_id.date_register.strftime('%d/%m/%Y %H:%M:%S')"/>  </td>
+                                      <td> <strong>Prix: </strong>  </td>
+                                      <td> <span t-esc="docs.price "/>  </td>
+                                  </tr>
+                                   <tr style="font-size: 22px;">
+                                      <td> <strong> Bagages:  </strong>  </td>
+                                      <td> <span t-esc="docs.bagage"/>  </td>
+                                      <td> <strong> Prix:  </strong>  </td>
+                                      <td> <span t-esc="docs.price_bagage"/>  </td>
+
+                                  </tr>
+
+                                   <tr style="font-size: 22px;">
+                                      <td> <strong> CNI:  </strong>  </td>
+                                      <td> <span t-esc="docs.cni"/>  </td>
+                                      <td> <strong> Tel:  </strong>  </td>
+                                      <td> <span t-esc="docs.mobile"/>  </td>
+                                  </tr>
+                    </table>
+                       <p>
+                         1- Le billet est individuel  <br/>
+                           2-Nous ne sommes responsable des bages not declarees  <br/>
+                           3- Avant de prendre place dans le car, rassurez vous que vos bagages y sont embraqués.
+                          <stong> NB: </stong> Avisez  nous en cas de mauvais comportement de nos agents et chargeurs, exces de vitesse, mauvais depassement et surcharge  <br/>
+                    Le billet est nom remboursable et valable un mois ! <br/>
+                      <strong>DOUALA - NKONGSAMBA - DOUALA</strong>
+                       </p>
+                    </div>
+
+                </div>
 
         </t>
-        </t>
-
-
 
 </template>
 </odoo>

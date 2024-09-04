@@ -2,56 +2,111 @@
 <odoo>
 <template id="report_bordeau">
         <t t-call="web.html_container">
-            <t t-call="web.external_layout">
+
             <div class="page">
-                <div class="oe_structure"/>
-                    <center> <h5>
-                        BORDERAU DU VOYAGE No <span t-field="docs.name"/> <br/>
-                        VEHICULE :  <span t-field="docs.car_id.name"/> <br/>
-                        CHAUFFEUR :  <span t-field="docs.driver_id.name"/> <br/>
-                        DEPART : <span t-field="docs.departure_id.name"/>
-                        DESTINATION : <span t-field="docs.destination_id.name"/> <br/>
-                        DATE: <span t-field="docs.date_register"/> </h5>
-            </center>
-        <table class="table table-sm o_main_table">
-            <thead class="thead-light">
-                <tr>
-                    <th><strong>No</strong></th>
-                    <th><strong>Noms et Prenoms</strong></th>
-                    <th><strong>Sexe</strong></th>
-                    <th><b>Destination</b></th>
-                    <th><b>Remboursement</b></th>
-                </tr>
+               <table>
+                <tr style="font-size: 22px;">
+                    <td>
+                      <img t-att-src="image_data_uri(docs.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
+                      <td colspan="4"> <strong>
+                            Agence de Douala: Sis a Deido Vallee 3 boutiques <br/>
+                         Tel : </strong> <span t-esc="docs.user_id.company_id.mobile"/> <br/>
+                        <strong> Agence de Nongsamba: Sis au Centre Commercial face Charter Express   <br/>
+                       Tel: </strong> <span t-esc="docs.user_id.company_id.phone"/></td>
+              </tr>
+              </table>
+
+                 <h4 style="text-align: right;"> Manifeste du   <span t-esc="docs.date_register.strftime('%d/%m/%Y')"/> </h4>
+                <h2 style="text-align: center;"> BORDERAU DU VOYAGE No <span t-field="docs.name"/> </h2>
+               <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+        <tr>
+            <td style="border: none; padding: 8px;">
+                <p> <strong> DEPART :</strong> <span t-field="docs.departure_id.name"/> </p>
+            </td>
+            <td style="border: none; padding: 8px;">
+                <p> </p>
+            </td>
+             <td style="border: none; padding: 8px;">
+                 <p/>
+
+            </td>
+            <td style="border: none; padding: 8px;">
+                <strong>  DESTINATION :</strong> <span t-field="docs.destination_id.name"/> <br/>
+
+            </td>
+        </tr>
+        </table>
+
+
+           <strong>CONDUCTEUR :   </strong>    <span t-field="docs.driver_id.name"/> <br/> <br/>
+
+        <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+            <thead class="thead-light" style="font-size: 23px;">
+                 <tr style="border: 2px solid black; padding: 8px;">
+                    <th style="border: 1px solid black; padding: 8px;"><strong>No</strong></th>
+                    <th style="border: 1px solid black; padding: 8px;"><strong>Noms et Prenoms</strong></th>
+                    <th style="border: 1px solid black; padding: 8px;"><strong>Identification</strong></th>
+                    <th style="border: 1px solid black; padding: 8px;"><b>Telephone</b></th>
+                    <th style="border: 1px solid black; padding: 8px;"><b>Frais Transport</b></th>
+                    <th style="border: 1px solid black; padding: 8px;"><b>Remboursement</b></th>
+
+                 </tr>
+
+
             </thead>
             <tbody>
                     <t t-set="index" t-value="1"/>
                     <t t-set="remb" t-value="0"/>
-                    <tr t-foreach="docs.passager_ids" t-as="line" class="border-black">
-                            <td class="text-left"><span t-esc="index"/></td>
-                            <td class="text-left"><span t-field="line.partner_id.name"/></td>
-                            <td class="text-left"><span t-field="line.sexe"/></td>
-                            <td class="text-left"><span t-field="docs.destination_id.name"/></td>
-                         <td class="text-left"><span t-field="line.rembour"/></td>
+                    <tr t-foreach="docs.passager_ids" t-as="line" style="border: 1px solid black; padding: 8px;">
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-esc="index"/></td>
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.partner_id.name"/></td>
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.cni"/></td>
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.mobile"/> </td>
+
+                            <td style="border: 1px solid black; padding: 8px; text-align: center; ">
+                            <span t-esc="'{:,.0f}'.format(int(line.price)).replace(',', ' ')"/> </td>
+
+                            <td style="border: 1px solid black; padding: 8px; text-align: center; vertical-align: middle;">
+                            <span t-esc="'{:,.0f}'.format(int(line.rembour)).replace(',', ' ')"/> </td>
+
                             <t t-set="index" t-value="index+1"/>
                             <t t-set="remb" t-value="remb+line.rembour"/>
                     </tr>
                     </tbody>
 
                     <tr class="border-black o_subtotal">
-                          <td with="80%" colspan="3">
+                          <td colspan="5" class="text-right">
                           <b>Total des remboursements :</b></td>
-                          <td class="text-right" colspan="2">
+                          <td class="text-center" colspan="2" style="border: 1px solid black; padding: 8px; text-align: center; vertical-align: middle;">
+
                               <h5> <span t-esc="'{:,.0f}'.format(remb).replace(',', ' ')"/></h5>
                           </td>
                         </tr>
 
                 </table>
-                <p>
-                </p>
-               <p class="text-right"> LA DIRECTION </p>
+
+
+               <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+                  <tr>
+                      <td style="border: none; padding: 8px;">
+                          <p>Signature Guichetier</p>
+                      </td>
+                      <td style="border: none; padding: 8px;">
+                          <p> </p>
+                      </td>
+                       <td style="border: none; padding: 8px;">
+                           <p/>
+
+                      </td>
+                      <td style="border: none; padding: 8px;">
+                          <p>Signature Chauffeur </p>
+
+                      </td>
+                  </tr>
+                </table>
             </div>
             </t>
-        </t>
+
 
 </template>
 </odoo>
