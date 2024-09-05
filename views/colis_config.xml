@@ -162,7 +162,7 @@
                         <group>
                             <group string="Informations Generales">
                                 <field name="name" required="1"/>
-                                <field name="price" required="1"/>
+                                <field name="price" options="{'precision': 0}" required="1"/>
                             </group>
                         </group>
                     </sheet>
@@ -176,7 +176,7 @@
             <field name="arch" type="xml">
                 <tree string="Type de Voyage">
                     <field name="name" required="1"/>
-                    <field name="price" required="1"/>
+                    <field name="price"  options="{'precision': 0}" required="1"/>
                 </tree>
             </field>
         </record>

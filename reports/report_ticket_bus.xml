@@ -2,7 +2,7 @@
 <odoo>
 <template id="report_ticket_bus">
           <t t-call="web.html_container">
-               <div class="page">
+                <div class="page">
                     <style>
                       .bottom-text {
                           position: absolute;
@@ -11,10 +11,11 @@
                           width: 100%;    /* Ensure it spans the full width */
                           text-align: left; /* Center the text horizontally */
                           font-size: 18px;
+                          font-family: 'Times New Roman', serif;
                       }
                       .top-text {
                           position: absolute;
-                          top: 60px;      /* Position the text at the bottom */
+                          top: 20px;      /* Position the text at the bottom */
                           left: 0;        /* Align it to the left side */
                           width: 100%;    /* Ensure it spans the full width */
                           text-align: left; /* Center the text horizontally */
@@ -26,7 +27,7 @@
                     </style>
                  <div class="top-text" style="transform: rotate(270deg); -webkit-transform: rotate(270deg);">
                     <table>
-                        <tr style="font-size: 24px;">
+                        <tr style="font-size: 16px;">
                         <td>
                           <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
                           <td colspan="4"> <strong>
@@ -36,35 +37,35 @@
                            Tel: </strong> <span t-esc="docs.voayge_id.user_id.company_id.phone"/></td>
                        </tr>
 
-                       <tr style="font-size: 24px;">
+                       <tr style="font-size: 20px; font-family: 'Times New Roman', serif;">
                          <br/>
                        <td colspan="4"> <strong> <h3> BILLET D'ACCES A BORD </h3> </strong></td>
                        </tr>
 
-                       <tr style="font-size: 24px;">
+                       <tr style="font-size: 16px;">
                            <td>   </td>
                            <td>    </td>
                        </tr>
-                       <tr style="font-size: 22px;">
+                       <tr style="font-size: 16px;">
                          <td>   </td>
                           <td>    </td>
                           <td> </td>
                           <td>   </td>
 
                       </tr>
-                     <tr style="font-size: 28px;">
+                     <tr style="font-size: 20px;">
                          <td> <strong>CarN:</strong>
                            <span t-esc="docs.voayge_id.car_id.license_plate"/>  </td>
                              <td>    </td>
                          <td> </td>
                      </tr>
-                        <tr style="font-size: 28px;">
+                        <tr style="font-size: 16px;">
 
                          <td> <strong>Siege N:</strong>  <span t-esc="docs.siege_number"/> </td>
                          <td>    </td>
                           <td> </td>
                         </tr>
-                       <tr style="font-size: 22px;">
+                       <tr style="font-size: 16px;">
                           <td>   </td>
                           <td>    </td>
                           <td> </td>
@@ -75,7 +76,7 @@
                  <div class="bottom-text" style="transform: rotate(270deg); -webkit-transform: rotate(270deg); -ms-transform: rotate(90deg);  position:absolute; ">
 
                    <table>
-                                    <tr style="font-size: 24px;">
+                                    <tr style="font-size: 16px;">
                                     <td>
                                       <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
                                       <td colspan="4"> <strong>
@@ -85,12 +86,12 @@
                                        Tel: </strong> <span t-esc="docs.voayge_id.user_id.company_id.phone"/></td>
                                    </tr>
 
-                                   <tr style="font-size: 24px;">
+                                   <tr style="font-size: 16px;">
                                    <td> <strong> Noms et Prénoms: </strong></td>
                                    <td><span t-esc="docs.partner_id.name"/> </td>
 
                                    </tr>
-                                   <tr style="font-size: 22px;">
+                                   <tr style="font-size: 16px;">
                                      <td> <strong> Destination:  </strong>  </td>
                                       <td> <span t-esc="docs.voayge_id.destination_id.name"/>   </td>
                                       <td> <strong>CarN:</strong></td>
@@ -99,13 +100,13 @@
                                   </tr>
 
 
-                                   <tr style="font-size: 22px;">
+                                   <tr style="font-size: 16px;">
                                       <td> <strong> Date et Heure de Depart:  </strong>  </td>
                                       <td> <span t-esc="docs.voayge_id.date_register.strftime('%d/%m/%Y %H:%M:%S')"/>  </td>
                                       <td> <strong>Prix: </strong>  </td>
                                       <td> <span t-esc="docs.price "/>  </td>
                                   </tr>
-                                   <tr style="font-size: 22px;">
+                                   <tr style="font-size: 16px;">
                                       <td> <strong> Bagages:  </strong>  </td>
                                       <td> <span t-esc="docs.bagage"/>  </td>
                                       <td> <strong> Prix:  </strong>  </td>
@@ -113,21 +114,23 @@
 
                                   </tr>
 
-                                   <tr style="font-size: 22px;">
+                                   <tr style="font-size: 16px;">
                                       <td> <strong> CNI:  </strong>  </td>
                                       <td> <span t-esc="docs.cni"/>  </td>
                                       <td> <strong> Tel:  </strong>  </td>
                                       <td> <span t-esc="docs.mobile"/>  </td>
                                   </tr>
                     </table>
-                       <p>
+                       <p> <small>
+
+
                          1- Le billet est individuel  <br/>
                            2-Nous ne sommes responsable des bages not declarees  <br/>
                            3- Avant de prendre place dans le car, rassurez vous que vos bagages y sont embraqués.
                           <stong> NB: </stong> Avisez  nous en cas de mauvais comportement de nos agents et chargeurs, exces de vitesse, mauvais depassement et surcharge  <br/>
                     Le billet est nom remboursable et valable un mois ! <br/>
                       <strong>DOUALA - NKONGSAMBA - DOUALA</strong>
-                       </p>
+                        </small> </p>
                     </div>
 
                 </div>

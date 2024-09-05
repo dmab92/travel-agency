@@ -39,10 +39,11 @@ class location_vehicule(models.Model):
     name = fields.Char("Numero  de la Location",readonly="True", default = lambda self: self._get_next_reference())
     date_register = fields.Datetime('Date de location', default=fields.datetime.now())
     date_debut = fields.Datetime('Depart Prevu le')
-    date_fin = fields.Datetime('Retour le')
+    date_fin = fields.Datetime('Retour le :')
 
-    departure_id = fields.Many2one("city.destination", " Depart", required=1)
-    destination_id = fields.Many2one("city.depart", "Destination", required=1)
+    departure_id = fields.Many2one("ville.envoi.colis", " Depart", required=1)
+    destination_id = fields.Many2one("ville.recept.colis", "Destination",required=1)
+
     price = fields.Integer("Montant de la location", digits=(6, 0))
     car_id = fields.Many2one("fleet.vehicle", "Vehicule", required=1)
     driver_id = fields.Many2one("res.partner", "Conducteur", required=1)
@@ -54,9 +55,8 @@ class location_vehicule(models.Model):
     notice = fields.Text("Notice")
     user_id = fields.Many2one("res.users", "Recu par", default=lambda self: self.env.user)
 
-
     state = fields.Selection([('draft', 'Brouillon'),
-                               ('valid', 'Validée'),
+                               ('send', 'Validée'),
                                ('cancel', 'Annulée'),
                                ], require=1, default='draft',
                               string='Etat')
@@ -68,7 +68,7 @@ class location_vehicule(models.Model):
             raise UserError(
                 _("'Alert !!! Veuillez  confirmer l'exactude des ces informations avant de les valider'"))
 
-        return self.write({'state': 'valid'})
+        return self.write({'state': 'send'})
 
     def set_draft(self):
         if not self.confirm:

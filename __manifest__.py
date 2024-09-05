@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet','sale_management','board'],
+    'depends': ['base','fleet'],
 
     # always loaded
     'data': [
@@ -34,14 +34,15 @@
         'views/pieces.xml',
         #'views/sales_dashboard.xml',
         'views/location.xml',
+        'views/bordeau_views.xml',
         'wizard/wizard_rapport_colis.xml',
         'reports/report_ticket_expedition.xml',
         'reports/report_rapport_expedition.xml',
         'reports/report_borderau.xml',
+         'reports/report_borderau_colis.xml',
         'reports/report_ticket_bus.xml',
         'report_voyage.xml',
         'menu_voyage.xml',
-        #'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

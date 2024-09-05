@@ -12,13 +12,11 @@
                     <field name="date_register"/>
                     <field name="car_id"/>
                     <field name="driver_id"/>
-                    <field name="total_bagage"  options="{'precision': 0}"/>
-                    <field name="total_frais" options="{'precision': 0}"/>
-                    <field name="total_remb" options="{'precision': 0}"/>
-                    <field name="total_gain" string="Total Encaissé" options="{'precision': 0}" />
-                     <field name="state" />
-
-
+                    <field name="total_bagage"   sum=" "  options="{'precision': 0}" />
+                    <field name="total_frais"   sum=" " options="{'precision': 0}"/>
+                    <field name="total_remb"   sum=" " options="{'precision': 0}"/>
+                    <field name="total_gain"   sum=" " string="Total Encaissé" options="{'precision': 0}" />
+                     <field name="state" invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -68,19 +66,19 @@
                          <group string="Informations Generales">
                             <group>
                                 <field name="name"/>
-                                <field name="date_register"/>
-                                <field name="departure_id"/>
-                                <field name="destination_id"/>
-                                <field name="type_id" required="1"/>
-                                <field name="price" options="{'precision': 0}"/>
+                                <field name="date_register" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="departure_id" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="destination_id" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="type_id" required="1" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="price" options="{'precision': 0}" attrs="{'readonly':[('state','=','send')]}"/>
                             </group>
                             <group>
-                                <field name="car_id"/>
-                                <field name="passenger_number"/>
-                                <field name="driver_id"/>
-                                <field name="road_fees" options="{'precision': 0}"/>
-                                <field name="user_id" />
-                                <field name="confirm"/>
+                                <field name="car_id" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="passenger_number" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="driver_id" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="road_fees" options="{'precision': 0}" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="user_id" readonly="1"/>
+                                <field name="confirm" attrs="{'readonly':[('state','=','send')]}"/>
 
 
                                 <field name="state"  invisible="1"/>
@@ -111,12 +109,14 @@
 
                                     </tree>
                                 </field>
-                                <group colspan="3"  class="oe_subtotal_footer oe_right">>
-                                     <field name="total_bagage"  options="{'precision': 0}"/>
-                                     <field name="total_frais" options="{'precision': 0}"/>
-                                     <field name="total_remb" options="{'precision': 0}"/>
-                                     <field name="total_gain" string="Total Encaissé" options="{'precision': 0}" />
-                                </group>
+                                    <strong>
+                                        <group colspan="3"  class="oe_subtotal_footer oe_right">>
+                                             <field name="total_bagage"  options="{'precision': 0}"/>
+                                             <field name="total_frais" options="{'precision': 0}"/>
+                                             <field name="total_remb" options="{'precision': 0}"/>
+                                             <field name="total_gain" string="Total Encaissé" options="{'precision': 0}" />
+                                        </group>
+                                    </strong>
                             </page>
                         </notebook>
 

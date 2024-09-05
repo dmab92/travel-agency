@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_bordereau_form">
+            <field name="name">Bordereau</field>
+            <field name="model">borderau.colis</field>
+            <field name="arch" type="xml">
+                <form string="Colis">
+                        <p class="oe_grey">
+                            Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Borderaux
+                        </p>
+                    <header>
+                        <button name="print_bordeau_colis"
+                                string="Valider et Imprimer le Bordeau  Courrier"
+                                type="object"
+                                class="oe_highlight"
+                                icon="fa-print"
+                                attrs="{'invisible': [('state','!=','draft')]}"
+                        />
+                        <button name="set_to_draft"
+                        string="Remettre en broullion"
+                        type="object"
+                        attrs="{'invisible': [('state','=','draft')]}"
+                        />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send" />
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="num_bordereau" />
+                                <field name="date_register"  attrs="{'readonly':[('state','=','send')]}" required="1"/>
+                                <field name="driver_id"  attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="car_id"  attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="price_total"  options="{'precision': 0}"/>
+                            </group>
+                            <group>
+                                <field name="ville_envoi_id" required="1" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="ville_reception_id" required="1"  attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="user_id" readonly="1"/>
+                                <field name="info_excat"  attrs="{'readonly':[('state','=','send')]}" />
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Les Colis">
+                                <field name="coli_ids"  attrs="{'readonly':[('state','=','send')]}" colspan="4">
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_colis_bordeau_tree">
+            <field name="name">Liste des Bordereaux</field>
+            <field name="model">borderau.colis</field>
+            <field name="arch" type="xml">
+                <tree string="Liste des Bordeaux"
+                    decoration-muted="state == 'draft'"
+                      decoration-success="state == 'send'">
+                    <field name="num_bordereau"/>
+                    <field name="date_register"/>
+                     <field name="ville_envoi_id" required="1"/>
+                    <field name="ville_reception_id" required="1" />
+                    <field name="car_id"/>
+                    <field name="price_total" options="{'precision': 0}" sum=" "/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_bordereau_action" model="ir.actions.act_window">
+            <field name="name">Liste des Bordereaux</field>
+            <field name="res_model">borderau.colis</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Bordereaux
+              </p><p>
+                Cette interface vous permet d'enregistrer les informations des Bordereaux
+              </p>
+            </field>
+        </record>
+
+</odoo>

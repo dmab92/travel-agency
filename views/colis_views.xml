@@ -10,28 +10,17 @@
                     <field name="receive_date"/>
                     <field name="receive_id"/>
                     <field name="state"/>
-                    <field name="paiement"/>
-<!--                    <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>-->
+
                     <group expand="0" string="Group By">
                         <filter string="Expediteur" name="groupby_sender_id" domain="[]" context="{'group_by': 'sender_id'}"/>
 
                         <filter string="Destinataire" name="groupby_receive_id" domain="[]" 
                             context="{'group_by': 'receive_id'}"/>
 
-<!--                        <filter string="Pays de reception" name="groupby_country_rec_id" domain="[]" -->
-<!--                            context="{'group_by': 'country_rec_id'}"/>-->
-
-<!--                        <filter string="Pays d'envoi" name="groupby_country_sen_id" domain="[]" -->
-<!--                            context="{'group_by': 'country_sen_id'}"/>-->
-
                         <filter string="Date d'envoi" name="groupby_sender_date" domain="[]" 
                             context="{'group_by': 'sender_date'}"/>
-
-
                         <filter string="Etat" name="groupby_state" domain="[]" 
                             context="{'group_by': 'state'}"/>
-                        
-                        
                     </group>
                 </search>
             </field>
@@ -70,16 +59,10 @@
                                 attrs="{'invisible': [('state','in',('draft','receive'))]}"
                                 />
 
-
-<!--                        <button name="generate_emails"-->
-<!--                        string="Genrer les mails"-->
-<!--                        type="object"-->
-
-<!--                        />-->
                         <button name="set_to_draft"
-                        string="Remettre en broullion"
-                        type="object"
-                        attrs="{'invisible': [('state','=','draft')]}"
+                                string="Remettre en broullion"
+                                type="object"
+                                attrs="{'invisible': [('state','=','draft')]}"
                         />
 
                     <field name="state" widget="statusbar" statusbar_visible="draft,send,receive" />
@@ -89,51 +72,30 @@
                         <group>
                             <group string="Informations sur l'Expediteur">
                                 <field name="numero_colis" />
-                                <field name="date_register"  required="1"/>
-<!--                                <field name="sender_date" required="1" />-->
-<!--                                <field name="sexe"  required="1"/>-->
-                                <field name="sender_id" required="1"  />
+                                <field name="date_register"  required="1" attrs="{'readonly':[('state','=','send')]}"/>
 
-                                <field name="sender_phone" required="1" />
+                                <field name="sender_id" required="1"  attrs="{'readonly':[('state','=','send')]}" />
+
+                                <field name="sender_phone" required="1" attrs="{'readonly':[('state','=','send')]}" />
                                 
-                                <field name="ville_envoi_id"  required="1"/>
-
-                               <!--  <field name="price" widget="monetary" /> -->
-<!--                                <field name="assurance"  />-->
-<!--                                <field name="embalage"  />-->
-<!--                                <field name="phyto" />-->
-
-<!--                                <field name="digital_signature_em" widget="signature"  string="Signature Emetteur"/>-->
+                                <field name="ville_envoi_id"  required="1" attrs="{'readonly':[('state','=','send')]}"/>
 
                             </group>
                             <group string="Informations sur le Destinataire">
 
-                                <field name="receive_id" required="1" />
-                                <field name="receive_phone" required="1"/>
-                                <field name="cni_exp" required="1" />
-                                <field name="ville_reception_id"   required="1" />
-<!--                                <field name="state_id" />-->
-<!--                                <field name="country_rec_id" />-->
-<!--                                <field name="address_rec" />-->
-                                <field name="price" required='1' force_save="1"/>
-<!--                                <field name="paiement" />-->
-<!--                                <field name="price_avance" -->
-<!--                                    attrs="{'readonly': [('paiement','in',('solde'))]}" force_save="1" />-->
-<!--                                <field name="price_rest" widget="monetary" attrs="{'readonly': [('paiement','in',('solde','notsolde'))]}" force_save="1"/>-->
-<!--                                -->
-                                <field name ="contenu_colis" required="1"/>
-<!--                                <field name="weight" />-->
-                                <field name="valeur_colis" />
-<!--                                <field name="receive_date"  required="1"/>-->
-                                <field name="info_excat" />
+                                <field name="receive_id" required="1"  attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="receive_phone" required="1" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="cni_exp" required="1"  attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="ville_reception_id"  attrs="{'readonly':[('state','=','send')]}" required="1" />
+
+                                <field name="price" required='1' attrs="{'readonly':[('state','=','send')]}" options="{'precision': 0}"  force_save="1"/>
+
+                                <field name ="contenu_colis" attrs="{'readonly':[('state','=','send')]}" required="1"/>
+                                <field name="valeur_colis"  attrs="{'readonly':[('state','=','send')]}"/>
+
+                                <field name="info_excat" attrs="{'readonly':[('state','=','send')]}" />
                                 <field name="user_id" readonly="1"/>
-<!--                                <field name="digital_signature" widget="signature"  string="Signature Destinataire"-->
-                                    />
                             </group>
-                            <!-- <group>
-                                
-                            </group> -->
-                            <!-- attrs="{'required': [('state','=','send')]}" -->
                         </group>
                     </sheet>
                 </form>
@@ -144,19 +106,19 @@
         <record model="ir.ui.view" id="view_colis_colis_tree">
             <field name="name">Liste des colis</field>
             <field name="model">voyage.colis</field>
-
             <field name="arch" type="xml">
                 <tree string="Liste des Colis">
                     <field name="numero_colis"/>
-                    <field name="sender_date"/>
                     <field name="sender_id"/>
-<!--                    <field name="country_sen_id"/>-->
                     <field name="receive_id"/>
-<!--                    <field name="country_rec_id" />-->
-                    <!-- <field name="receive_date"/> -->
-                    <field name="price" widget="monetary" />
-<!--                    <field name="paiement" />-->
-                    <field name="state"/>
+                    <field name="price" sum=" " options="{'precision': 0}" />
+                     <button name="print_ticket"
+                            string="Imprimer le recu"
+                            type="object"
+                            class="oe_highlight"
+                            icon="fa-print"
+                                        />
+
                 </tree>
             </field>
         </record>
@@ -218,7 +180,6 @@
               </p>
             </field>
         </record>
-
 
 
         <record id="view_all_my_colis_action" model="ir.actions.act_window">

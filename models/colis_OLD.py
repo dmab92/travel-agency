@@ -51,7 +51,7 @@ class colis_colis(models.Model):
     numero_colis = fields.Char("Numero du colis", readonly="True", default=lambda self: self._get_next_reference())
     date_register = fields.Datetime('Date d\'énregistrement du colis', default=fields.datetime.now())
     sender_id = fields.Many2one('res.partner', "Nom de l'expediteur")
-    user_id = fields.Many2one('res.users', 'Caissier(e)',default=lambda self: self.env.user) 
+    user_id = fields.Many2one('res.users', 'Guichetier(e)',default=lambda self: self.env.user)
     sender_phone = fields.Char("Telephone")
     sender_date = fields.Date("Date d'envoi",default=datetime.today())
     receive_id = fields.Many2one('res.partner', "Nom du Destinataire")

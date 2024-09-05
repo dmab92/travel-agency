@@ -106,11 +106,11 @@
                                 <field name="state_id" />
                                 <field name="country_rec_id" />
                                 <field name="address_rec" />
-                                <field name="price" required='1' force_save="1"/>
+                                <field name="price"  options="{'precision': 0}" required='1' force_save="1"/>
                                 <field name="paiement" />
-                                <field name="price_avance" 
+                                <field name="price_avance"  options="{'precision': 0}"
                                     attrs="{'readonly': [('paiement','in',('solde'))]}" force_save="1"/>
-                                <field name="price_rest" attrs="{'readonly': [('paiement','in',('solde','notsolde'))]}" force_save="1"/>
+                                <field name="price_rest"  options="{'precision': 0}" attrs="{'readonly': [('paiement','in',('solde','notsolde'))]}" force_save="1"/>
                                 <!-- <field name="ville_reception_id" required="1" /> -->
                                 <field name ="contenu_colis" required="1"/>
                                 <field name="weight" />
@@ -141,7 +141,7 @@
                     <field name="ville_envoi_id"/>
                     <field name="receive_id"/>
                     <field name="country_rec_id"/>
-                    <field name="price" widget="monetary" />
+                    <field name="price" options="{'precision': 0}"/>
                     <field name="paiement" />
                     <field name="state"/>
                     <!-- <tree string = "Etat" decoration-info="state=='draft'" decoration-muted="state == 'send'" decoration-danger="state == 'receive'" /> -->

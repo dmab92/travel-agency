@@ -70,6 +70,14 @@
                 name="travel_agency_app.report_ticket_bus"
                 paperformat="travel_agency_app.paperformat_report_ticket"
                 />
+         <!-- Reports  Ticket de Bus-->
+        <report id="action_bordereau_colis"
+                string="Bordereau Colis"
+                model="borderau.colis"
+                report_type = "qweb-pdf"
+                file="travel_agency_app.report_bordeau_colis"
+                name="travel_agency_app.report_bordeau_colis"
+                />
     </data>
 
 </odoo>

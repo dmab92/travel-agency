@@ -269,19 +269,19 @@
 
 
 
-    <data noupdate="1">
-       <record id="ir_cron_transport_action" model="ir.cron">
-           <field name="name">Transport Cron</field>
-           <field name="model_id" ref="model_vehicule_voyage"/>
-           <field name="state">code</field>
-           <field name="code">model.send_sms()</field>
-           <field name="user_id" ref="base.user_root"/>
-           <field name="interval_number">1</field>
-           <field name="interval_type">weeks</field>
-           <field name="numbercall">-1</field>
-           <field name="priority">5</field>
-       </record>
-    </data>
+<!--    <data noupdate="1">-->
+<!--       <record id="ir_cron_transport_action" model="ir.cron">-->
+<!--           <field name="name">Transport Cron</field>-->
+<!--           <field name="model_id" ref="model_vehicule_voyage"/>-->
+<!--           <field name="state">code</field>-->
+<!--           <field name="code">model.send_sms()</field>-->
+<!--           <field name="user_id" ref="base.user_root"/>-->
+<!--           <field name="interval_number">1</field>-->
+<!--           <field name="interval_type">weeks</field>-->
+<!--           <field name="numbercall">-1</field>-->
+<!--           <field name="priority">5</field>-->
+<!--       </record>-->
+<!--    </data>-->
 
 
 

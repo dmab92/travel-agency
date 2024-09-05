@@ -44,11 +44,10 @@ class voyage_voyage(models.Model):
 
     date_register = fields.Datetime('Date et Heure de depart', default=fields.datetime.now())
     name = fields.Char("Numero du Voyage",readonly="True", default = lambda self: self._get_next_reference())
-    user_id = fields.Many2one("res.users", "Caissiere", default=lambda self: self.env.user, required=1)
+    user_id = fields.Many2one("res.users", "Guichetier(e)", default=lambda self: self.env.user, required=1)
     car_id = fields.Many2one("fleet.vehicle", "Vehicule",required=1)
     driver_id = fields.Many2one("res.partner", "Conducteur",required=1)
     passager_ids = fields.One2many('voyage.passager','voayge_id', string="Passagers")
-    #lines_ids = fields.One2many('lines.voyage','voayge_id',string="Passagers")
     state = fields.Selection([('draft', 'Brouillon'),
                               ('send', 'Validé'),
                               ('cancel', 'Annulé'),
@@ -60,8 +59,8 @@ class voyage_voyage(models.Model):
     total_remb = fields.Integer("Total Remboursement",compute='_compute_passanger_number',digits=0)
     total_gain = fields.Integer("Total Gain", compute='_compute_passanger_number',digits=0)
     road_fees= fields.Integer("Frais de route", digits=0)
-    departure_id = fields.Many2one("city.destination", " Depart",required=1)
-    destination_id = fields.Many2one("city.depart","Destination",required=1)
+    departure_id = fields.Many2one("ville.envoi.colis", " Depart")
+    destination_id = fields.Many2one("ville.recept.colis","Destination")
     type_id = fields.Many2one("voyage.type", "Type")
     price = fields.Integer("Frais de transport",  related='type_id.price', digits=(6,0))
     license_plate = fields.Integer("Frais de route")
@@ -122,9 +121,6 @@ class voyage_voyage(models.Model):
             record.license_plate = record.car_id.license_plate
             record.driver_id = record.car_id.driver_id
 
-
-
-
     def print_bordeau(self):
 
         return self.env.ref('travel_agency_app.action_report_bordeau').report_action(self)
@@ -143,9 +139,6 @@ class voyage_voyage(models.Model):
 
     def set_cancel(self):
         return self.write({'state': 'cancel'})
-
-
-
 
 class voyage_passager(models.Model):
     """Defining the passengers ."""
@@ -209,8 +202,6 @@ class voyage_line(models.Model):
     #         record.license_plate = record.car_id.license_plate
     #         record.driver_id = record.car_id.driver_id
 
-
-
 class city_destination(models.Model):
     """Defining  for destinatation."""
     _description = ' Ville de Destination'
@@ -226,8 +217,6 @@ class city_depart(models.Model):
     name= fields.Char("Arrivee")
 
 
-
-
 class voyage_type(models.Model):
     """Defining   the city of departure of car."""
     _description = " Type de voyage"
@@ -235,3 +224,5 @@ class voyage_type(models.Model):
 
     name= fields.Char("Type")
     price =fields.Integer("Prix")
+
+

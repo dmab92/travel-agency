@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_bordeau_colis">
+        <t t-call="web.html_container">
+            <div class="page">
+                <table>
+                    <tr style="font-size: 22px;">
+                        <td>
+                          <img t-att-src="image_data_uri(docs.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
+                          <td colspan="4"> <strong>
+                                Agence de Douala: Sis a Deido Vallee 3 boutiques <br/>
+                             Tel : </strong> <span t-esc="docs.user_id.company_id.mobile"/> <br/>
+                            <strong> Agence de Nongsamba: Sis au Centre Commercial face Charter Express   <br/>
+                           Tel: </strong> <span t-esc="docs.user_id.company_id.phone"/></td>
+                  </tr>
+                </table>
+
+                     <h4 style="text-align: right;"> Manifeste du   <span t-esc="docs.date_register.strftime('%d/%m/%Y')"/> </h4>
+                    <h2 style="text-align: center;"> BORDERAU COURRIER No <span t-field="docs.num_bordereau"/> </h2>
+                   <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+                        <tr>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong> DEPART :</strong> <span t-field="docs.ville_envoi_id.name"/> </p>
+                            </td>
+                            <td style="border: none; padding: 8px;">
+                                <p> </p>
+                            </td>
+                             <td style="border: none; padding: 8px;">
+                                 <p/>
+
+                            </td>
+                            <td style="border: none; padding: 8px;">
+                                <strong>  DESTINATION :</strong> <span t-field="docs.ville_reception_id.name"/> <br/>
+
+                            </td>
+                        </tr>
+                       <tr>
+                           <td style="border: none; padding: 8px;">
+                                <strong>CONDUCTEUR :   </strong>    <span t-field="docs.driver_id.name"/>
+                            </td>
+                       </tr>
+        </table>
+
+        <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+            <thead class="thead-light" style="font-size: 23px;">
+                 <tr style="border: 2px solid black; padding: 8px;">
+                    <th style="border: 1px solid black; padding: 8px;"><strong>No</strong></th>
+                    <th style="border: 1px solid black; padding: 8px;"><strong>EXPEDITEUR</strong></th>
+                    <th style="border: 1px solid black; padding: 8px;"><strong>DESTINATAIRE</strong></th>
+                    <th style="border: 1px solid black; padding: 8px;"><b>OBSERVATIONS</b></th>
+                 </tr>
+            </thead>
+            <tbody>
+                    <t t-set="index" t-value="1"/>
+                    <t t-set="remb" t-value="0"/>
+                    <tr t-foreach="docs.coli_ids" t-as="line" style="border: 1px solid black; padding: 8px;">
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-esc="index"/></td>
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.sender_id.name"/></td>
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.receive_id.name"/></td>
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.contenu_colis"/></td>
+                            <t t-set="index" t-value="index+1"/>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+
+               <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+                  <tr>
+                      <td style="border: none; padding: 8px;">
+                          <p>Signature Guichetier</p>
+                      </td>
+                      <td style="border: none; padding: 8px;">
+                          <p> </p>
+                      </td>
+                       <td style="border: none; padding: 8px;">
+                           <p/>
+
+                      </td>
+                      <td style="border: none; padding: 8px;">
+                          <p>Signature Chauffeur </p>
+
+                      </td>
+                  </tr>
+                </table>
+            </div>
+            </t>
+
+
+</template>
+</odoo>
+
+
