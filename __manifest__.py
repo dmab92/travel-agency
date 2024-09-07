@@ -7,8 +7,8 @@
        """,
 
     'description': """
-         Ce module vous permet de gerer l'enseignment des activites d'une agence de transport
-       de l'enregistremnt des voyages, les badages, l'impression des tickets, des bordeau de route et bien d'autres elements
+         Ce module vous permet de gerer l'ensemble des activites d'une agence de transport
+       de l'enregistremnt des voyages, les badages, l'impression des tickets, des bordeaux de route et bien d'autres elements
         d'Editer vos etats Statistiques aux format PDF et Excel
     """,
     'author': "MT Consulting  SARL",

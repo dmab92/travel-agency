@@ -66,11 +66,12 @@
                          <group string="Informations Generales">
                             <group>
                                 <field name="name"/>
+                                <field  name="letter"  attrs="{'readonly':[('state','=','send')]}"  required="1"/>
                                 <field name="date_register" attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="departure_id" attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="destination_id" attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="type_id" required="1" attrs="{'readonly':[('state','=','send')]}"/>
-                                <field name="price" options="{'precision': 0}" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="price" options="{'precision': 0}"  readonly="1"/>
                             </group>
                             <group>
                                 <field name="car_id" attrs="{'readonly':[('state','=','send')]}"/>
@@ -79,34 +80,31 @@
                                 <field name="road_fees" options="{'precision': 0}" attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="user_id" readonly="1"/>
                                 <field name="confirm" attrs="{'readonly':[('state','=','send')]}"/>
-
-
                                 <field name="state"  invisible="1"/>
                             </group>
                         </group>
 
                         <notebook>
                             <page string="Les Passagers">
-                                <field name="passager_ids"  attrs="{'readonly':[('state','=','send')]}" colspan="4">
+                                <field name="line_ids"  attrs="{'readonly':[('state','=','send')]}" colspan="4">
                                     <tree string="Les Passagers"   editable="top">
                                         <field name="siege_number" string="No." readonly="1"/>
+                                        <field name="numero_id"  />
                                         <field name="partner_id"  required="1"/>
-                                        <field name="sexe"  required="1"/>
-                                        <field name="mobile"  />
-
-                                        <field name="cni"  string="Numero CNI" required="1"/>
+                                        <field name="cni"  string="CNI" required="1"/>
 
                                         <field name="price"   options="{'precision': 0}" readonly="1"/>
                                         <field name="bagage" />
                                         <field name="price_bagage" options="{'precision': 0}" />
                                         <field name="rembour"  options="{'precision': 0}"/>
+                                        <field name="user_id" invisible="1"/>
                                         <button name="print_ticket"
                                             string="Imprimer le ticket"
                                             type="object"
                                             class="oe_highlight"
                                             icon="fa-print"
                                         />
-
+                                        <field name="mobile" invisible="1" />
                                     </tree>
                                 </field>
                                     <strong>
@@ -140,6 +138,67 @@
               </p>
             </field>
         </record>
+
+
+
+<!--  Les passagers   -->
+
+
+    <record model="ir.ui.view" id="view_passager_tree">
+            <field name="name">Les Passagers</field>
+            <field name="model">voyage.passager</field>
+            <field name="arch" type="xml">
+                <tree string="Les PASSAGERS">
+                    <field name="partner_id"/>
+                    <field name="mobile"/>
+                    <field name="cni"/>
+                </tree>
+            </field>
+    </record>
+
+     <record model="ir.ui.view" id="view_passager_form">
+            <field name="name">Les Passagers</field>
+            <field name="model">voyage.passager</field>
+            <field name="arch" type="xml">
+                <form string="VOYAGES">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les   Passagers
+                    </p>
+                    <header>
+                    </header>
+                    <sheet>
+                         <group string="Informations Generales">
+                            <group>
+                                <field name="partner_id" />
+                                <field name="cni"/>
+                            </group>
+                            <group>
+                                <field name="mobile"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+     <record id="view_passager_action" model="ir.actions.act_window">
+                <field name="name">Les passagers</field>
+                <field name="res_model">voyage.passager</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_passager_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Passagers ici
+              </p><p>
+                Pour creer un passager,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
 
 
 </odoo>

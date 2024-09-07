@@ -64,7 +64,7 @@
         <!-- Reports  Ticket de Bus-->
         <report id="action_report_ticket"
                 string="Ticket de Voyage"
-                model="voyage.passager"
+                model="lines.voyage"
                 report_type = "qweb-pdf"
                 file="travel_agency_app.report_ticket_bus"
                 name="travel_agency_app.report_ticket_bus"

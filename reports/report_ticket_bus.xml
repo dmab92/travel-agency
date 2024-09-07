@@ -2,7 +2,7 @@
 <odoo>
 <template id="report_ticket_bus">
           <t t-call="web.html_container">
-                <div class="page">
+               <div class="page">
                     <style>
                       .bottom-text {
                           position: absolute;
@@ -11,7 +11,7 @@
                           width: 100%;    /* Ensure it spans the full width */
                           text-align: left; /* Center the text horizontally */
                           font-size: 18px;
-                          font-family: 'Times New Roman', serif;
+                          font-family: 'DejaVu Sans', sans-serif;
                       }
                       .top-text {
                           position: absolute;
@@ -22,18 +22,18 @@
 
                           font-weight: bold; /* Optional: Make the text bold */
                           color: #333; /* Optional: Set the text color */
-
+                          font-family: 'DejaVu Sans', sans-serif;
                       }
                     </style>
                  <div class="top-text" style="transform: rotate(270deg); -webkit-transform: rotate(270deg);">
                     <table>
                         <tr style="font-size: 16px;">
                         <td>
-                          <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
+                          <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:100px;width:60px ,text-position:center"/></td>
                           <td colspan="4"> <strong>
-                                Agence de Douala: <br/> Sis a Deido Vallee 3 boutiques <br/>
-                             Tel : </strong> <span t-esc="docs.voayge_id.user_id.company_id.mobile"/> <br/>
-                            <strong>  <br/> Agence de Nongsamba:  <br/> Sis au center commercial face Charter Express  <br/>
+                                Agence de Douala: <br/> Sis a Deido Vallée 3 boutiques <br/>
+                             Tel : </strong> <span t-esc="docs.voayge_id.user_id.company_id.mobile"/>
+                            <strong>  <br/> Agence de Nongsamba: Sis au center commercial face Charter Express  <br/>
                            Tel: </strong> <span t-esc="docs.voayge_id.user_id.company_id.phone"/></td>
                        </tr>
 
@@ -59,10 +59,10 @@
                              <td>    </td>
                          <td> </td>
                      </tr>
-                        <tr style="font-size: 16px;">
+                        <tr style="font-size: 18px;">
 
-                         <td> <strong>Siege N:</strong>  <span t-esc="docs.siege_number"/> </td>
-                         <td>    </td>
+                         <td> <strong>Siege N:</strong>  </td>
+                         <td>  <span t-esc="docs.siege_number"/>    </td>
                           <td> </td>
                         </tr>
                        <tr style="font-size: 16px;">
@@ -78,17 +78,18 @@
                    <table>
                                     <tr style="font-size: 16px;">
                                     <td>
-                                      <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
-                                      <td colspan="4"> <strong>
-                                            Agence de Douala: Sis a Deido Vallee 3 boutiques
-                                         Tel : </strong> <span t-esc="docs.voayge_id.user_id.company_id.mobile"/>
-                                        <strong>  <br/> Agence de Nongsamba: Sis au center commercial face Charter Express  <br/>
-                                       Tel: </strong> <span t-esc="docs.voayge_id.user_id.company_id.phone"/></td>
+                                      <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:100px;width:50px ,text-position:center"/></td>
+                                      <td colspan="4" style="font-size: 16px;">
+                                      <strong>
+                                        Agence de Douala: Sis a Deido Vallee 3 boutiques </strong> <br/>
+                                        Tel :  <span t-esc="docs.voayge_id.user_id.company_id.mobile"/>
+                                        <strong> Agence de Nkongsamba: Sis au Centre Commercial face Charter Express </strong>  <br/>
+                                        Tel:  <span t-esc="docs.voayge_id.user_id.company_id.phone"/>  </td>
                                    </tr>
 
                                    <tr style="font-size: 16px;">
-                                   <td> <strong> Noms et Prénoms: </strong></td>
-                                   <td><span t-esc="docs.partner_id.name"/> </td>
+                                   <td colspan="2"> <strong> Noms et Prénoms: </strong></td>
+                                   <td colspan="5"><span t-esc="docs.partner_id.name"/> </td>
 
                                    </tr>
                                    <tr style="font-size: 16px;">
@@ -101,14 +102,14 @@
 
 
                                    <tr style="font-size: 16px;">
-                                      <td> <strong> Date et Heure de Depart:  </strong>  </td>
-                                      <td> <span t-esc="docs.voayge_id.date_register.strftime('%d/%m/%Y %H:%M:%S')"/>  </td>
+                                      <td colspan="2"> <strong> Date et Heure de Depart:  </strong>  </td>
+                                      <td colspan="3"> <span t-esc="docs.voayge_id.date_register.strftime('%d/%m/%Y %H:%M:%S')"/>  </td>
                                       <td> <strong>Prix: </strong>  </td>
                                       <td> <span t-esc="docs.price "/>  </td>
                                   </tr>
                                    <tr style="font-size: 16px;">
                                       <td> <strong> Bagages:  </strong>  </td>
-                                      <td> <span t-esc="docs.bagage"/>  </td>
+                                      <td colspan="3"> <span t-esc="docs.bagage"/>  </td>
                                       <td> <strong> Prix:  </strong>  </td>
                                       <td> <span t-esc="docs.price_bagage"/>  </td>
 
@@ -119,22 +120,24 @@
                                       <td> <span t-esc="docs.cni"/>  </td>
                                       <td> <strong> Tel:  </strong>  </td>
                                       <td> <span t-esc="docs.mobile"/>  </td>
+                                      <td> <strong>Siege N: <span t-esc="docs.siege_number"/>  </strong> </td>
                                   </tr>
+
                     </table>
                        <p> <small>
-
-
                          1- Le billet est individuel  <br/>
                            2-Nous ne sommes responsable des bages not declarees  <br/>
                            3- Avant de prendre place dans le car, rassurez vous que vos bagages y sont embraqués.
                           <stong> NB: </stong> Avisez  nous en cas de mauvais comportement de nos agents et chargeurs, exces de vitesse, mauvais depassement et surcharge  <br/>
                     Le billet est nom remboursable et valable un mois ! <br/>
                       <strong>DOUALA - NKONGSAMBA - DOUALA</strong>
-                        </small> </p>
+                        </small>
+                        </p>
+
                     </div>
 
-                </div>
 
+                </div>
         </t>
 
 </template>
