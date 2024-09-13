@@ -51,6 +51,7 @@ class voyage_voyage(models.Model):
 
     state = fields.Selection([('draft', 'Brouillon'),
                               ('send', 'Validé'),
+                              ('confirm','Confirmé'),
                               ('cancel', 'Annulé'),
                               ], require=1, default='draft',
                              string='Etat')
@@ -65,8 +66,11 @@ class voyage_voyage(models.Model):
     destination_id = fields.Many2one("ville.recept.colis","Destination")
     type_id = fields.Many2one("voyage.type", "Type")
     price = fields.Integer("Frais de transport",  related='type_id.price', digits=(6,0))
-    license_plate = fields.Integer("Frais de route")
+    license_plate = fields.Char("Frais de route")
     passenger_number = fields.Integer("Nombre max de passagers", related='car_id.seats')
+    conso = fields.Char('Consomation')
+    whatch = fields.Char('Laverie')
+
 
     confirm = fields.Boolean("Je confirme avoir reelu cette fiche et n'avoir apercu aucune anomalie")
 
@@ -98,12 +102,12 @@ class voyage_voyage(models.Model):
             record.line_ids.price = record.price
 
 
-    @api.onchange('car_id')
-    def _onchange_car_id(self):
-        for record in self:
-            record.road_fees = record.car_id.horsepower_tax
-            record.license_plate = record.car_id.license_plate
-            record.driver_id = record.car_id.driver_id
+    # @api.onchange('car_id')
+    # def _onchange_car_id(self):
+    #     for record in self:
+    #         record.road_fees = record.car_id.horsepower_tax
+    #         record.license_plate = record.car_id.license_plate
+    #         record.driver_id = record.car_id.driver_id
             #record.write({'road_fees': record.price_rest,
                           #'license_plate': record.price_avance})
 
@@ -115,7 +119,6 @@ class voyage_voyage(models.Model):
             record.driver_id = record.car_id.driver_id
 
     def print_bordeau(self):
-
         return self.env.ref('travel_agency_app.action_report_bordeau').report_action(self)
     def set_valited(self):
         "Check de nomber of line "
@@ -125,13 +128,21 @@ class voyage_voyage(models.Model):
         if not self.confirm :
             raise UserError(_("'Alert !!! Veuillez  confirmer l'exactude des ces informations avant de les valider'"))
 
-        return self.write({'state': 'send'})
+        self.write({'state': 'send'})
+        return self.env.ref('travel_agency_app.action_report_bordeau').report_action(self)
 
     def set_draft(self):
         return self.write({'state':'draft'})
 
+    def set_confirm(self):
+        return self.write({'state': 'confirm'})
+
+
+
+
     def set_cancel(self):
         return self.write({'state': 'cancel'})
+
 
 class voyage_passager(models.Model):
     """Defining the passengers ."""

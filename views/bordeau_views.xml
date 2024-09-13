@@ -44,6 +44,30 @@
                         <notebook>
                             <page string="Les Colis">
                                 <field name="coli_ids"  attrs="{'readonly':[('state','=','send')]}" colspan="4">
+                                     <tree string="Liste des Colis">
+                                        <field name="numero_colis"/>
+                                        <field name="sender_id"/>
+                                        <field name="sender_phone"/>
+                                        <field name="ville_envoi_id" />
+                                        <field name="receive_id"/>
+                                        <field name="ville_reception_id" />
+                                        <field name="receive_phone"/>
+                                        <field name="contenu_colis" />
+
+                                        <field name="price" sum=" " options="{'precision': 0}" />
+                                        <field name="state"
+                                               string="Etat"
+                                               widget="badge"
+                                               decoration-danger="state == 'draft'"
+                                               decoration-success="state ==  'send'"
+                                               />
+                                         <button name="print_ticket"
+                                                string="Imprimer le recu"
+                                                type="object"
+                                                class="oe_highlight"
+                                                icon="fa-print"
+                                         />
+                                     </tree>
                                 </field>
                             </page>
                         </notebook>

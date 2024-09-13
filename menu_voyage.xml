@@ -30,7 +30,7 @@
                               parent="travel_agency_app.voyage_managment"
                               sequence="3"
                           />
-
+<!-- GESTION DES COLIS-->
 
                     <menuitem name="Gestion des colis"
                               id="travel_agency_app.colis_management"
@@ -38,23 +38,34 @@
                               groups="base.group_user"
                               sequence="2"/>
 
-                     <menuitem name="Borderaux Colis"
+                    <menuitem name="Borderaux Colis"
                                 id="travel_agency_app.bordereau"
                                 parent="travel_agency_app.colis_management"
                                 action="travel_agency_app.view_bordereau_action"
                                 groups="base.group_user"
                                 sequence="1"/>
 
+        <menuitem name="Colis Non Récupérés"
+                            id="travel_agency_app.no_taken"
+                            parent="travel_agency_app.colis_management"
+                            action="travel_agency_app.view_colis_notaken_action"
+                            groups="base.group_user"
+                            sequence="2"/>
+         <menuitem name="Colis  Récupérés"
+                            id="travel_agency_app.taken"
+                            parent="travel_agency_app.colis_management"
+                            action="travel_agency_app.view_taken_action_taken"
+                            groups="base.group_user"
+                            sequence="3"/>
 
-
-                  <menuitem name="Tous les Colis"
+                    <menuitem name="Tous les Colis"
                             id="travel_agency_app.all_colis"
                             parent="travel_agency_app.colis_management"
-                            action="travel_agency_app.view_colis_colis_action"
+                            action="travel_agency_app.view_all_colis_action"
                             groups="base.group_user"
                             sequence="4"/>
 
-
+<!-- LOCATION-->
                 <menuitem name="Locations"
                           id="travel_agency_app.location"
                           parent="travel_agency_app.menu_root"

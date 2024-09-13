@@ -58,8 +58,15 @@
                                 icon="fa-check-circle"
                                 attrs="{'invisible':[('state','!=','send')]}"
                         />
+                         <button name="set_confirm"
+                                string="Confirmé le voyage"
+                                type="object"
+                                icon="fa-check-circle"
+                                attrs="{'invisible':[('state','!=','send')]}"
+                        />
 
-                    <field name="state" widget="statusbar" statusbar_visible="draft,send,cancel" />
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,send,confirm,cancel" />
 
                     </header>
                     <sheet>
@@ -78,6 +85,11 @@
                                 <field name="passenger_number" attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="driver_id" attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="road_fees" options="{'precision': 0}" attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="conso" attrs="{'readonly':[('state','=','confirm')]}" />
+                                <field name="whatch" attrs="{
+                                'readonly':[('state','=','confirm')], 'invisible':[('state','=','draft')]
+
+                                }" />
                                 <field name="user_id" readonly="1"/>
                                 <field name="confirm" attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="state"  invisible="1"/>
@@ -143,7 +155,6 @@
 
 <!--  Les passagers   -->
 
-
     <record model="ir.ui.view" id="view_passager_tree">
             <field name="name">Les Passagers</field>
             <field name="model">voyage.passager</field>
@@ -181,7 +192,6 @@
             </field>
         </record>
 
-
      <record id="view_passager_action" model="ir.actions.act_window">
                 <field name="name">Les passagers</field>
                 <field name="res_model">voyage.passager</field>
@@ -196,9 +206,7 @@
                 cliquer sur le buton creer en haut a gauche de ce message
               </p>
             </field>
-        </record>
-
-
+     </record>
 
 
 </odoo>

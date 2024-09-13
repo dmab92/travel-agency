@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
         <record id="view_colis_colis_filter" model="ir.ui.view">
             <field name="name">voyage.colis.filter</field>
             <field name="model">voyage.colis</field>
             <field name="arch" type="xml">
                 <search string="Colis">
+                    <field name="receive_phone"/>
+                    <field name="numero_colis"/>
                     <field name="sender_id"/>
-                    <field name="sender_date"/>
-                    <field name="receive_date"/>
                     <field name="receive_id"/>
+
                     <field name="state"/>
 
                     <group expand="0" string="Group By">
-                        <filter string="Expediteur" name="groupby_sender_id" domain="[]" context="{'group_by': 'sender_id'}"/>
 
+                        <filter string="Telephone Destinataire" name="groupby_receive_phone" domain="[]"
+                            context="{'group_by': 'receive_phone'}"/>
+                        <filter string="No Colis" name="groupby_numero_colis" domain="[]" context="{'group_by': 'numero_colis'}"/>
+                        <filter string="Expediteur" name="groupby_sender_id" domain="[]" context="{'group_by': 'sender_id'}"/>
                         <filter string="Destinataire" name="groupby_receive_id" domain="[]" 
                             context="{'group_by': 'receive_id'}"/>
-
-                        <filter string="Date d'envoi" name="groupby_sender_date" domain="[]" 
-                            context="{'group_by': 'sender_date'}"/>
                         <filter string="Etat" name="groupby_state" domain="[]" 
                             context="{'group_by': 'state'}"/>
                     </group>
@@ -40,14 +42,15 @@
                                 type="object"
                                 class="oe_highlight"
                                 icon="fa-check-circle"
-                                attrs="{'invisible': [('state','in',('send','receive'))]}"
+                                invisible="1"
+
                         />
                         <button name="receive_colis_sms"
                                 string="Valider la reception du colis"
                                 type="object"
                                 class="oe_highlight"
                                 icon="fa-check"
-                                attrs="{'invisible': [('state','in',('draft','receive'))]}"
+                                invisible="1"
                                 />
                         
 
@@ -71,9 +74,12 @@
                     <sheet>
                         <group>
                             <group string="Informations sur l'Expediteur">
+
                                 <field name="numero_colis" />
                                 <field name="date_register"  required="1" attrs="{'readonly':[('state','=','send')]}"/>
-
+<!--                                <field name="phone_id" />-->
+<!--                                <field name="nom" />-->
+<!--                                <field name="cni" />-->
                                 <field name="sender_id" required="1"  attrs="{'readonly':[('state','=','send')]}" />
 
                                 <field name="sender_phone" required="1" attrs="{'readonly':[('state','=','send')]}" />
@@ -85,7 +91,7 @@
 
                                 <field name="receive_id" required="1"  attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="receive_phone" required="1" attrs="{'readonly':[('state','=','send')]}"/>
-                                <field name="cni_exp" required="1"  attrs="{'readonly':[('state','=','send')]}"/>
+                                <field name="cni_exp"   attrs="{'readonly':[('state','=','send')]}"/>
                                 <field name="ville_reception_id"  attrs="{'readonly':[('state','=','send')]}" required="1" />
 
                                 <field name="price" required='1' attrs="{'readonly':[('state','=','send')]}" options="{'precision': 0}"  force_save="1"/>
@@ -110,94 +116,82 @@
                 <tree string="Liste des Colis">
                     <field name="numero_colis"/>
                     <field name="sender_id"/>
+                    <field name="sender_phone"/>
+                    <field name="ville_envoi_id" />
                     <field name="receive_id"/>
+                    <field name="ville_reception_id" />
+                    <field name="receive_phone"/>
+                    <field name="contenu_colis" />
+
                     <field name="price" sum=" " options="{'precision': 0}" />
+
+                    <field name="state"
+                           string="Etat"
+                           widget="badge"
+                           decoration-danger="state == 'draft'"
+                           decoration-success="state ==  'send'"
+                           />
+
                      <button name="print_ticket"
                             string="Imprimer le recu"
                             type="object"
                             class="oe_highlight"
                             icon="fa-print"
-                                        />
-
+                             invisible="1"
+                     />
+                    <button name="set_to_send"
+                            string="Valider la reception"
+                            type="object"
+                            class="oe_highlight"
+                            attrs="{'invisible':[('state','=','send')]}"
+                     />
                 </tree>
             </field>
         </record>
 
-        <record id="view_colis_colis_action" model="ir.actions.act_window">
-            <field name="name">Liste des Colis</field>
+        <record id="view_colis_notaken_action" model="ir.actions.act_window">
+            <field name="name">Tous mes colis non Récuperés</field>
             <field name="res_model">voyage.colis</field>
+            <field name="domain">[ ('state', '=', 'draft')]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
-                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Colis
+                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur Mes  Colis non Récuperés
               </p><p>
-                Cette interface vous permet d'enregistrer les informations des Colis
+                Cette interface vous permet d'enregistrer les informations  non Récuperés
               </p>
             </field>
         </record>
 
-        <record id="view_colis_colis_action_to_send" model="ir.actions.act_window">
-            <field name="name">Liste des Colis à Envoyer </field>
-            <field name="res_model">voyage.colis</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[ ('state', '=', 'draft') ]</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face"> 
-                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Colis a Envoyer
-              </p><p>
-                Cette interface vous permet d'enregistrer les informations des Colis a Envoyer 
-              </p>
-            </field>
-        </record>
-        <record id="view_colis_colis_action_send" model="ir.actions.act_window">
-            <field name="name">Liste des Colis Envoyés</field>
+        <record id="view_taken_action_taken" model="ir.actions.act_window">
+            <field name="name">Liste des Colis Récuperés</field>
             <field name="res_model">voyage.colis</field>
             <field name="domain">[ ('state', '=', 'send') ]</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
-                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Colis Envoyés
+                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Colis Récuperés
               </p><p>
-                Cette interface vous permet d'enregistrer les informations des Colis Envoyés
-              </p>
-            </field>
-        </record>
-
-        <record id="view_colis_colis_action_receive" model="ir.actions.act_window">
-            <field name="name">Liste des Colis Récus</field>
-            <field name="res_model">voyage.colis</field>
-            <field name="domain">[ ('state', '=', 'receive') ]</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Colis Recus
-              </p><p>
-                Cette interface vous permet d'enregistrer les informations des Colis Recus
+                Cette interface vous permet d'enregistrer les informations des Colis Récuperés
               </p>
             </field>
         </record>
 
 
-        <record id="view_all_my_colis_action" model="ir.actions.act_window">
-            <field name="name">Tous mes colis recu</field>
-            <field name="res_model">voyage.colis</field>
-            <field name="domain">[ ('state', '=', 'receive'),
+         <record id="view_all_colis_action" model="ir.actions.act_window">
+                <field name="name">Liste des Colis</field>
+                <field name="res_model">voyage.colis</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+                  <p class="o_view_nocontent_smiling_face">
+                     Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Colis
+                  </p><p>
+                    Cette interface vous permet d'enregistrer les informations des Colis
+                  </p>
+                </field>
+         </record>
 
-                ('ville_envoi_id', 'in', 'user_id.ville_envoi_ids.ids')
-
-             ]</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
-                 Cr&#233;ez / &#233;ditez vos donn&#233;es sur Mes  Colis Recus
-              </p><p>
-                Cette interface vous permet d'enregistrer les informations Mes Colis Recus
-              </p>
-            </field>
-        </record>
 </odoo>

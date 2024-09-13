@@ -62,9 +62,9 @@ class voyage_colis(models.Model):
     receive_date = fields.Date("Date de retrait")
     price = fields.Integer("Montant Payé")
     contenu_colis = fields.Text("Nature du colis")
-    state = fields.Selection([('draft', 'Brouillon'),
-                              ('send', 'Envoyé'),
-                              ('receive', 'Recu')],
+    state = fields.Selection([('draft', 'Non Recupéré'),
+                              ('send', 'Recupéré')
+                               ],
                              string='Etat', default='draft',
                              help="Il s'agit de l'Etat du colis, il peut etre A envoyer, Envoyé ou Recu")
 
@@ -77,6 +77,9 @@ class voyage_colis(models.Model):
     senderID = fields.Char("SendeID")
     borderau_id = fields.Many2one('borderau.colis',string='Borderau')
 
+    # phone_id = fields.Many2one("voyage.passager")
+    # nom = fields.Char(related='phone_id.partner_id.name')
+    # cni = fields.Char(related='phone_id.cni')
 
     def send_colis_sms(self):
 
@@ -159,6 +162,9 @@ class voyage_colis(models.Model):
     def set_to_draft(self):
         return self.write({'state': 'draft'})
 
+    def set_to_send(self):
+        return self.write({'state': 'send'})
+
 
 
 
@@ -205,6 +211,7 @@ class borderau_colis(models.Model):
     num_bordereau = fields.Char("Numero du Bordeau", readonly="True", default = lambda self: self._get_next_reference())
     date_register = fields.Datetime('Date d\'énregistrement du colis', default=fields.datetime.now())
     index = fields.Char('Index')
+
     state = fields.Selection([('draft', 'Brouillon'),
                               ('send', 'Validé')
                               ],
@@ -215,9 +222,9 @@ class borderau_colis(models.Model):
     ville_reception_id = fields.Many2one('ville.recept.colis', "Destination")
     coli_ids = fields.One2many('voyage.colis','borderau_id', string='Colis')
     price_total = fields.Integer("Total Encaissé", compute='_compute_colis', digits=0)
-    driver_id = fields.Many2one("res.partner", "Conducteur", required=1)
+    driver_id = fields.Many2one("res.partner", "Conducteur", )
     user_id = fields.Many2one('res.users', 'Guichetier(e)', default=lambda self: self.env.user)
-    car_id = fields.Many2one("fleet.vehicle", "Vehicule", required=1)
+    car_id = fields.Many2one("fleet.vehicle", "Vehicule")
     info_excat = fields.Boolean("Est vous sur de vouloir valider l'envoi du colis ?", defaut=False)
 
     @api.onchange('coli_ids')
