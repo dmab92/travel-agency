@@ -41,12 +41,12 @@ class location_vehicule(models.Model):
     date_debut = fields.Datetime('Depart Prevu le')
     date_fin = fields.Datetime('Retour le :')
 
-    departure_id = fields.Many2one("ville.envoi.colis", " Depart", required=1)
-    destination_id = fields.Many2one("ville.recept.colis", "Destination",required=1)
+    departure_id = fields.Many2one("ville.envoi.colis", " Depart", )
+    destination_id = fields.Many2one("ville.recept.colis", "Destination")
 
     price = fields.Integer("Montant de la location", digits=(6, 0))
-    car_id = fields.Many2one("fleet.vehicle", "Vehicule", required=1)
-    driver_id = fields.Many2one("res.partner", "Conducteur", required=1)
+    car_id = fields.Many2one("fleet.vehicle", "Vehicule")
+    driver_id = fields.Many2one("res.partner", "Conducteur", )
     ration = fields.Integer("Ration Chauffeur", digits=0)
     road_fees = fields.Integer("Frais de route", digits=0)
     partner_id = fields.Many2one("res.partner", "Locataire", required=1)
@@ -68,7 +68,8 @@ class location_vehicule(models.Model):
             raise UserError(
                 _("'Alert !!! Veuillez  confirmer l'exactude des ces informations avant de les valider'"))
 
-        return self.write({'state': 'send'})
+        self.write({'state': 'send'})
+        return self.env.ref('travel_agency_app.action_report_location').report_action(self)
 
     def set_draft(self):
         if not self.confirm:
@@ -78,4 +79,9 @@ class location_vehicule(models.Model):
         return self.write({'state': 'draft'})
 
     def set_cancel(self):
+        return self.write({'state': 'cancel'})
+
+
+
+    def print_recu(self):
         return self.write({'state': 'cancel'})

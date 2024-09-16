@@ -75,9 +75,19 @@
                 string="Bordereau Colis"
                 model="borderau.colis"
                 report_type = "qweb-pdf"
+
                 file="travel_agency_app.report_bordeau_colis"
                 name="travel_agency_app.report_bordeau_colis"
                 />
+
+        <report id="action_report_location"
+                string="Location Bus"
+                model="location.vehicule"
+                report_type = "qweb-pdf"
+                file="travel_agency_app.report_location"
+                name="travel_agency_app.report_location"
+                />
+
     </data>
 
 </odoo>

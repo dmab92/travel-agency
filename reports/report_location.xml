@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_location">
+        <t t-call="web.html_container">
+             <div class="page">
+                   <table>
+                        <tr style="font-size: 22px;">
+                            <td>
+                              <img t-att-src="image_data_uri(docs.user_id.company_id.logo)" alt="Logo" style="height:180px;width:180px ,text-position:center"/></td>
+                              <td colspan="4"> <strong>
+                                    Agence de Douala: Sis a Deido Vallee 3 boutiques <br/>
+                                 Tel : </strong> <span t-esc="docs.user_id.company_id.mobile"/>
+                                <strong> Agence de Nongsamba: Sis au Centre Commercial face Charter Express   <br/>
+                               Tel: </strong> <span t-esc="docs.user_id.company_id.phone"/></td>
+                        </tr>
+                  </table>
+
+
+                 <h3 style="text-align: center;"> LOCATION  No <span t-field="docs.name"/>
+                </h3>
+                   <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+                        <tr>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong> LOCATAIRE :</strong> <span t-field="docs.partner_id.name"/> </p>
+                            </td>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong> Tel :</strong> <span t-field="docs.phone"/> </p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong> Ville de Depart :</strong> <span t-field="docs.departure_id.name"/> </p>
+                            </td>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong>Destination :</strong> <span t-field="docs.destination_id.name"/> </p>
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong>  Date de Depart :</strong><span t-esc="docs.date_debut.strftime('%d/%m/%Y')"/></p>
+                            </td>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong>Date de Retour  :</strong> <span t-esc="docs.date_fin.strftime('%d/%m/%Y')"/> </p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="border: none; padding: 8px;">
+                                <p> <strong> Montant :</strong><span  t-esc="docs.price"/> FCFA</p>
+                            </td>
+                             <td style="border: none; padding: 8px;">
+                                <p> <strong> BUS :</strong><span  t-esc="docs.car_id.name"/> FCFA</p>
+                            </td>
+
+                        </tr>
+                   </table>
+
+                   <table style="border-collapse: collapse; width: 100%; font-size: 20px;">
+                      <tr>
+                          <td style="border: none; padding: 8px;">
+                              <p>Le Locataire</p>
+                          </td>
+                          <td style="border: none; padding: 8px;">
+                              <p> </p>
+                          </td>
+                           <td style="border: none; padding: 8px;">
+                               <p/>
+
+                          </td>
+                          <td style="border: none; padding: 8px;">
+                              <p>Le Chef d'Agence </p>
+
+                          </td>
+                      </tr>
+                    </table>
+            </div>
+        </t>
+</template>
+</odoo>
+
+

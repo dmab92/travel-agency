@@ -31,16 +31,6 @@
                                     Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les LOCATIONS
                     </p>
                     <header>
-
-<!--                         <button name="print_bordeau"-->
-<!--                                 string="Imprimer le Bordereau"-->
-<!--                                 type="object"-->
-<!--                                 class="oe_highlight"-->
-<!--                                 icon="fa-print"-->
-<!--                                 attrs="{'invisible':[('state','=','draft')]}"-->
-<!--                        />-->
-
-
                          <button name="set_cancel"
                                 string="Annuler la location"
                                 type="object"
@@ -49,11 +39,11 @@
                         />
 
                          <button name="set_valited"
-                                string="Valider la location"
+                                string="Valider  la location et imprimer la facture"
                                 type="object"
                                 class="oe_highlight"
-                                icon="fa-check"
-                                 attrs="{'invisible':[('state','=','send')]}"
+                                icon="fa-print"
+                                 attrs="{'invisible':[('state','!=','draft')]}"
                         />
 
                         <button name="set_draft"

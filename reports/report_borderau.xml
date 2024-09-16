@@ -50,10 +50,10 @@
                  <tr style="border: 2px solid black; padding: 8px;">
                     <th style="border: 1px solid black; padding: 8px;"><strong>No</strong></th>
                     <th style="border: 1px solid black; padding: 8px;"><strong>Noms et Prenoms</strong></th>
-                    <th style="border: 1px solid black; padding: 8px;"><strong>Identification</strong></th>
-                    <th style="border: 1px solid black; padding: 8px;"><b>Telephone</b></th>
-                    <th style="border: 1px solid black; padding: 8px;"><b>Frais Transport</b></th>
-                    <th style="border: 1px solid black; padding: 8px;"><b>Remboursement</b></th>
+                    <th style="border: 1px solid black; padding: 8px;"><strong>CNI</strong></th>
+                    <th style="border: 1px solid black; padding: 8px;"><b>Tel</b></th>
+                    <th style="border: 1px solid black; padding: 8px;"><b>Frais</b></th>
+                    <th style="border: 1px solid black; padding: 8px;"><b>Remb</b></th>
 
                  </tr>
 
@@ -62,12 +62,11 @@
             <tbody>
                     <t t-set="index" t-value="1"/>
                     <t t-set="remb" t-value="0"/>
-                    <tr t-foreach="docs.passager_ids" t-as="line" style="border: 1px solid black; padding: 8px;">
+                    <tr t-foreach="docs.line_ids" t-as="line" style="border: 1px solid black; padding: 8px;">
                             <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-esc="index"/></td>
                             <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.partner_id.name"/></td>
                             <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.cni"/></td>
                             <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.mobile"/> </td>
-
                             <td style="border: 1px solid black; padding: 8px; text-align: center; ">
                             <span t-esc="'{:,.0f}'.format(int(line.price)).replace(',', ' ')"/> </td>
 

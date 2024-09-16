@@ -26,7 +26,6 @@
         #'security/groups.xml'
         'data/layouts.xml',
         'security/ir.model.access.csv',
-
         'views/colis_views.xml',
         'views/colis_config.xml',
         'views/voyages.xml',
@@ -41,6 +40,7 @@
         'reports/report_borderau.xml',
          'reports/report_borderau_colis.xml',
         'reports/report_ticket_bus.xml',
+        'reports/report_location.xml',
         'report_voyage.xml',
         'menu_voyage.xml',
     ],

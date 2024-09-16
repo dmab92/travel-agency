@@ -84,7 +84,7 @@ class voyage_voyage(models.Model):
             record.total_frais = sum(record.line_ids.mapped('price'))
             record.total_bagage = sum(record.line_ids.mapped('price_bagage'))
             record.total_remb =sum(record.line_ids.mapped('rembour'))
-            record.total_gain= record.total_frais + record.total_bagage - record.total_remb
+            record.total_gain= record.total_frais + record.total_bagage
 
     @api.constrains('line_ids')
     def _check_control_date(self):

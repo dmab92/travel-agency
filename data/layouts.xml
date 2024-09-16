@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-         <record model="ir.module.category" id="caisse_voyages_accesss">
+        <record model="ir.module.category" id="caisse_voyages_accesss">
             <field name="name">Caissieres</field>
         </record>
 
@@ -12,14 +12,36 @@
         </record>
 
 
-        <record model="ir.module.category" id="managers_voyages_accesss">
-            <field name="name">Managers</field>
+         <record model="ir.module.category" id="guichet_voyages">
+            <field name="name">Guichet</field>
+        </record>
+
+        <record id="group_guichet_voyages" model="res.groups">
+            <field name="name">Guichet Groups</field>
+            <field name="category_id" ref="travel_agency_app.guichet_voyages"/>
+        </record>
+
+
+        <record model="ir.module.category" id="managers_voyages">
+            <field name="name">staffAdmin</field>
         </record>
 
         <record id="group_managers_voyages" model="res.groups">
-            <field name="name">Managers Groups</field>
-            <field name="category_id" ref="travel_agency_app.managers_voyages_accesss"/>
+            <field name="name">Staff Voyages Admin</field>
+            <field name="category_id" ref="travel_agency_app.managers_voyages"/>
         </record>
+
+
+          <record model="ir.module.category" id="colis_voyages">
+            <field name="name">Colis</field>
+        </record>
+
+        <record id="group_colis_voyages" model="res.groups">
+            <field name="name">Colis Groups</field>
+            <field name="category_id" ref="travel_agency_app.colis_voyages"/>
+        </record>
+
+
 
           <record id="sheet_a5" model="report.paperformat">
             <field name="name">A5 Format</field>

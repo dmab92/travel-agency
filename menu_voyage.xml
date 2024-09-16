@@ -5,117 +5,115 @@
       groups="base.group_user" 
       web_icon="travel_agency_app,static/description/icon.png" />
 
-    <!-- !!!!!!!!!!!!!!!!!!!!!! MENU COLIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-        <menuitem name="Gestion des Voyages"
-                  id="travel_agency_app.voyage_managment"
-                  parent="travel_agency_app.menu_root"
-                  sequence="1"
-                />
+    <!-- !!!!!!!!!!!!!!!!!!!!!! MENU COLIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   -->
+
+                    <menuitem name="Gestion des Voyages"
+                              id="travel_agency_app.voyage_managment"
+                              parent="travel_agency_app.menu_root"
+                              sequence="1"
+                              groups="travel_agency_app.caisse_voyages_accesss"
+                    />
+
                     <menuitem name="Enregister un Voyage"
                               id="travel_agency_app.voyage_save"
                               parent="travel_agency_app.voyage_managment"
                               action="travel_agency_app.view_voyage_action"
                               sequence="2"
-                          />
-
+                              groups="travel_agency_app.caisse_voyages_accesss"
+                    />
                     <menuitem name="Tous les Voyages"
                               id="travel_agency_app.all_voyage"
                               parent="travel_agency_app.voyage_managment"
                               action="travel_agency_app.view_voyage_action"
                               sequence="4"
-                          />
 
-                    <menuitem name="Imprimer les Rapports"
-                              id="travel_agency_app.voyage_rapport"
-                              parent="travel_agency_app.voyage_managment"
-                              sequence="3"
-                          />
-<!-- GESTION DES COLIS-->
+                    />
+
+
+<!-- GESTION DES COLIS   groups="travel_agency_app.colis_voyages"-->
 
                     <menuitem name="Gestion des colis"
                               id="travel_agency_app.colis_management"
                               parent="travel_agency_app.menu_root"
-                              groups="base.group_user"
+
                               sequence="2"/>
 
                     <menuitem name="Borderaux Colis"
                                 id="travel_agency_app.bordereau"
                                 parent="travel_agency_app.colis_management"
                                 action="travel_agency_app.view_bordereau_action"
-                                groups="base.group_user"
+                                groups="travel_agency_app.caisse_voyages_accesss"
                                 sequence="1"/>
 
-        <menuitem name="Colis Non Récupérés"
+
+                    <menuitem name="Colis Non Récupérés"
                             id="travel_agency_app.no_taken"
                             parent="travel_agency_app.colis_management"
                             action="travel_agency_app.view_colis_notaken_action"
-                            groups="base.group_user"
-                            sequence="2"/>
-         <menuitem name="Colis  Récupérés"
-                            id="travel_agency_app.taken"
-                            parent="travel_agency_app.colis_management"
-                            action="travel_agency_app.view_taken_action_taken"
-                            groups="base.group_user"
-                            sequence="3"/>
+                              groups="travel_agency_app.caisse_voyages_accesss"
+
+                                        sequence="2"/>
+                     <menuitem name="Colis  Récupérés"
+                                        id="travel_agency_app.taken"
+                                        parent="travel_agency_app.colis_management"
+                                        action="travel_agency_app.view_taken_action_taken"
+                                        groups="travel_agency_app.caisse_voyages_accesss"
+
+                                        sequence="3"/>
 
                     <menuitem name="Tous les Colis"
-                            id="travel_agency_app.all_colis"
-                            parent="travel_agency_app.colis_management"
-                            action="travel_agency_app.view_all_colis_action"
-                            groups="base.group_user"
-                            sequence="4"/>
+                              id="travel_agency_app.all_colis"
+                              parent="travel_agency_app.colis_management"
+                              action="travel_agency_app.view_all_colis_action"
+                              groups="travel_agency_app.caisse_voyages_accesss"
+                              sequence="4"
+                    />
 
-<!-- LOCATION-->
+<!-- LOCATION groups="travel_agency_app.managers_voyages"-->
                 <menuitem name="Locations"
                           id="travel_agency_app.location"
                           parent="travel_agency_app.menu_root"
                           action="travel_agency_app.view_location_action"
                           sequence="2"
-                  />
+                          groups="base.group_system"
+
+                />
 
                     <menuitem name="Configuration"
                               id="travel_agency_app.config"
                               parent="travel_agency_app.menu_root"
-                              groups="base.group_user"
+                              groups="base.group_system"
                               sequence="3"/>
-                    <menuitem name="Pieces Vehicules"
-                                  id="travel_agency_app.vehicule"
-                                  parent="travel_agency_app.config"
-                                  action="travel_agency_app.view_piece_vehicule_action"
-                                  groups="base.group_user"/>
-
-                    <menuitem name="Pieces Du Chauffeur"
-                                  id="travel_agency_app.chauf"
-                                  parent="travel_agency_app.config"
-                                  action="travel_agency_app.view_piece_chauffeur_action"
-                                  groups="base.group_user"/>
 
                     <menuitem name="Villes d'envoi"
-                                  id="travel_agency_app.ville_envoi"
-                                  parent="travel_agency_app.config"
-                                  action="travel_agency_app.view_ville_envoi_action"
-                                  groups="base.group_user"/>
+                              id="travel_agency_app.ville_envoi"
+                              parent="travel_agency_app.config"
+                              action="travel_agency_app.view_ville_envoi_action"
+                               groups="base.group_system"
+                              />
 
                     <menuitem name="Villes de reception"
-                                  id="travel_agency_app.ville_recept"
-                                  parent="travel_agency_app.config"
-                                  action="travel_agency_app.view_ville_recept_action"
-                                  groups="base.group_user"/>
+                              id="travel_agency_app.ville_recept"
+                              parent="travel_agency_app.config"
+                              action="travel_agency_app.view_ville_recept_action"
+                               groups="base.group_system"
+                              />
 
 
-          <menuitem name="Type de voyage"
-                  id="travel_agency_app.type_voyage"
-                  parent="travel_agency_app.config"
-                  groups="base.group_user"
-                  action="travel_agency_app.view_typ_voyage_action"
-                  sequence="6"/>
+                    <menuitem name="Type de voyage"
+                              id="travel_agency_app.type_voyage"
+                              parent="travel_agency_app.config"
+                              action="travel_agency_app.view_typ_voyage_action"
+                              sequence="6"
+                               groups="base.group_system"
+                    />
 
-         <menuitem name="Tous les passagers"
-                  id="travel_agency_app.all_passengers"
-                  parent="travel_agency_app.config"
-                  groups="base.group_user"
-                  action="travel_agency_app.view_passager_action"
-                  sequence="2"/>
-
+                     <menuitem name="Tous les passagers"
+                              id="travel_agency_app.all_passengers"
+                              parent="travel_agency_app.config"
+                              action="travel_agency_app.view_passager_action"
+                              sequence="2"
+                                groups="base.group_system"
+                     />
     </data>
 </odoo>
