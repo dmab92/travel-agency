@@ -70,11 +70,7 @@ class voyage_voyage(models.Model):
     passenger_number = fields.Integer("Nombre max de passagers", related='car_id.seats')
     conso = fields.Char('Consomation')
     whatch = fields.Char('Laverie')
-
-
     confirm = fields.Boolean("Je confirme avoir reelu cette fiche et n'avoir apercu aucune anomalie")
-
-
 
     @api.onchange('line_ids')
     def _compute_passanger_number(self):
@@ -100,16 +96,6 @@ class voyage_voyage(models.Model):
         "On change the price of transfort"
         for record in self:
             record.line_ids.price = record.price
-
-
-    # @api.onchange('car_id')
-    # def _onchange_car_id(self):
-    #     for record in self:
-    #         record.road_fees = record.car_id.horsepower_tax
-    #         record.license_plate = record.car_id.license_plate
-    #         record.driver_id = record.car_id.driver_id
-            #record.write({'road_fees': record.price_rest,
-                          #'license_plate': record.price_avance})
 
     @api.onchange('car_id')
     def _onchange_car_id(self):
@@ -148,50 +134,31 @@ class voyage_passager(models.Model):
     """Defining the passengers ."""
     _description = 'Passagers'
     _name = 'voyage.passager'
-    _rec_name = 'mobile'
+    _rec_name = 'name'
+    _order = 'id DESC'
 
-
-    partner_id = fields.Many2one('res.partner' , "Noms et Prenoms", required=1)
+    # def default_mobile(self):
+    #     return self.env['voyage.mobile'].search([], limit=1)
+    active = fields.Boolean("Active", default=True)
+    name = fields.Char("Tel:")
+    nom = fields.Char("Noms et Prenoms")
     cni = fields.Char("CNI")
-    mobile = fields.Char("Tel:")
-
-    #voayge_id = fields.Many2one("voyage.voyage", "Voyage")
-    #price = fields.Integer("Frais de Transport", related='voayge_id.price')
-    #price_bagage = fields.Integer("Prix Bagage")
-    #bagage = fields.Char("Bagages")
-    #rembour = fields.Integer("Remboursement")
-    #sexe = fields.Selection([(' M. ', 'Homme'), (' Mme ', "Femme")], string='Civilité')
-
-    #user_id = fields.Many2one("res.users", "Guichetier(e)", default=lambda self: self.env.user, readonly="1")
-
-    #siege_number = fields.Integer(string="Sequence", compute="_compute_sequence", store=True)
-
-    # @api.depends('voayge_id.line_ids')
-    # def _compute_sequence(self):
-    #     for record in self:
-    #         if record.voayge_id:
-    #             # Iterate through the One2many field and assign the sequence number
-    #             for index, line in enumerate(record.voayge_id.line_ids, start=1):
-    #                 line.siege_number = index
-
-    # @api.onchange('partner_id')
-    # def _onc_siege_number(self):
-    #     for record in self:
-    #         record.siege_number += 1
-
-    # def print_ticket(self):
-    #      return self.env.ref('travel_agency_app.action_report_ticket').report_action(self)
 
 class voyage_line(models.Model):
     """Defining the passengers ."""
     _description = 'Les lignes de voyages'
     _name = 'lines.voyage'
     _rec_name = 'numero_id'
+    _order = 'id DESC'
 
-    numero_id = fields.Many2one('voyage.passager', "Tel:")
-    mobile = fields.Char(related='numero_id.mobile', string='Mobile', store=True)
-    partner_id = fields.Many2one('res.partner', "Noms et Prenoms")
-    cni = fields.Char("Numero de CNI")
+
+    numero_id = fields.Many2one('voyage.passager', "Tel:", required=True)
+
+    mobile = fields.Char(string='Téléphone', readonly=False)
+
+
+    nom = fields.Char("Noms et Prenoms", related='numero_id.nom',store=True )
+    cni = fields.Char("Numero de CNI", related='numero_id.cni', store=True)
     price = fields.Integer("Frais de Transport", related='voayge_id.price')
     price_bagage = fields.Integer("Prix Bagage")
     rembour = fields.Integer("Remboursement")
@@ -200,7 +167,6 @@ class voyage_line(models.Model):
     user_id = fields.Many2one("res.users", "Guichetier(e)", default=lambda self: self.env.user)
 
     siege_number = fields.Integer(string="Sequence", compute="_compute_sequence", store=True)
-
 
     @api.depends('voayge_id.line_ids')
     def _compute_sequence(self):
@@ -216,29 +182,17 @@ class voyage_line(models.Model):
             record.siege_number += 1
 
     def print_ticket(self):
-         return self.env.ref('travel_agency_app.action_report_ticket').report_action(self)
+         return self.env.ref('travel_agency_app.action_report_ticket_v2').report_action(self)
 
 
     @api.onchange('numero_id')
     def _onchange_mobile(self):
         for record in self:
             record.cni = record.numero_id.cni
-            record.partner_id = record.numero_id.partner_id.id
+            record.nom = record.numero_id.nom
 
 
-class city_destination(models.Model):
-    """Defining  for destinatation."""
-    _description = ' Ville de Destination'
-    _name = 'city.destination'
 
-    name= fields.Char("Destination")
-
-class city_depart(models.Model):
-    """Defining   the city of departure of car."""
-    _description = "Vlle d'arrivee"
-    _name = 'city.depart'
-
-    name= fields.Char("Arrivee")
 
 
 class voyage_type(models.Model):
@@ -248,5 +202,4 @@ class voyage_type(models.Model):
 
     name= fields.Char("Type")
     price =fields.Integer("Prix")
-
 

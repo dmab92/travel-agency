@@ -64,7 +64,7 @@
                     <t t-set="remb" t-value="0"/>
                     <tr t-foreach="docs.line_ids" t-as="line" style="border: 1px solid black; padding: 8px;">
                             <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-esc="index"/></td>
-                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.partner_id.name"/></td>
+                            <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.nom"/></td>
                             <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.cni"/></td>
                             <td style="border: 1px solid black; padding: 8px;" class="text-left"><span t-field="line.mobile"/> </td>
                             <td style="border: 1px solid black; padding: 8px; text-align: center; ">

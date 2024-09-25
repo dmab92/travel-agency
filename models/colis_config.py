@@ -8,8 +8,8 @@ class ville_colis_send(models.Model):
     _name = 'ville.envoi.colis'
     _rec_name ='name'
 
-    name = fields.Char("Ville de l'expediteur")
-    country_id = fields.Many2one("res.country","Pays de l'expediteur")
+    name = fields.Char("Ville")
+    phone = fields.Char("Numero Agence")
 
 
 class ville_colis_recept(models.Model):
@@ -18,8 +18,8 @@ class ville_colis_recept(models.Model):
     _name = 'ville.recept.colis'
     _rec_name ='name'
 
-    name = fields.Char("Ville de reception")
-    country_id = fields.Many2one("res.country","Pays de l'expediteur")
+    name = fields.Char("Ville")
+    phone = fields.Char("Numero Agence")
 
 class address_colis(models.Model):
     """Defining model for address for colis."""

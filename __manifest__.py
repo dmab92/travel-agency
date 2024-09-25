@@ -40,6 +40,7 @@
         'reports/report_borderau.xml',
          'reports/report_borderau_colis.xml',
         'reports/report_ticket_bus.xml',
+        'reports/report_ticket_bus_V2.xml',
         'reports/report_location.xml',
         'report_voyage.xml',
         'menu_voyage.xml',
@@ -53,13 +54,7 @@
     'auto_install': False,
 
 'assets': {
-    'web.assets_backend': [
-
-        #'travel_agency_app/static/src/components/**/*.js',
-        #'travel_agency_app/static/src/components  /**/*.xml',
-         #'travel_agency_app/static/src/components/**/*.scss',
-       # 'travel_agency_app/static/src/css/custom_styles.css',
-
-    ],
-},
+    #'web.assets_backend': [
+     #   'travel_agency_app/static/src/js/custom_js.js'],
+}
 }

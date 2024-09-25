@@ -29,7 +29,7 @@
             <field name="arch" type="xml">
                 <tree string="Ville d'envoi des Colis">
                     <field name="name" required="1"/>
-                    <field name="country_id"  />
+                    <field name="phone"  />
                 </tree>
             </field>
         </record>
@@ -63,7 +63,7 @@
                         <group>
                             <group string="Informations Generales">
                                 <field name="name" required="1"/>
-                                <field name="country_id"  />
+                                <field name="phone"  />
                             </group>
                         </group>
                     </sheet>
@@ -78,7 +78,7 @@
             <field name="arch" type="xml">
                 <tree string="Ville de reception des Colis">
                     <field name="name" required="1"/>
-                    <field name="country_id"  />
+                    <field name="phone"  />
                 </tree>
             </field>
         </record>

@@ -1,35 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<template id="report_ticket_bus">
+<template id="report_ticket_bus_V2">
           <t t-call="web.html_container">
                <div class="page">
-                    <style>
-                      .bottom-text {
-                          position: absolute;
-                          bottom: 20px;      /* Position the text at the bottom */
-                          left: 0;        /* Align it to the left side */
-                          width: 100%;    /* Ensure it spans the full width */
-                          text-align: left; /* Center the text horizontally */
-                          font-size: 18px;
-                          font-family: 'DejaVu Sans', sans-serif;
-                      }
-                      .top-text {
-                          position: absolute;
-                          top: 20px;      /* Position the text at the bottom */
-                          left: 0;        /* Align it to the left side */
-                          width: 100%;    /* Ensure it spans the full width */
-                          text-align: left; /* Center the text horizontally */
-
-                          font-weight: bold; /* Optional: Make the text bold */
-                          color: #333; /* Optional: Set the text color */
-                          font-family: 'DejaVu Sans', sans-serif;
-                      }
-                    </style>
-                 <div class="top-text" style="transform: rotate(270deg); -webkit-transform: rotate(270deg);">
                     <table>
                         <tr style="font-size: 16px;">
-                        <td>
-                          <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo" style="height:100px;width:60px ,text-position:center"/></td>
+                          <td>
+                          <img t-att-src="image_data_uri(docs.voayge_id.user_id.company_id.logo)" alt="Logo"
+                               style="height:100px;width:60px ,text-position:center"/></td>
                           <td colspan="4"> <strong>
                                 Agence de Douala: <br/> Sis a Deido Vallée 3 boutiques <br/>
                              Tel : </strong> <span t-esc="docs.voayge_id.user_id.company_id.mobile"/>
@@ -72,8 +50,6 @@
                           <td>   </td>
                       </tr>
                     </table>
-                </div>
-                 <div class="bottom-text" style="transform: rotate(270deg); -webkit-transform: rotate(270deg); -ms-transform: rotate(90deg);  position:absolute; ">
 
                    <table>
                                     <tr style="font-size: 16px;">
@@ -137,7 +113,7 @@
                     </div>
 
 
-                </div>
+
         </t>
 
 </template>
